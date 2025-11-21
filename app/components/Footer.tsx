@@ -1,30 +1,7 @@
 "use client";
 
 import { techStack } from "../lib/projects";
-import {
-  SiReact,
-  SiTypescript,
-  SiJavascript,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiFirebase,
-  SiSupabase,
-  SiVercel,
-} from "react-icons/si";
-
-const techIcons: Record<
-  string,
-  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-> = {
-  React: SiReact,
-  TypeScript: SiTypescript,
-  JavaScript: SiJavascript,
-  "Next.js": SiNextdotjs,
-  "Node.js": SiNodedotjs,
-  Firebase: SiFirebase,
-  Supabase: SiSupabase,
-  Vercel: SiVercel,
-};
+import { techIcons } from "../lib/tech-icons";
 
 export default function Footer() {
   return (
@@ -39,10 +16,7 @@ export default function Footer() {
             hello@patrikdinh.com
           </a>
 
-          <div
-            className="flex flex-col sm:flex-row gap-6 text-lg font-medium"
-            style={{ paddingLeft: "8.72rem" }}
-          >
+          <div className="flex flex-col sm:flex-row gap-6 text-lg font-medium sm:pl-[8.72rem]">
             <a
               href="https://github.com/iamthepk"
               target="_blank"
@@ -74,6 +48,8 @@ export default function Footer() {
                       className="w-8 h-8 md:w-10 md:h-10 cursor-pointer"
                       style={{ color: "var(--text)" }}
                       title={tech}
+                      role="img"
+                      aria-label={tech}
                     >
                       <IconComponent
                         className="w-full h-full"
@@ -110,8 +86,8 @@ export default function Footer() {
             Prague, Czech Republic
           </p>
           <p
-            className="text-base font-normal"
-            style={{ color: "var(--text-muted)", marginTop: "0.5rem" }}
+            className="text-base font-normal mt-2"
+            style={{ color: "var(--text-muted)" }}
           >
             Available for remote work
           </p>

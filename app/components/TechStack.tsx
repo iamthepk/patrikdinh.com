@@ -1,28 +1,7 @@
 "use client";
 
 import { techStack } from "../lib/projects";
-import {
-  SiReact,
-  SiTypescript,
-  SiJavascript,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiFirebase,
-  SiSupabase,
-} from "react-icons/si";
-
-const techIcons: Record<
-  string,
-  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-> = {
-  React: SiReact,
-  TypeScript: SiTypescript,
-  JavaScript: SiJavascript,
-  "Next.js": SiNextdotjs,
-  "Node.js": SiNodedotjs,
-  Firebase: SiFirebase,
-  Supabase: SiSupabase,
-};
+import { techIcons } from "../lib/tech-icons";
 
 export default function TechStack() {
   return (
@@ -38,6 +17,8 @@ export default function TechStack() {
                     className="w-12 h-12 md:w-16 md:h-16 cursor-pointer"
                     style={{ color: "var(--text)" }}
                     title={tech}
+                    role="img"
+                    aria-label={tech}
                   >
                     <IconComponent
                       className="w-full h-full"

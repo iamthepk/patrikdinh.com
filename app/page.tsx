@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   useEffect(() => {
-    // Scroll na začátek při refreshi
+    // Scroll to top on page refresh
     window.scrollTo(0, 0);
   }, []);
 

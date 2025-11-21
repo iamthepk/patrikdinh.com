@@ -1,43 +1,9 @@
 "use client";
 
 import { projects } from "../lib/projects";
-import {
-  SiReact,
-  SiTypescript,
-  SiJavascript,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiFirebase,
-  SiSupabase,
-  SiVercel,
-  SiVite,
-  SiMui,
-  SiExpress,
-  SiPuppeteer,
-  SiGooglegemini,
-  SiGithub,
-} from "react-icons/si";
+import { techIcons } from "../lib/tech-icons";
+import { SiGithub } from "react-icons/si";
 import { HiExternalLink } from "react-icons/hi";
-
-const techIcons: Record<
-  string,
-  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-> = {
-  React: SiReact,
-  TypeScript: SiTypescript,
-  JavaScript: SiJavascript,
-  "Next.js": SiNextdotjs,
-  "Node.js": SiNodedotjs,
-  Firebase: SiFirebase,
-  Supabase: SiSupabase,
-  Vercel: SiVercel,
-  Vite: SiVite,
-  MUI: SiMui,
-  Express: SiExpress,
-  Puppeteer: SiPuppeteer,
-  Gemini: SiGooglegemini,
-  PDFKit: SiPuppeteer, // Fallback, PDFKit nemá ikonu
-};
 
 export default function Projects() {
   return (
@@ -57,35 +23,29 @@ export default function Projects() {
               className="pb-12 border-b border-opacity-10"
               style={{
                 borderColor: "var(--text)",
-                paddingBottom: "3rem",
               }}
             >
               <h3
-                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
-                style={{ color: "var(--text)", marginBottom: "1.5rem" }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+                style={{ color: "var(--text)" }}
               >
                 {project.title}
               </h3>
 
               {project.subtitle && (
                 <p
-                  className="text-xl md:text-2xl font-normal leading-[1.5] max-w-3xl"
-                  style={{ color: "var(--text)", marginBottom: "1.5rem" }}
+                  className="text-xl md:text-2xl font-normal leading-[1.5] max-w-3xl mb-6"
+                  style={{ color: "var(--text)" }}
                 >
                   {project.subtitle}
                 </p>
               )}
 
-              <div
-                className="text-sm md:text-base font-normal italic leading-[1.5] max-w-3xl"
-                style={{ color: "var(--text)", marginBottom: "2rem" }}
-              >
+              <div className="text-sm md:text-base font-normal italic leading-[1.5] max-w-3xl mb-8" style={{ color: "var(--text)" }}>
                 {project.description.split(". ").map((sentence, idx, array) => (
                   <p
                     key={idx}
-                    style={{
-                      marginBottom: idx < array.length - 1 ? "1rem" : "0",
-                    }}
+                    className={idx < array.length - 1 ? "mb-4" : ""}
                   >
                     {sentence}
                     {idx < array.length - 1 ? "." : ""}
@@ -94,10 +54,7 @@ export default function Projects() {
               </div>
 
               {/* Tech Icons */}
-              <div
-                className="flex flex-wrap gap-4"
-                style={{ marginBottom: "2rem" }}
-              >
+              <div className="flex flex-wrap gap-4 mb-8">
                 {project.tech.split(" · ").map((tech) => {
                   const IconComponent = techIcons[tech.trim()];
                   return (
@@ -107,6 +64,8 @@ export default function Projects() {
                           className="w-6 h-6 md:w-7 md:h-7 cursor-pointer"
                           style={{ color: "var(--text)" }}
                           title={tech.trim()}
+                          role="img"
+                          aria-label={tech.trim()}
                         >
                           <IconComponent
                             className="w-full h-full"

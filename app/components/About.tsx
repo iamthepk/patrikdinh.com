@@ -11,7 +11,7 @@ export default function About() {
           About
         </h2>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "48px" }}>
+        <div className="flex flex-col gap-12">
           <p
             className="text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.2] tracking-tight"
             style={{ color: "var(--text)" }}

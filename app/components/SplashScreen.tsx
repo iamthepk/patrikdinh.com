@@ -9,7 +9,13 @@ const lastName = "DINH";
 const firstNameLetters = firstName.split("");
 const lastNameLetters = lastName.split("");
 
-const getRandomDirection = () => ({
+interface RandomDirection {
+  x: number;
+  y: number;
+  rotate: number;
+}
+
+const getRandomDirection = (): RandomDirection => ({
   x: (Math.random() - 0.5) * 1000,
   y: (Math.random() - 0.5) * 1000,
   rotate: (Math.random() - 0.5) * 720,
@@ -22,17 +28,17 @@ export default function SplashScreen({
 }) {
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Načtení theme synchronně před prvním renderem, aby se zabránilo blikání
+  // Load theme synchronously before first render to prevent flash
   useLayoutEffect(() => {
     const storedTheme = localStorage.getItem("theme") as
       | "dark"
       | "light"
       | null;
     if (storedTheme) {
-      // Nastavení dark class na html element pro správné CSS proměnné
+      // Set dark class on html element for correct CSS variables
       document.documentElement.classList.toggle("dark", storedTheme === "dark");
     } else {
-      // Výchozí theme je dark
+      // Default theme is dark
       document.documentElement.classList.add("dark");
     }
   }, []);
@@ -54,7 +60,7 @@ export default function SplashScreen({
   const letterVariants = {
     initial: { opacity: 1, x: 0, y: 0, rotate: 0 },
     animate: { opacity: 1, x: 0, y: 0, rotate: 0 },
-    exit: (custom: ReturnType<typeof getRandomDirection>) => ({
+    exit: (custom: RandomDirection) => ({
       opacity: 0,
       x: custom.x,
       y: custom.y,

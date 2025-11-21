@@ -6,14 +6,16 @@ import { Sun, Moon } from "lucide-react";
 export default function Hero() {
   const { theme, toggleTheme } = useTheme();
 
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = (id: string): void => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <section
-      className="min-h-screen flex flex-col justify-center section-padding"
-      style={{ paddingTop: "96px", paddingBottom: "2rem" }}
+      className="min-h-screen flex flex-col justify-center section-padding pt-24 pb-8"
     >
       <button
         onClick={toggleTheme}
@@ -54,6 +56,7 @@ export default function Hero() {
           <button
             onClick={() => scrollToSection("work")}
             style={{ color: "var(--text)" }}
+            aria-label="Scroll to work section"
           >
             Work ↓
           </button>
