@@ -6,6 +6,7 @@ export interface Project {
   tech: string;
   liveUrl?: string;
   githubUrl?: string;
+  screenshot?: string;
 }
 
 export const projects: Project[] = [
@@ -19,6 +20,7 @@ export const projects: Project[] = [
     tech: "React · TypeScript · Supabase · Vite · MUI",
     liveUrl: "/pos-app",
     githubUrl: "https://github.com/iamthepk/pos.lootea.cz",
+    screenshot: "/screenshots/pos-system.jpg",
   },
   {
     id: "invoice-ai",
@@ -28,6 +30,7 @@ export const projects: Project[] = [
       "Parses PDFs into a unified JSON schema, including items, VAT breakdown, totals, suppliers, customers, and metadata. Includes validation and correction logic (e.g., VAT fixes, date normalization) used directly in my internal ERP system.",
     tech: "React · Next.js · TypeScript · Gemini",
     liveUrl: "https://invoice.ai.extractor.patrikdinh.com/",
+    screenshot: "/screenshots/invoice-ai.jpg",
   },
   {
     id: "print-agent",
@@ -37,6 +40,7 @@ export const projects: Project[] = [
       "Local Node.js service that receives print requests from the POS system and handles thermal receipt printing (including refunds, VAT, discounts, dual-currency totals) and Brother label printing for individual drinks. Runs silently in the background, starts automatically with Windows, and exposes a small REST API for POS↔printer communication. Generates receipts via PDFKit and controls printers using SumatraPDF and Puppeteer.",
     tech: "Node.js · Express",
     liveUrl: "/print-agent",
+    screenshot: "/screenshots/print-agent.jpg",
   },
 ];
 

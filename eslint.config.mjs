@@ -13,6 +13,12 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      // Allow setState in effects for Next.js hydration pattern (theme providers)
+      "@next/next/no-sync-scripts": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;
