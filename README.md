@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Editorial Minimalism
 
-## Getting Started
+Pure text-first design. Massive typography. Zero noise.
 
-First, run the development server:
+## Design Philosophy
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Editorial minimalism:**
+- Text as the only design element
+- Massive whitespace creates hierarchy
+- Pure black and white
+- Zero decorative elements
+- Content is king
+
+## Features
+
+- 🖤 Monochrome design (dark/light)
+- 📝 Text-first approach
+- 📐 Responsive typography (clamp)
+- ⚡ Zero animations (except hover)
+- 🎯 Brutally simple
+
+## Typography Scale
+
+```
+Hero:     3rem - 9rem   (48px - 144px)
+Section:  2.5rem - 6rem (40px - 96px)
+Project:  2.25rem - 4.5rem (36px - 72px)
+Body:     1.25rem - 1.875rem (20px - 30px)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Layout Spacing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+Sections:    128-192px apart
+Components:  64-80px apart
+Elements:    32-64px apart
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
 
-## Learn More
+- Next.js 16
+- TypeScript
+- TailwindCSS
+- Inter Variable font
 
-To learn more about Next.js, take a look at the following resources:
+## Run
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000)
 
-## Deploy on Vercel
+## Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/
+├── components/
+│   ├── Hero.tsx       # Fullscreen intro
+│   ├── Projects.tsx   # Project list
+│   ├── About.tsx      # Text blocks
+│   ├── TechStack.tsx  # Three columns
+│   └── Contact.tsx    # Large links
+├── lib/
+│   ├── theme-provider.tsx
+│   └── projects.ts
+└── page.tsx
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Customize
+
+### Colors (globals.css)
+
+```css
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --text-muted: #737373;
+}
+
+:root.dark {
+  --bg: #000000;
+  --text: #ffffff;
+  --text-muted: #a3a3a3;
+}
+```
+
+### Projects (lib/projects.ts)
+
+Edit the `projects` array with your work.
+
+### Content
+
+All text is directly in components - simple to edit.
+
+## Build
+
+```bash
+npm run build
+```
+
+Deploy to Vercel for best results.
+
+---
+
+## Design Rules
+
+1. Text is design
+2. Whitespace is content
+3. Bigger is clearer
+4. Less is more
+5. Remove if unsure
+
+---
+
+Editorial minimalism. Text-first. Zero bullshit.
