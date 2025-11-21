@@ -61,7 +61,7 @@ export default function Hero() {
             Work ↓
           </button>
           <a
-            href="mailto:hello@patrikdinh.com"
+            href="mailto:me@patrikdinh.com"
             style={{ color: "var(--text)" }}
           >
             Email

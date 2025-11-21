@@ -9,11 +9,11 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 footer-container">
         <div>
           <a
-            href="mailto:hello@patrikdinh.com"
+            href="mailto:me@patrikdinh.com"
             className="block text-2xl md:text-3xl font-normal mb-4"
             style={{ color: "var(--text)" }}
           >
-            hello@patrikdinh.com
+            me@patrikdinh.com
           </a>
 
           <div className="flex flex-col sm:flex-row gap-6 text-lg font-medium sm:pl-[8.72rem]">
