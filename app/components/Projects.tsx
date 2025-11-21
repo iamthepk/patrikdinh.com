@@ -15,7 +15,9 @@ import {
   SiExpress,
   SiPuppeteer,
   SiGooglegemini,
+  SiGithub,
 } from "react-icons/si";
+import { HiExternalLink } from "react-icons/hi";
 
 const techIcons: Record<
   string,
@@ -49,13 +51,13 @@ export default function Projects() {
         </h2>
 
         <div className="project-spacing">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div
               key={project.id}
-              className={index < projects.length - 1 ? "pb-12 border-b border-opacity-10" : ""}
+              className="pb-12 border-b border-opacity-10"
               style={{
                 borderColor: "var(--text)",
-                paddingBottom: index < projects.length - 1 ? "3rem" : "0",
+                paddingBottom: "3rem",
               }}
             >
               <h3
@@ -78,21 +80,24 @@ export default function Projects() {
                 className="text-sm md:text-base font-normal italic leading-[1.5] max-w-3xl"
                 style={{ color: "var(--text)", marginBottom: "2rem" }}
               >
-                {project.description
-                  .split(". ")
-                  .map((sentence, idx, array) => (
-                    <p
-                      key={idx}
-                      style={{ marginBottom: idx < array.length - 1 ? "1rem" : "0" }}
-                    >
-                      {sentence}
-                      {idx < array.length - 1 ? "." : ""}
-                    </p>
-                  ))}
+                {project.description.split(". ").map((sentence, idx, array) => (
+                  <p
+                    key={idx}
+                    style={{
+                      marginBottom: idx < array.length - 1 ? "1rem" : "0",
+                    }}
+                  >
+                    {sentence}
+                    {idx < array.length - 1 ? "." : ""}
+                  </p>
+                ))}
               </div>
 
               {/* Tech Icons */}
-              <div className="flex flex-wrap gap-4" style={{ marginBottom: "2rem" }}>
+              <div
+                className="flex flex-wrap gap-4"
+                style={{ marginBottom: "2rem" }}
+              >
                 {project.tech.split(" · ").map((tech) => {
                   const IconComponent = techIcons[tech.trim()];
                   return (
@@ -135,9 +140,11 @@ export default function Projects() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="group flex items-center gap-2 transition-opacity hover:opacity-70 underline-offset-4 hover:underline"
                     style={{ color: "var(--text)" }}
                   >
-                    Demo
+                    <span>View</span>
+                    <HiExternalLink className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 )}
                 {project.githubUrl && (
@@ -145,9 +152,11 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="group flex items-center gap-2 transition-opacity hover:opacity-70 underline-offset-4 hover:underline"
                     style={{ color: "var(--text)" }}
                   >
-                    Code
+                    <span>Code</span>
+                    <SiGithub className="w-5 h-5 transition-transform group-hover:scale-110" />
                   </a>
                 )}
               </div>
