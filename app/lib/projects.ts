@@ -24,7 +24,7 @@ export const projects: Project[] = [
   },
   {
     id: "invoice-ai",
-    title: "Invoice AI",
+    title: "Invoice AI Extractor",
     subtitle: "AI-powered invoice data extraction using Google Gemini.",
     description:
       "Parses PDFs into a unified JSON schema, including items, VAT breakdown, totals, suppliers, customers, and metadata. Includes validation and correction logic (e.g., VAT fixes, date normalization) used directly in my internal ERP system.",

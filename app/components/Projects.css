@@ -1,9 +1,5 @@
 /* Projects Component Styles */
 
-.section {
-  /* Section styles are handled by global classes */
-}
-
 .heading {
   color: var(--text);
 }
@@ -14,37 +10,39 @@
 }
 
 .projectContent {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
   overflow: visible;
-  align-items: flex-start;
+  align-items: start;
 }
 
 @media (min-width: 768px) {
   .projectContent {
-    flex-direction: row;
+    grid-template-columns: auto 1fr;
     gap: 3rem;
-    align-items: center;
+    align-items: start;
   }
 }
 
 /* Thumbnail Container */
 .thumbnailWrapper {
-  flex-shrink: 0;
   width: 100%;
   overflow: visible;
+  display: flex;
+  align-items: start;
+  justify-content: start;
 }
 
 @media (min-width: 768px) {
   .thumbnailWrapper {
-    width: 22rem; /* md:w-96 */
+    width: 24.2rem; /* 22rem * 1.1 */
   }
 }
 
 @media (min-width: 1024px) {
   .thumbnailWrapper {
-    width: 700px; /* Good balance between quality and size (~52% of original) */
+    width: 770px; /* 700px * 1.1 */
   }
 }
 
@@ -88,32 +86,28 @@
   inset: 0;
   pointer-events: none;
   z-index: 10;
-}
-
-.gradientOverlayDark {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, transparent 100%);
-}
-
-.gradientOverlayLight {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.12) 0%,
+    rgba(var(--bg-rgb), 0.15) 0%,
+    rgba(var(--bg-rgb), 0.08) 20%,
+    rgba(var(--bg-rgb), 0.04) 50%,
     transparent 100%
   );
+  transition: background 150ms;
 }
 
 /* Content Section */
 .content {
-  flex: 1;
   min-width: 0;
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
   .content {
     min-width: 400px; /* Prevent text wrapping on desktop */
-    flex-shrink: 0;
   }
 }
 
@@ -130,6 +124,8 @@
   letter-spacing: -0.025em;
   word-break: keep-all;
   overflow-wrap: normal;
+  line-height: 0.95;
+  padding-bottom: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -148,7 +144,7 @@
   color: var(--text);
   font-size: clamp(1.25rem, 4vw, 1.5rem);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.2;
   margin-bottom: 1.5rem;
 }
 
@@ -192,6 +188,12 @@
   height: 1.5rem;
   cursor: pointer;
   color: var(--text);
+}
+
+.techIconSvg {
+  width: 100%;
+  height: 100%;
+  color: inherit;
 }
 
 @media (min-width: 768px) {
@@ -254,17 +256,12 @@
 .linkIcon {
   width: 1.25rem;
   height: 1.25rem;
+  display: block;
   transition: transform 0.15s;
 }
 
 .link:hover .linkIcon {
   transform: scale(1.1);
-}
-
-.linkGroup {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 /* Modal */

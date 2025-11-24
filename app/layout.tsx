@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio — Full-stack & AI Developer",
+  title: "Patrik Dinh - Full-stack & AI Developer",
   description:
     "Building useful products with AI & TypeScript. Full-stack & AI developer focused on practical automation and intelligent systems.",
   icons: {

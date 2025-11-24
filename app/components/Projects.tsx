@@ -91,20 +91,14 @@ export default function Projects() {
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 500px, 600px"
                             priority={project.id === projects[0].id}
                           />
-                          <div
-                            className={`gradientOverlay ${
-                              theme === "dark"
-                                ? "gradientOverlayDark"
-                                : "gradientOverlayLight"
-                            }`}
-                          />
+                          <div className="gradientOverlay" />
                         </div>
                       </div>
                     </div>
                   )}
 
                   {/* Content - Right side */}
-                  <div className="content">
+                  <div className="content max-w-[620px]">
                     <h3 className="title">{project.title}</h3>
 
                     {project.subtitle && (
@@ -142,10 +136,7 @@ export default function Projects() {
                                 role="img"
                                 aria-label={tech.trim()}
                               >
-                                <IconComponent
-                                  className="w-full h-full"
-                                  style={{ color: "inherit" }}
-                                />
+                                <IconComponent className="techIconSvg" />
                                 <span className="techIconTooltip">
                                   {tech.trim()}
                                 </span>
@@ -169,10 +160,7 @@ export default function Projects() {
                           className="link"
                         >
                           <span>Code</span>
-                          <SiGithub
-                            className="linkIcon"
-                            style={{ display: "block" }}
-                          />
+                          <SiGithub className="linkIcon" />
                         </a>
                       )}
                     </div>

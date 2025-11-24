@@ -14,9 +14,7 @@ export default function Hero() {
   };
 
   return (
-    <section
-      className="min-h-screen flex flex-col justify-center section-padding pt-24 pb-8"
-    >
+    <section className="min-h-screen flex flex-col justify-center section-padding pt-24 pb-8">
       <button
         onClick={toggleTheme}
         className="fixed top-12 right-12 p-2 hover:opacity-70 transition-opacity"
@@ -60,10 +58,7 @@ export default function Hero() {
           >
             Work ↓
           </button>
-          <a
-            href="mailto:me@patrikdinh.com"
-            style={{ color: "var(--text)" }}
-          >
+          <a href="mailto:me@patrikdinh.com" style={{ color: "var(--text)" }}>
             Email
           </a>
           <a
