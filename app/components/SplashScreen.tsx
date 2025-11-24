@@ -21,45 +21,66 @@ const getRandomDirection = (): RandomDirection => ({
   rotate: (Math.random() - 0.5) * 720,
 });
 
+type Phase = "enter" | "exit";
+
 export default function SplashScreen({
   onComplete,
 }: {
   onComplete: () => void;
 }) {
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [phase, setPhase] = useState<Phase>("enter");
 
-  // Load theme synchronously before first render to prevent flash
+  // theme sync
   useLayoutEffect(() => {
     const storedTheme = localStorage.getItem("theme") as
       | "dark"
       | "light"
       | null;
+
     if (storedTheme) {
-      // Set dark class on html element for correct CSS variables
       document.documentElement.classList.toggle("dark", storedTheme === "dark");
     } else {
-      // Default theme is dark
       document.documentElement.classList.add("dark");
     }
   }, []);
 
+  // po „dopsání“ jména chvíli podržet a pak spustit exit
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsAnimating(true);
-    }, 1800);
+      setPhase("exit");
+    }, 2200); // klidně si poladíš (délka enter animace + chvilka pauzy)
 
     return () => clearTimeout(timer);
   }, []);
 
   const containerVariants = {
     initial: { opacity: 1 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0, transition: { duration: 0.5, delay: 0.3 } },
+    enter: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.07, // rychlost „psaní“
+        delayChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.5, delay: 0.3 },
+    },
   };
 
   const letterVariants = {
-    initial: { opacity: 1, x: 0, y: 0, rotate: 0 },
-    animate: { opacity: 1, x: 0, y: 0, rotate: 0 },
+    initial: { opacity: 0, y: 40, scale: 0.9, rotate: 0 },
+    enter: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 260,
+        damping: 20,
+      },
+    },
     exit: (custom: RandomDirection) => ({
       opacity: 0,
       x: custom.x,
@@ -76,12 +97,11 @@ export default function SplashScreen({
     <motion.div
       variants={containerVariants}
       initial="initial"
-      animate={isAnimating ? "exit" : "animate"}
+      animate={phase}
       onAnimationComplete={() => {
-        if (isAnimating) {
-          setTimeout(() => {
-            onComplete();
-          }, 500);
+        if (phase === "exit") {
+          // necháme jemný buffer, ať to není useknuté
+          setTimeout(onComplete, 350);
         }
       }}
       className="fixed inset-0 z-50 flex items-center justify-center"
@@ -89,7 +109,8 @@ export default function SplashScreen({
         backgroundColor: "var(--bg)",
       }}
     >
-      <div
+      <motion.div
+        variants={containerVariants}
         style={{
           fontFamily: "var(--font-inter), -apple-system, sans-serif",
           lineHeight: 0.85,
@@ -104,8 +125,6 @@ export default function SplashScreen({
                 key={`first-${index}`}
                 custom={directions}
                 variants={letterVariants}
-                initial="initial"
-                animate={isAnimating ? "exit" : "animate"}
                 className="inline-block"
                 style={{
                   fontSize: "clamp(10rem, 45vw, 35rem)",
@@ -137,8 +156,6 @@ export default function SplashScreen({
                 key={`last-${index}`}
                 custom={directions}
                 variants={letterVariants}
-                initial="initial"
-                animate={isAnimating ? "exit" : "animate"}
                 className="inline-block"
                 style={{
                   fontSize: "clamp(10.8rem, 48.6vw, 37.8rem)",
@@ -153,7 +170,7 @@ export default function SplashScreen({
             );
           })}
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

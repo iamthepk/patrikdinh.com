@@ -1,0 +1,107 @@
+/* Hero Component Styles */
+
+.heroSection {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+}
+
+.heroContainer {
+  max-width: 80rem; /* 5xl */
+}
+
+/* Theme Toggle Button */
+.themeToggle {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
+  padding: 0.5rem;
+  transition: opacity 150ms;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.themeToggle:hover {
+  opacity: 0.7;
+}
+
+.themeToggleIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Typography */
+.heroTitle {
+  font-size: clamp(3rem, 12vw, 8.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
+.heroSubtitle {
+  font-size: clamp(2.5rem, 10vw, 6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 5rem;
+}
+
+.heroDescription {
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text);
+  max-width: 64rem; /* 4xl */
+  margin-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .heroDescription {
+    font-size: 2.25rem; /* 3xl */
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroDescription {
+    font-size: 2.75rem; /* 4xl */
+  }
+}
+
+/* Navigation Links */
+.heroNavigation {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+@media (min-width: 640px) {
+  .heroNavigation {
+    flex-direction: row;
+  }
+}
+
+.heroLink {
+  color: var(--text);
+  text-decoration: none;
+  transition: opacity 150ms;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.heroLink:hover {
+  opacity: 0.5;
+}

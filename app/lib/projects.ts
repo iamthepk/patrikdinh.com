@@ -39,7 +39,6 @@ export const projects: Project[] = [
     description:
       "Local Node.js service that receives print requests from the POS system and handles thermal receipt printing (including refunds, VAT, discounts, dual-currency totals) and Brother label printing for individual drinks. Runs silently in the background, starts automatically with Windows, and exposes a small REST API for POS↔printer communication. Generates receipts via PDFKit and controls printers using SumatraPDF and Puppeteer.",
     tech: "Node.js · Express",
-    liveUrl: "/print-agent",
     screenshot: "/thumbnails/print-agent.webp",
   },
 ];

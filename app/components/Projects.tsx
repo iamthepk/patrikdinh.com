@@ -6,6 +6,7 @@ import { SiGithub } from "react-icons/si";
 import Image from "next/image";
 import { useTheme } from "../lib/theme-provider";
 import { useState } from "react";
+import { PrintAgentFlowAnimation } from "./PrintAgentFlowAnimation";
 import "./Projects.css";
 
 export default function Projects() {
@@ -62,8 +63,13 @@ export default function Projects() {
                   {project.screenshot && (
                     <div className="thumbnailWrapper">
                       <div
-                        className="thumbnailContainer group"
+                        className={`thumbnailContainer group ${
+                          project.id === "print-agent" ? "" : "cursor-pointer"
+                        }`}
                         onClick={() => {
+                          if (project.id === "print-agent") {
+                            return; // Print Agent nemá liveUrl, neotevíráme nic
+                          }
                           if (project.liveUrl) {
                             const urlWithTheme = addThemeToUrl(project.liveUrl);
                             window.open(
@@ -78,21 +84,28 @@ export default function Projects() {
                           }
                         }}
                       >
-                        <div className="thumbnailImageWrapper">
-                          <Image
-                            src={getThumbnailPath(project.screenshot)}
-                            alt=""
-                            fill
-                            quality={100}
-                            unoptimized={true}
-                            className={`thumbnailImage ${
-                              theme === "dark" ? "thumbnailImageDark" : ""
-                            }`}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 500px, 600px"
-                            priority={project.id === projects[0].id}
-                          />
-                          <div className="gradientOverlay" />
-                        </div>
+                        {project.id === "print-agent" ? (
+                          <div className="thumbnailImageWrapper">
+                            <PrintAgentFlowAnimation isThumbnail={true} />
+                            <div className="gradientOverlay" />
+                          </div>
+                        ) : (
+                          <div className="thumbnailImageWrapper">
+                            <Image
+                              src={getThumbnailPath(project.screenshot)}
+                              alt=""
+                              fill
+                              quality={100}
+                              unoptimized={true}
+                              className={`thumbnailImage ${
+                                theme === "dark" ? "thumbnailImageDark" : ""
+                              }`}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 500px, 600px"
+                              priority={project.id === projects[0].id}
+                            />
+                            <div className="gradientOverlay" />
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
