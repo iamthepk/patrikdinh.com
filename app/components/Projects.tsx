@@ -69,9 +69,14 @@ export default function Projects() {
         </h2>
 
         <div className="project-spacing">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <div key={project.id} className="projectContainer">
-              <div className="projectContent">
+              <div
+                className={
+                  "projectContent" +
+                  (index % 2 === 1 ? " projectContentReverse" : "")
+                }
+              >
                 {/* Screenshot - Left side */}
                 {project.screenshot && (
                   <div className="thumbnailWrapper">

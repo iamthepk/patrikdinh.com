@@ -26,6 +26,34 @@
     gap: 4rem;
     align-items: flex-start;
   }
+
+  /* Reverse layout - screenshot vpravo, text vlevo */
+  .projectContentReverse {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+
+  /* U reverse chceme mít text pořád "vpravo" vizuálně zarovnaný */
+  .projectContentReverse .thumbnailWrapper {
+    order: 2;
+    justify-content: flex-end;
+  }
+
+  .projectContentReverse .content {
+    order: 1;
+  }
+}
+
+/* Na mobilech nech všechno nad sebou */
+@media (max-width: 1023px) {
+  .projectContent,
+  .projectContentReverse {
+    grid-template-columns: 1fr;
+  }
+
+  .thumbnailWrapper,
+  .content {
+    order: 0;
+  }
 }
 
 /* Screenshot container */
