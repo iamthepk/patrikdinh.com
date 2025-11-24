@@ -121,9 +121,6 @@ export function PrintAgentFlowAnimation({
     setIsLooping((prev) => !prev);
   };
 
-  // Pro thumbnail použijeme plnou velikost pro lepší kvalitu
-  const scale = 1;
-
   return (
     <div
       className={`${
@@ -385,8 +382,11 @@ export function PrintAgentFlowAnimation({
           <text x={840} y={365} fill={textColor} fontSize={16} fontWeight={600} textAnchor="middle">
             Print Agent
           </text>
-          <text x={840} y={390} fill={textColor} fontSize={13} opacity={0.7} textAnchor="middle">
-            routes receipts & stickers
+          <text x={840} y={385} fill={textColor} fontSize={12} opacity={0.6} textAnchor="middle">
+            :8000
+          </text>
+          <text x={840} y={400} fill={textColor} fontSize={12} opacity={0.7} textAnchor="middle">
+            REST API
           </text>
         </motion.g>
 
@@ -405,6 +405,36 @@ export function PrintAgentFlowAnimation({
           custom={1.2}
           markerEnd="url(#arrowhead)"
         />
+        {/* Endpoint label on sticker line - positioned well above the arrow */}
+        <motion.g
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible"
+          custom={1.25}
+        >
+          <rect
+            x={950}
+            y={325}
+            width={90}
+            height={18}
+            rx={4}
+            fill={isDark ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)"}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth * 0.5}
+            opacity={0.8}
+          />
+          <text
+            x={995}
+            y={337}
+            fill={textColor}
+            fontSize={10}
+            fontWeight={500}
+            textAnchor="middle"
+            opacity={0.9}
+          >
+            /print-sticker
+          </text>
+        </motion.g>
 
         {/* Receipt line - from right edge of Print Agent to left edge of Receipt box (further, because it's the last step) */}
         <motion.path
@@ -420,6 +450,36 @@ export function PrintAgentFlowAnimation({
           custom={1.4}
           markerEnd="url(#arrowhead)"
         />
+        {/* Endpoint label on receipt line - positioned well below the arrow */}
+        <motion.g
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible"
+          custom={1.45}
+        >
+          <rect
+            x={1050}
+            y={255}
+            width={95}
+            height={18}
+            rx={4}
+            fill={isDark ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)"}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth * 0.5}
+            opacity={0.8}
+          />
+          <text
+            x={1097.5}
+            y={267}
+            fill={textColor}
+            fontSize={10}
+            fontWeight={500}
+            textAnchor="middle"
+            opacity={0.9}
+          >
+            /print-receipt
+          </text>
+        </motion.g>
 
         {/* --- Epson receipt placeholder --- */}
         <motion.g
@@ -461,8 +521,8 @@ export function PrintAgentFlowAnimation({
           <text x={1425} y={305} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
             Epson TM-T20III
           </text>
-          <text x={1425} y={323} fill={textColor} fontSize={13} opacity={0.6} textAnchor="middle">
-            Receipt Printer
+          <text x={1425} y={323} fill={textColor} fontSize={12} opacity={0.5} textAnchor="middle">
+            PDFKit + SumatraPDF
           </text>
         </motion.g>
 
@@ -506,8 +566,8 @@ export function PrintAgentFlowAnimation({
           <text x={1225} y={460} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
             Brother QL-700
           </text>
-          <text x={1225} y={478} fill={textColor} fontSize={13} opacity={0.6} textAnchor="middle">
-            Sticker Printer
+          <text x={1225} y={478} fill={textColor} fontSize={12} opacity={0.5} textAnchor="middle">
+            Puppeteer + IrfanView
           </text>
         </motion.g>
       </motion.svg>
