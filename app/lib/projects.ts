@@ -37,7 +37,7 @@ export const projects: Project[] = [
     title: "Print Agent",
     subtitle: "Automated print job orchestration for document workflows.",
     description:
-      "Local Node.js service that receives print requests from the POS system and handles thermal receipt printing (including refunds, VAT, discounts, dual-currency totals) and Brother label printing for individual drinks. Runs silently in the background, starts automatically with Windows, and exposes a small REST API for POS↔printer communication. Generates receipts via PDFKit and controls printers using SumatraPDF and Puppeteer.",
+      "Local Node.js service that receives structured print jobs from the POS and routes them to the correct printer (Epson receipts or Brother stickers). Uses predefined templates for both receipts and stickers, ensuring consistent formatting, VAT accuracy, discounts, dual-currency totals, and refund handling. Prints fully silently - no dialogs, no pop-ups - and runs in the background on Windows with automatic startup. Exposes a small REST API for POS↔printer communication and generates outputs via PDFKit, Puppeteer and SumatraPDF.",
     tech: "Node.js · Express",
     screenshot: "/thumbnails/print-agent.webp",
   },
