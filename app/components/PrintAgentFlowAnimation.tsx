@@ -349,7 +349,7 @@ export function PrintAgentFlowAnimation({
 
         {/* --- Line: Order -> Print Agent --- */}
         <motion.path
-          d="M600 305 H770"
+          d="M600 305 H800"
           stroke={strokeColor}
           strokeWidth={strokeWidth * 0.85}
           fill="none"
