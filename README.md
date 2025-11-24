@@ -93,7 +93,7 @@ Edit the `projects` array with your work.
 ### Screenshots
 
 Add project screenshots to `public/screenshots/`:
-- Screenshot: `{project-id}.jpg` (9:16 portrait aspect ratio, displayed on the left side of project)
+- Screenshot: `{project-id}.jpg` (16:9 landscape aspect ratio, displayed on the left side of project)
 
 Screenshots are displayed with low-contrast styling (opacity + grayscale) to maintain minimal aesthetic while providing proof of work.
 

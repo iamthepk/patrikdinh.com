@@ -2,6 +2,7 @@
 
 import { techStack } from "../lib/projects";
 import { techIcons } from "../lib/tech-icons";
+import { MapPin, Wifi } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -78,19 +79,29 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="text-left md:text-right footer-right">
-          <p
-            className="text-base font-normal"
-            style={{ color: "var(--text-muted)" }}
-          >
-            Prague, Czech Republic
-          </p>
-          <p
-            className="text-base font-normal mt-2"
-            style={{ color: "var(--text-muted)" }}
-          >
-            Available for remote work
-          </p>
+        <div className="text-left md:text-right footer-right flex flex-col gap-3">
+          <div className="flex items-center gap-2 md:justify-end">
+            <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: "var(--text)" }} />
+            <p
+              className="text-base font-medium"
+              style={{ color: "var(--text)" }}
+            >
+              Prague, Czech Republic
+            </p>
+          </div>
+          <div className="flex items-center gap-2 md:justify-end">
+            <Wifi className="w-4 h-4 flex-shrink-0" style={{ color: "var(--text)" }} />
+            <span
+              className="text-base font-medium px-3 py-1 rounded-full border transition-all duration-200 hover:opacity-80"
+              style={{ 
+                color: "var(--text)",
+                borderColor: "var(--text)",
+                backgroundColor: "transparent"
+              }}
+            >
+              Available for remote work
+            </span>
+          </div>
         </div>
       </div>
     </footer>
