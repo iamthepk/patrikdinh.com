@@ -57,14 +57,17 @@ Open [http://localhost:3000](http://localhost:3000)
 ```
 app/
 ├── components/
-│   ├── Hero.tsx       # Fullscreen intro
-│   ├── Projects.tsx   # Project list
-│   ├── About.tsx      # Text blocks
-│   ├── TechStack.tsx  # Three columns
-│   └── Contact.tsx    # Large links
+│   ├── Hero.tsx                    # Fullscreen intro
+│   ├── Projects.tsx                 # Project list with alternating layout
+│   ├── About.tsx                    # Text blocks with tech stack icons
+│   ├── Footer.tsx                   # Contact footer
+│   ├── PrintAgentFlowAnimation.tsx  # SVG animation for Print Agent project
+│   ├── SplashScreen.tsx             # Splash screen animation
+│   └── SplashWrapper.tsx            # Splash screen wrapper
 ├── lib/
-│   ├── theme-provider.tsx
-│   └── projects.ts
+│   ├── theme-provider.tsx           # Theme context provider
+│   ├── projects.ts                  # Projects data
+│   └── tech-icons.tsx               # Tech stack icons mapping
 └── page.tsx
 ```
 

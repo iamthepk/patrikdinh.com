@@ -109,10 +109,6 @@ button:hover {
   margin-top: 4rem;
 }
 
-.project-title {
-  margin-bottom: 1.5rem;
-}
-
 /* Custom Scrollbar */
 /* Webkit browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
@@ -149,8 +145,4 @@ button:hover {
     padding-left: 140px;
     padding-right: 24px;
   }
-}
-
-.footer-right {
-  padding-right: 0;
 }

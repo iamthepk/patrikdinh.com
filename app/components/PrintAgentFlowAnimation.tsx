@@ -455,7 +455,7 @@ export function PrintAgentFlowAnimation({
             fontSize={16}
             textAnchor="middle"
           >
-            RECEIPT
+            Receipt
           </text>
 
           <text x={1425} y={305} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
@@ -500,7 +500,7 @@ export function PrintAgentFlowAnimation({
             fontSize={15}
             textAnchor="middle"
           >
-            STICKER
+            Sticker
           </text>
 
           <text x={1225} y={460} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">

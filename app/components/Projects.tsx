@@ -62,7 +62,6 @@ export default function Projects() {
 
   return (
     <section id="work" className="section-padding section-spacing">
-      {/* FULL-WIDTH, ŽÁDNÝ max-w */}
       <div className="w-full px-6 lg:px-16">
         <h2 className="text-5xl md:text-6xl font-black tracking-tight heading-spacing heading">
           Work
@@ -77,8 +76,8 @@ export default function Projects() {
                   (index % 2 === 1 ? " projectContentReverse" : "")
                 }
               >
-                {/* Screenshot - Left side */}
-                {project.screenshot && (
+                {/* Thumbnail - Left side */}
+                {project.thumbnail && (
                   <div className="thumbnailWrapper">
                     <div
                       className={`thumbnailContainer group ${
@@ -96,7 +95,7 @@ export default function Projects() {
                           );
                         } else {
                           setSelectedImage(
-                            getThumbnailPath(project.screenshot!)
+                            getThumbnailPath(project.thumbnail!)
                           );
                         }
                       }}
@@ -109,7 +108,7 @@ export default function Projects() {
                       ) : (
                         <div className="thumbnailImageWrapper">
                           <Image
-                            src={getThumbnailPath(project.screenshot)}
+                            src={getThumbnailPath(project.thumbnail)}
                             alt=""
                             fill
                             quality={100}
@@ -201,7 +200,6 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Modal zůstává stejný */}
       {selectedImage && (
         <div className="modal" onClick={() => setSelectedImage(null)}>
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>

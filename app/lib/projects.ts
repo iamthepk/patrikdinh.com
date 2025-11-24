@@ -6,7 +6,7 @@ export interface Project {
   tech: string;
   liveUrl?: string;
   githubUrl?: string;
-  screenshot?: string;
+  thumbnail?: string;
 }
 
 export const projects: Project[] = [
@@ -18,9 +18,8 @@ export const projects: Project[] = [
     description:
       "Designed for high-throughput bubble tea operations with instant printing, dual-currency support, and live sync with the internal ERP. Includes order flow, inventory deduction, discounts, VAT handling, shift management, and customer database integration.",
     tech: "React · TypeScript · Supabase · Vite · MUI",
-    liveUrl: "/pos-app",
-    githubUrl: "https://github.com/iamthepk/pos.lootea.cz",
-    screenshot: "/thumbnails/pos-app.webp",
+    liveUrl: "https://pos.system.patrikdinh.com/",
+    thumbnail: "/thumbnails/pos-app.webp",
   },
   {
     id: "invoice-ai",
@@ -30,7 +29,7 @@ export const projects: Project[] = [
       "Parses PDFs into a unified JSON schema, including items, VAT breakdown, totals, suppliers, customers, and metadata. Includes validation and correction logic (e.g., VAT fixes, date normalization) used directly in my internal ERP system.",
     tech: "React · Next.js · TypeScript · Gemini",
     liveUrl: "https://invoice.ai.extractor.patrikdinh.com/",
-    screenshot: "/thumbnails/invoice-ai-extractor.webp",
+    thumbnail: "/thumbnails/invoice-ai-extractor.webp",
   },
   {
     id: "print-agent",
@@ -39,7 +38,7 @@ export const projects: Project[] = [
     description:
       "Local Node.js service that receives structured print jobs from the POS and routes them to the correct printer (Epson receipts or Brother stickers). Uses predefined templates for both receipts and stickers, ensuring consistent formatting, VAT accuracy, discounts, dual-currency totals, and refund handling. Prints fully silently - no dialogs, no pop-ups - and runs in the background on Windows with automatic startup. Exposes a small REST API for POS↔printer communication and generates outputs via PDFKit, Puppeteer and SumatraPDF.",
     tech: "Node.js · Express",
-    screenshot: "/thumbnails/print-agent.webp",
+    thumbnail: "/thumbnails/print-agent.webp",
   },
 ];
 
