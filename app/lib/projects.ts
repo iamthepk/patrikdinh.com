@@ -20,7 +20,7 @@ export const projects: Project[] = [
     tech: "React · TypeScript · Supabase · Vite · MUI",
     liveUrl: "/pos-app",
     githubUrl: "https://github.com/iamthepk/pos.lootea.cz",
-    screenshot: "/thumbnails/pos-system.webp",
+    screenshot: "/thumbnails/pos-app.webp",
   },
   {
     id: "invoice-ai",

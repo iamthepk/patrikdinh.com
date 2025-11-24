@@ -121,8 +121,8 @@ export function PrintAgentFlowAnimation({
     setIsLooping((prev) => !prev);
   };
 
-  // Pro thumbnail použijeme menší velikosti pomocí CSS transform
-  const scale = isThumbnail ? 0.95 : 1;
+  // Pro thumbnail použijeme plnou velikost pro lepší kvalitu
+  const scale = 1;
 
   return (
     <div
@@ -182,7 +182,7 @@ export function PrintAgentFlowAnimation({
       )}
       <motion.svg
         key={animationKey}
-        viewBox="0 0 1200 675"
+        viewBox="0 0 1600 675"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
         initial={{ opacity: 0, x: 0 }}
@@ -194,11 +194,7 @@ export function PrintAgentFlowAnimation({
           duration: isResetting ? 0.4 : 0.5,
           ease: isResetting ? "easeIn" : "easeOut",
         }}
-        style={
-          isThumbnail
-            ? { transform: `scale(${scale})`, transformOrigin: "center" }
-            : undefined
-        }
+        style={undefined}
       >
         {/* Arrow marker definition - modern elegant style */}
         <defs>
@@ -226,7 +222,7 @@ export function PrintAgentFlowAnimation({
           custom={0.1}
         >
           <rect
-            x={60}
+            x={150}
             y={260}
             width={180}
             height={90}
@@ -237,7 +233,7 @@ export function PrintAgentFlowAnimation({
           />
           {/* POS Screen */}
           <rect
-            x={75}
+            x={165}
             y={275}
             width={90}
             height={50}
@@ -248,32 +244,32 @@ export function PrintAgentFlowAnimation({
           />
           {/* Screen content lines */}
           <line
-            x1={85}
+            x1={175}
             y1={290}
-            x2={155}
+            x2={245}
             y2={290}
             stroke={strokeColor}
             strokeWidth={strokeWidth * 0.6}
           />
           <line
-            x1={85}
+            x1={175}
             y1={300}
-            x2={140}
+            x2={230}
             y2={300}
             stroke={strokeColor}
             strokeWidth={strokeWidth * 0.6}
           />
           <line
-            x1={85}
+            x1={175}
             y1={310}
-            x2={130}
+            x2={220}
             y2={310}
             stroke={strokeColor}
             strokeWidth={strokeWidth * 0.6}
           />
           {/* Product tiles/items */}
           <rect
-            x={170}
+            x={260}
             y={278}
             width={25}
             height={20}
@@ -283,7 +279,7 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth * 0.7}
           />
           <rect
-            x={200}
+            x={290}
             y={278}
             width={25}
             height={20}
@@ -293,7 +289,7 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth * 0.7}
           />
           <rect
-            x={170}
+            x={260}
             y={303}
             width={25}
             height={20}
@@ -303,7 +299,7 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth * 0.7}
           />
           <rect
-            x={200}
+            x={290}
             y={303}
             width={25}
             height={20}
@@ -312,7 +308,7 @@ export function PrintAgentFlowAnimation({
             fill="none"
             strokeWidth={strokeWidth * 0.7}
           />
-          <text x={150} y={370} fill={textColor} fontSize={14} opacity={0.7} textAnchor="middle">
+          <text x={240} y={370} fill={textColor} fontSize={14} opacity={0.7} textAnchor="middle">
             POS App
           </text>
         </motion.g>
@@ -325,7 +321,7 @@ export function PrintAgentFlowAnimation({
           custom={0.3}
         >
           <rect
-            x={280}
+            x={420}
             y={260}
             width={180}
             height={90}
@@ -334,14 +330,14 @@ export function PrintAgentFlowAnimation({
             fill="none"
             strokeWidth={strokeWidth}
           />
-          <text x={370} y={310} fill={textColor} fontSize={18} fontWeight={600} textAnchor="middle">
+          <text x={510} y={310} fill={textColor} fontSize={18} fontWeight={600} textAnchor="middle">
             Order
           </text>
         </motion.g>
 
         {/* --- Line: POS App -> Order --- */}
         <motion.path
-          d="M240 305 H280"
+          d="M330 305 H420"
           stroke={strokeColor}
           strokeWidth={strokeWidth * 0.85}
           fill="none"
@@ -356,7 +352,7 @@ export function PrintAgentFlowAnimation({
 
         {/* --- Line: Order -> Print Agent --- */}
         <motion.path
-          d="M460 305 H630"
+          d="M600 305 H770"
           stroke={strokeColor}
           strokeWidth={strokeWidth * 0.85}
           fill="none"
@@ -377,19 +373,19 @@ export function PrintAgentFlowAnimation({
           custom={0.9}
         >
           <polygon
-            points="630,285 670,265 710,285 710,325 670,345 630,325"
+            points="800,285 840,265 880,285 880,325 840,345 800,325"
             stroke={strokeColor}
             strokeWidth={strokeWidth}
             fill="none"
           />
-          <text x={670} y={308} fill={textColor} fontSize={18} fontWeight={600} textAnchor="middle">
+          <text x={840} y={308} fill={textColor} fontSize={18} fontWeight={600} textAnchor="middle">
             JS
           </text>
 
-          <text x={670} y={365} fill={textColor} fontSize={16} fontWeight={600} textAnchor="middle">
+          <text x={840} y={365} fill={textColor} fontSize={16} fontWeight={600} textAnchor="middle">
             Print Agent
           </text>
-          <text x={670} y={390} fill={textColor} fontSize={13} opacity={0.7} textAnchor="middle">
+          <text x={840} y={390} fill={textColor} fontSize={13} opacity={0.7} textAnchor="middle">
             routes receipts & stickers
           </text>
         </motion.g>
@@ -397,7 +393,7 @@ export function PrintAgentFlowAnimation({
         {/* --- Branch lines --- */}
         {/* Sticker line - from right edge of Print Agent to left edge of Sticker box (closer, because there can be multiple prints) */}
         <motion.path
-          d="M710 325 C 760 375, 790 375, 800 395"
+          d="M880 325 C 1000 375, 1100 375, 1150 395"
           stroke={strokeColor}
           strokeWidth={strokeWidth * 0.85}
           fill="none"
@@ -412,7 +408,7 @@ export function PrintAgentFlowAnimation({
 
         {/* Receipt line - from right edge of Print Agent to left edge of Receipt box (further, because it's the last step) */}
         <motion.path
-          d="M710 285 C 810 235, 940 235, 1000 235"
+          d="M880 285 C 1050 235, 1250 235, 1350 235"
           stroke={strokeColor}
           strokeWidth={strokeWidth * 0.85}
           fill="none"
@@ -433,7 +429,7 @@ export function PrintAgentFlowAnimation({
           custom={1.5}
         >
           <rect
-            x={1000}
+            x={1350}
             y={190}
             width={150}
             height={90}
@@ -443,7 +439,7 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth}
           />
           <rect
-            x={1015}
+            x={1365}
             y={205}
             width={120}
             height={60}
@@ -453,7 +449,7 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth * 0.75}
           />
           <text
-            x={1075}
+            x={1425}
             y={240}
             fill={textColor}
             fontSize={16}
@@ -462,10 +458,10 @@ export function PrintAgentFlowAnimation({
             RECEIPT
           </text>
 
-          <text x={1075} y={305} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
+          <text x={1425} y={305} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
             Epson TM-T20III
           </text>
-          <text x={1075} y={323} fill={textColor} fontSize={13} opacity={0.6} textAnchor="middle">
+          <text x={1425} y={323} fill={textColor} fontSize={13} opacity={0.6} textAnchor="middle">
             Receipt Printer
           </text>
         </motion.g>
@@ -478,7 +474,7 @@ export function PrintAgentFlowAnimation({
           custom={1.3}
         >
           <rect
-            x={800}
+            x={1150}
             y={350}
             width={150}
             height={90}
@@ -488,7 +484,7 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth}
           />
           <rect
-            x={815}
+            x={1165}
             y={365}
             width={120}
             height={60}
@@ -498,7 +494,7 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth * 0.75}
           />
           <text
-            x={875}
+            x={1225}
             y={398}
             fill={textColor}
             fontSize={15}
@@ -507,10 +503,10 @@ export function PrintAgentFlowAnimation({
             STICKER
           </text>
 
-          <text x={875} y={460} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
+          <text x={1225} y={460} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
             Brother QL-700
           </text>
-          <text x={875} y={478} fill={textColor} fontSize={13} opacity={0.6} textAnchor="middle">
+          <text x={1225} y={478} fill={textColor} fontSize={13} opacity={0.6} textAnchor="middle">
             Sticker Printer
           </text>
         </motion.g>

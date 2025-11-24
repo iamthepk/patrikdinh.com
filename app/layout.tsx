@@ -72,6 +72,52 @@ export default function RootLayout({
             `,
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                // Úvodní zpráva při načtení
+                console.log('%cPatrik Dinh', 'color: #4ade80; font-size: 16px; font-weight: bold;');
+                console.log('%cFull-stack & AI Developer', 'color: #d1d5db; font-size: 12px;');
+                console.log('%cBuilding useful products with AI & TypeScript', 'color: #d1d5db; font-size: 12px;');
+                console.log('');
+                console.log('%c📧 me@patrikdinh.com', 'color: #d1d5db; font-size: 12px;');
+                console.log('%c🔗 linkedin.com/in/dinhpatrik', 'color: #d1d5db; font-size: 12px;');
+                console.log('%c🔗 github.com/iamthepk', 'color: #d1d5db; font-size: 12px;');
+                console.log('');
+                console.log('%cCurious? Try typing info() in the console', 'color: #4ade80; font-size: 12px;');
+                console.log('%cinfo()', 'color: #22d3ee; font-size: 12px; font-weight: bold;');
+                
+                // Funkce info() se spustí až když ji uživatel zavolá
+                window.info = function() {
+                  const info = {
+                    'Framework': 'Next.js 16 (App Router)',
+                    'Language': 'TypeScript',
+                    'Styling': 'Tailwind CSS',
+                    'Focus': 'Full-stack & AI Development',
+                    'Author': 'Patrik Dinh',
+                    'Location': 'Prague, Czech Republic'
+                  };
+                  
+                  console.table(info);
+                  
+                  console.log('%cLooking for a developer?', 'color: #4ade80; font-size: 14px; font-weight: bold;');
+                  console.log('%c• Experience with modern AI models (GPT, Gemini, Claude)', 'color: #d1d5db; font-size: 12px;');
+                  console.log('%c• Next.js, React, TypeScript - daily practice', 'color: #d1d5db; font-size: 12px;');
+                  console.log('%c• Clean, maintainable code + attention to detail', 'color: #d1d5db; font-size: 12px;');
+                  console.log('%c• Solving complex problems', 'color: #d1d5db; font-size: 12px;');
+                  
+                  console.log('%cContact:', 'color: #4ade80; font-size: 14px; font-weight: bold;');
+                  console.log('%cEmail: me@patrikdinh.com', 'color: #d1d5db; font-size: 12px;');
+                  console.log('%cLinkedIn: linkedin.com/in/dinhpatrik', 'color: #d1d5db; font-size: 12px;');
+                  console.log('%cGitHub: github.com/iamthepk', 'color: #d1d5db; font-size: 12px;');
+                  
+                  return undefined;
+                };
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.variable} antialiased`}>
         <ThemeProvider>
