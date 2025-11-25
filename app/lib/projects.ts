@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "Invoice AI Extractor",
     subtitle: "AI-powered invoice data extraction using Google Gemini.",
     description:
-      "Parses PDFs into a unified JSON schema, including items, VAT breakdown, totals, suppliers, customers, and metadata. Includes validation and correction logic (e.g., VAT fixes, date normalization) used directly in my internal ERP system.",
+      "Parses complex PDF invoices into a structured, unified JSON schema. The output includes key financial data (items, VAT breakdown, totals) and comprehensive metadata (suppliers, customers). The system features built-in validation and correction logic (e.g., VAT fixes, date normalization) to ensure data integrity, which is then used directly in our internal ERP system for automated processing.",
     tech: "React · Next.js · TypeScript · Gemini",
     liveUrl: "https://invoice.ai.extractor.patrikdinh.com/",
     thumbnail: "/thumbnails/invoice-ai-extractor.webp",
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     title: "Print Agent",
     subtitle: "Automated print job orchestration for document workflows.",
     description:
-      "Local Node.js service that receives structured print jobs from the POS and routes them to the correct printer (Epson receipts or Brother stickers). Uses ngrok for secure HTTPS tunneling, enabling communication from HTTPS-based POS applications without Mixed Content issues. Uses predefined templates for both receipts and stickers, ensuring consistent formatting, VAT accuracy, discounts, dual-currency totals, and refund handling. Prints fully silently - no dialogs, no pop-ups - and runs in the background on Windows with automatic startup. Exposes a small REST API for POS↔printer communication and generates outputs via PDFKit, Puppeteer and SumatraPDF.",
+      "Local Node.js service that receives structured print jobs from the POS and routes them to the correct printer (Epson receipts or Brother stickers). Uses ngrok for secure, stable HTTPS tunneling, which bridges the gap between the cloud-hosted POS application and the local Print Agent, eliminating Mixed Content and CORS issues. Uses predefined templates for both receipts and stickers, ensuring consistent formatting, VAT accuracy, discounts, dual-currency totals, and refund handling. Prints fully silently - no dialogs, no pop-ups - and runs in the background on Windows with automatic startup. Exposes a small REST API for POS↔printer communication and generates outputs via PDFKit, Puppeteer and SumatraPDF.",
     tech: "Node.js · Express",
     thumbnail: "/thumbnails/print-agent.webp",
   },
