@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./lib/theme-provider";
 import SplashWrapper from "./components/SplashWrapper";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -77,6 +78,7 @@ export default function RootLayout({
         <ThemeProvider>
           <SplashWrapper>{children}</SplashWrapper>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
