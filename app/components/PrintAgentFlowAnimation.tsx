@@ -121,9 +121,6 @@ export function PrintAgentFlowAnimation({
     setIsLooping((prev) => !prev);
   };
 
-  // Pro thumbnail použijeme menší velikosti pomocí CSS transform
-  const scale = isThumbnail ? 0.95 : 1;
-
   return (
     <div
       className={`${
@@ -182,7 +179,7 @@ export function PrintAgentFlowAnimation({
       )}
       <motion.svg
         key={animationKey}
-        viewBox="0 0 1200 675"
+        viewBox="0 0 1600 675"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
         initial={{ opacity: 0, x: 0 }}
@@ -194,53 +191,35 @@ export function PrintAgentFlowAnimation({
           duration: isResetting ? 0.4 : 0.5,
           ease: isResetting ? "easeIn" : "easeOut",
         }}
-        style={
-          isThumbnail
-            ? { transform: `scale(${scale})`, transformOrigin: "center" }
-            : undefined
-        }
+        style={undefined}
       >
-        {/* --- Order card --- */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate={isLooping ? "visible" : "visible"}
-          custom={0.1}
-        >
-          <rect
-            x={60}
-            y={250}
-            width={220}
-            height={120}
-            rx={16}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth}
-          />
-          <text x={80} y={285} fill={textColor} fontSize={18} fontWeight={600}>
-            Brown Sugar Milk Tea
-          </text>
-          <text x={80} y={310} fill={textColor} fontSize={16}>
-            + Tapioca
-          </text>
-          <text x={80} y={345} fill={textColor} fontSize={14} opacity={0.7}>
-            Order #1024
-          </text>
-
-          <text x={60} y={390} fill={textColor} fontSize={14} opacity={0.6}>
-            POS App – objednávka
-          </text>
-        </motion.g>
-
-        {/* --- POS box --- */}
+        {/* Arrow marker definition - modern elegant style */}
+        <defs>
+          <marker
+            id="arrowhead"
+            markerWidth="10"
+            markerHeight="10"
+            refX="8"
+            refY="3"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path
+              d="M 0 0.5 Q 0 0, 1 0.5 L 8 3 L 1 5.5 Q 0 6, 0 5.5 Z"
+              fill={strokeColor}
+              stroke="none"
+            />
+          </marker>
+        </defs>
+        {/* --- POS App --- */}
         <motion.g
           variants={cardVariants}
           initial="hidden"
           animate="visible"
-          custom={0.5}
+          custom={0.1}
         >
           <rect
-            x={330}
+            x={150}
             y={260}
             width={180}
             height={90}
@@ -249,55 +228,138 @@ export function PrintAgentFlowAnimation({
             fill="none"
             strokeWidth={strokeWidth}
           />
+          {/* POS Screen */}
           <rect
-            x={350}
-            y={280}
-            width={60}
-            height={40}
-            rx={6}
+            x={165}
+            y={275}
+            width={90}
+            height={50}
+            rx={4}
             stroke={strokeColor}
             fill="none"
             strokeWidth={strokeWidth}
           />
+          {/* Screen content lines */}
+          <line
+            x1={175}
+            y1={290}
+            x2={245}
+            y2={290}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth * 0.6}
+          />
+          <line
+            x1={175}
+            y1={300}
+            x2={230}
+            y2={300}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth * 0.6}
+          />
+          <line
+            x1={175}
+            y1={310}
+            x2={220}
+            y2={310}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth * 0.6}
+          />
+          {/* Product tiles/items */}
           <rect
-            x={415}
-            y={295}
-            width={30}
-            height={10}
+            x={260}
+            y={278}
+            width={25}
+            height={20}
             rx={3}
             stroke={strokeColor}
             fill="none"
-            strokeWidth={strokeWidth}
+            strokeWidth={strokeWidth * 0.7}
           />
-          <text x={330} y={380} fill={textColor} fontSize={14} opacity={0.7}>
+          <rect
+            x={290}
+            y={278}
+            width={25}
+            height={20}
+            rx={3}
+            stroke={strokeColor}
+            fill="none"
+            strokeWidth={strokeWidth * 0.7}
+          />
+          <rect
+            x={260}
+            y={303}
+            width={25}
+            height={20}
+            rx={3}
+            stroke={strokeColor}
+            fill="none"
+            strokeWidth={strokeWidth * 0.7}
+          />
+          <rect
+            x={290}
+            y={303}
+            width={25}
+            height={20}
+            rx={3}
+            stroke={strokeColor}
+            fill="none"
+            strokeWidth={strokeWidth * 0.7}
+          />
+          <text x={240} y={370} fill={textColor} fontSize={14} opacity={0.7} textAnchor="middle">
             POS App
           </text>
         </motion.g>
 
-        {/* --- Line: Order -> POS --- */}
+        {/* --- Order --- */}
+        <motion.g
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible"
+          custom={0.3}
+        >
+          <rect
+            x={420}
+            y={260}
+            width={180}
+            height={90}
+            rx={16}
+            stroke={strokeColor}
+            fill="none"
+            strokeWidth={strokeWidth}
+          />
+          <text x={510} y={310} fill={textColor} fontSize={18} fontWeight={600} textAnchor="middle">
+            Order
+          </text>
+        </motion.g>
+
+        {/* --- Line: POS App -> Order --- */}
         <motion.path
-          d="M280 305 H330"
+          d="M330 305 H420"
           stroke={strokeColor}
-          strokeWidth={strokeWidth}
+          strokeWidth={strokeWidth * 0.85}
           fill="none"
           strokeLinecap="round"
+          strokeLinejoin="round"
           variants={lineVariants}
           initial="hidden"
           animate="visible"
-          custom={0.4}
+          custom={0.2}
+          markerEnd="url(#arrowhead)"
         />
 
-        {/* --- POS -> Print Agent line --- */}
+        {/* --- Line: Order -> Print Agent --- */}
         <motion.path
-          d="M510 305 H570"
+          d="M600 305 H800"
           stroke={strokeColor}
-          strokeWidth={strokeWidth}
+          strokeWidth={strokeWidth * 0.85}
           fill="none"
           strokeLinecap="round"
+          strokeLinejoin="round"
           variants={lineVariants}
           initial="hidden"
           animate="visible"
-          custom={0.8}
+          custom={0.5}
+          markerEnd="url(#arrowhead)"
         />
 
         {/* --- Print Agent --- */}
@@ -308,45 +370,116 @@ export function PrintAgentFlowAnimation({
           custom={0.9}
         >
           <polygon
-            points="630,270 670,250 710,270 710,310 670,330 630,310"
+            points="800,285 840,265 880,285 880,325 840,345 800,325"
             stroke={strokeColor}
             strokeWidth={strokeWidth}
             fill="none"
           />
-          <text x={651} y={297} fill={textColor} fontSize={18} fontWeight={600}>
+          <text x={840} y={308} fill={textColor} fontSize={18} fontWeight={600} textAnchor="middle">
             JS
           </text>
 
-          <text x={605} y={360} fill={textColor} fontSize={16} fontWeight={600}>
+          <text x={840} y={365} fill={textColor} fontSize={16} fontWeight={600} textAnchor="middle">
             Print Agent
           </text>
-          <text x={575} y={385} fill={textColor} fontSize={13} opacity={0.7}>
-            směruje účtenky & stickery
+          <text x={840} y={385} fill={textColor} fontSize={12} opacity={0.6} textAnchor="middle">
+            :8000
+          </text>
+          <text x={840} y={400} fill={textColor} fontSize={12} opacity={0.7} textAnchor="middle">
+            REST API
           </text>
         </motion.g>
 
         {/* --- Branch lines --- */}
+        {/* Sticker line - from right edge of Print Agent to left edge of Sticker box (closer, because there can be multiple prints) */}
         <motion.path
-          d="M670 270 C 770 220, 850 220, 940 220"
+          d="M880 325 C 1000 375, 1100 375, 1150 395"
           stroke={strokeColor}
-          strokeWidth={strokeWidth}
+          strokeWidth={strokeWidth * 0.85}
           fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           variants={lineVariants}
           initial="hidden"
           animate="visible"
           custom={1.2}
+          markerEnd="url(#arrowhead)"
         />
+        {/* Endpoint label on sticker line - positioned well above the arrow */}
+        <motion.g
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible"
+          custom={1.25}
+        >
+          <rect
+            x={950}
+            y={325}
+            width={90}
+            height={18}
+            rx={4}
+            fill={isDark ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)"}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth * 0.5}
+            opacity={0.8}
+          />
+          <text
+            x={995}
+            y={337}
+            fill={textColor}
+            fontSize={10}
+            fontWeight={500}
+            textAnchor="middle"
+            opacity={0.9}
+          >
+            /print-sticker
+          </text>
+        </motion.g>
 
+        {/* Receipt line - from right edge of Print Agent to left edge of Receipt box (further, because it's the last step) */}
         <motion.path
-          d="M670 330 C 770 380, 850 380, 940 380"
+          d="M880 285 C 1050 235, 1250 235, 1350 235"
           stroke={strokeColor}
-          strokeWidth={strokeWidth}
+          strokeWidth={strokeWidth * 0.85}
           fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           variants={lineVariants}
           initial="hidden"
           animate="visible"
           custom={1.4}
+          markerEnd="url(#arrowhead)"
         />
+        {/* Endpoint label on receipt line - positioned well below the arrow */}
+        <motion.g
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible"
+          custom={1.45}
+        >
+          <rect
+            x={1050}
+            y={255}
+            width={95}
+            height={18}
+            rx={4}
+            fill={isDark ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)"}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth * 0.5}
+            opacity={0.8}
+          />
+          <text
+            x={1097.5}
+            y={267}
+            fill={textColor}
+            fontSize={10}
+            fontWeight={500}
+            textAnchor="middle"
+            opacity={0.9}
+          >
+            /print-receipt
+          </text>
+        </motion.g>
 
         {/* --- Epson receipt placeholder --- */}
         <motion.g
@@ -356,7 +489,7 @@ export function PrintAgentFlowAnimation({
           custom={1.5}
         >
           <rect
-            x={940}
+            x={1350}
             y={190}
             width={150}
             height={90}
@@ -366,30 +499,30 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth}
           />
           <rect
-            x={955}
+            x={1365}
             y={205}
             width={120}
-            height={55}
+            height={60}
             rx={6}
             stroke={strokeColor}
             fill="none"
             strokeWidth={strokeWidth * 0.75}
           />
           <text
-            x={1015}
-            y={237}
+            x={1425}
+            y={240}
             fill={textColor}
             fontSize={16}
             textAnchor="middle"
           >
-            ÚČTENKA
+            Receipt
           </text>
 
-          <text x={940} y={305} fill={textColor} fontSize={14} opacity={0.8}>
+          <text x={1425} y={305} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
             Epson TM-T20III
           </text>
-          <text x={940} y={323} fill={textColor} fontSize={13} opacity={0.6}>
-            Receipt
+          <text x={1425} y={323} fill={textColor} fontSize={12} opacity={0.5} textAnchor="middle">
+            PDFKit + SumatraPDF
           </text>
         </motion.g>
 
@@ -398,10 +531,10 @@ export function PrintAgentFlowAnimation({
           variants={cardVariants}
           initial="hidden"
           animate="visible"
-          custom={1.7}
+          custom={1.3}
         >
           <rect
-            x={940}
+            x={1150}
             y={350}
             width={150}
             height={90}
@@ -411,30 +544,30 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth}
           />
           <rect
-            x={955}
-            y={340}
+            x={1165}
+            y={365}
             width={120}
-            height={45}
+            height={60}
             rx={6}
             stroke={strokeColor}
             fill="none"
             strokeWidth={strokeWidth * 0.75}
           />
           <text
-            x={1015}
-            y={368}
+            x={1225}
+            y={398}
             fill={textColor}
             fontSize={15}
             textAnchor="middle"
           >
-            STICKER
+            Sticker
           </text>
 
-          <text x={940} y={450} fill={textColor} fontSize={14} opacity={0.8}>
+          <text x={1225} y={460} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
             Brother QL-700
           </text>
-          <text x={940} y={468} fill={textColor} fontSize={13} opacity={0.6}>
-            Sticker
+          <text x={1225} y={478} fill={textColor} fontSize={12} opacity={0.5} textAnchor="middle">
+            Puppeteer + IrfanView
           </text>
         </motion.g>
       </motion.svg>
