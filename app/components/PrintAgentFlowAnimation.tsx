@@ -325,7 +325,7 @@ export function PrintAgentFlowAnimation({
           custom={0.3}
         >
           <rect
-            x={420}
+            x={360}
             y={260}
             width={180}
             height={90}
@@ -335,7 +335,7 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth}
           />
           <text
-            x={510}
+            x={450}
             y={310}
             fill={textColor}
             fontSize={20}
@@ -348,7 +348,7 @@ export function PrintAgentFlowAnimation({
 
         {/* --- Line: POS App -> Order --- */}
         <motion.path
-          d="M330 305 H420"
+          d="M330 305 H360"
           stroke={strokeColor}
           strokeWidth={strokeWidth * 0.85}
           fill="none"
@@ -361,9 +361,9 @@ export function PrintAgentFlowAnimation({
           markerEnd="url(#arrowhead)"
         />
 
-        {/* --- Line: Order -> Print Agent --- */}
+        {/* --- Line: Order -> ngrok --- */}
         <motion.path
-          d="M600 305 H800"
+          d="M540 305 H620"
           stroke={strokeColor}
           strokeWidth={strokeWidth * 0.85}
           fill="none"
@@ -373,6 +373,60 @@ export function PrintAgentFlowAnimation({
           initial="hidden"
           animate="visible"
           custom={0.5}
+          markerEnd="url(#arrowhead)"
+        />
+
+        {/* --- ngrok --- */}
+        <motion.g
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible"
+          custom={0.7}
+        >
+          <rect
+            x={620}
+            y={260}
+            width={100}
+            height={90}
+            rx={16}
+            stroke={strokeColor}
+            fill="none"
+            strokeWidth={strokeWidth}
+          />
+          <text
+            x={670}
+            y={310}
+            fill={textColor}
+            fontSize={18}
+            fontWeight={600}
+            textAnchor="middle"
+          >
+            ngrok
+          </text>
+          <text
+            x={670}
+            y={370}
+            fill={textColor}
+            fontSize={14}
+            opacity={0.7}
+            textAnchor="middle"
+          >
+            HTTPS Tunnel
+          </text>
+        </motion.g>
+
+        {/* --- Line: ngrok -> Print Agent --- */}
+        <motion.path
+          d="M720 305 H800"
+          stroke={strokeColor}
+          strokeWidth={strokeWidth * 0.85}
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          variants={lineVariants}
+          initial="hidden"
+          animate="visible"
+          custom={0.8}
           markerEnd="url(#arrowhead)"
         />
 
