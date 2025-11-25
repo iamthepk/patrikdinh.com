@@ -32,13 +32,21 @@ export default function SplashScreen({
 
   // theme sync
   useLayoutEffect(() => {
-    const storedTheme = localStorage.getItem("theme") as
-      | "dark"
-      | "light"
-      | null;
+    // Nejprve zkontroluj URL parametr
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlTheme = urlParams.get("theme") as "dark" | "light" | null;
+    
+    let theme: "dark" | "light" | null;
+    if (urlTheme === "dark" || urlTheme === "light") {
+      theme = urlTheme;
+      // Aktualizuj localStorage podle URL parametru
+      localStorage.setItem("theme", theme);
+    } else {
+      theme = localStorage.getItem("theme") as "dark" | "light" | null;
+    }
 
-    if (storedTheme) {
-      document.documentElement.classList.toggle("dark", storedTheme === "dark");
+    if (theme) {
+      document.documentElement.classList.toggle("dark", theme === "dark");
     } else {
       document.documentElement.classList.add("dark");
     }

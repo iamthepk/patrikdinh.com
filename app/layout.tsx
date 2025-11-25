@@ -37,7 +37,19 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  const theme = localStorage.getItem('theme');
+                  // Nejprve zkontroluj URL parametr
+                  const urlParams = new URLSearchParams(window.location.search);
+                  const urlTheme = urlParams.get('theme');
+                  
+                  let theme;
+                  if (urlTheme === 'dark' || urlTheme === 'light') {
+                    theme = urlTheme;
+                    // Aktualizuj localStorage podle URL parametru
+                    localStorage.setItem('theme', theme);
+                  } else {
+                    theme = localStorage.getItem('theme');
+                  }
+                  
                   if (theme === 'light') {
                     document.documentElement.classList.remove('dark');
                   } else {

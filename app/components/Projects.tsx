@@ -48,15 +48,35 @@ export default function Projects() {
     }
   };
 
-  // Helper function to add theme parameter to URL
-  const addThemeToUrl = (url: string) => {
-    try {
-      const urlObj = new URL(url);
-      urlObj.searchParams.set("theme", theme);
-      return urlObj.toString();
-    } catch {
-      const separator = url.includes("?") ? "&" : "?";
-      return `${url}${separator}theme=${theme}`;
+  // Helper function to open URL with theme passed via postMessage (hidden)
+  const openUrlWithTheme = (url: string) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    
+    // Pošli theme přes postMessage když se okno načte
+    if (newWindow) {
+      // Ulož theme do sessionStorage jako fallback
+      sessionStorage.setItem("theme", theme);
+      
+      // Pošli theme přes postMessage
+      const sendTheme = () => {
+        try {
+          newWindow.postMessage(
+            { type: "THEME_SYNC", theme },
+            new URL(url).origin
+          );
+        } catch (e) {
+          // Pokud selže postMessage, použij sessionStorage
+          console.warn("Failed to send theme via postMessage", e);
+        }
+      };
+      
+      // Zkus poslat theme hned
+      sendTheme();
+      
+      // Zkus znovu po chvíli (když se stránka načte)
+      setTimeout(sendTheme, 100);
+      setTimeout(sendTheme, 500);
+      setTimeout(sendTheme, 1000);
     }
   };
 
@@ -87,12 +107,7 @@ export default function Projects() {
                         if (project.id === "print-agent") return;
 
                         if (project.liveUrl) {
-                          const urlWithTheme = addThemeToUrl(project.liveUrl);
-                          window.open(
-                            urlWithTheme,
-                            "_blank",
-                            "noopener,noreferrer"
-                          );
+                          openUrlWithTheme(project.liveUrl);
                         } else {
                           setSelectedImage(
                             getThumbnailPath(project.thumbnail!)

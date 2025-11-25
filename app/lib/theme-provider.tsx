@@ -5,6 +5,7 @@ import {
   useContext,
   useCallback,
   useLayoutEffect,
+  useEffect,
   useState,
 } from "react";
 
@@ -23,6 +24,17 @@ export const useTheme = () => useContext(ThemeContext);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
+      // Nejprve zkontroluj URL parametr
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlTheme = urlParams.get("theme") as Theme | null;
+      
+      if (urlTheme === "dark" || urlTheme === "light") {
+        // Aktualizuj localStorage podle URL parametru
+        localStorage.setItem("theme", urlTheme);
+        return urlTheme;
+      }
+      
+      // Pokud není URL parametr, použij localStorage
       const stored = localStorage.getItem("theme") as Theme | null;
       return stored || "dark";
     }
@@ -53,6 +65,37 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.classList.toggle("dark", theme === "dark");
     updateFavicon(theme === "dark");
   }, [theme, updateFavicon]);
+
+  // Sleduj změny URL parametrů při navigaci
+  useEffect(() => {
+    const checkUrlTheme = () => {
+      if (typeof window === "undefined") return;
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlTheme = urlParams.get("theme") as Theme | null;
+      
+      if (urlTheme === "dark" || urlTheme === "light") {
+        if (urlTheme !== theme) {
+          setTheme(urlTheme);
+          localStorage.setItem("theme", urlTheme);
+        }
+      }
+    };
+
+    // Zkontroluj při načtení
+    checkUrlTheme();
+
+    // Sleduj změny URL (např. při použití browser back/forward)
+    window.addEventListener("popstate", checkUrlTheme);
+    
+    // Sleduj změny při navigaci v Next.js (pro případ, že by se URL změnilo bez reloadu)
+    const interval = setInterval(checkUrlTheme, 100);
+
+    return () => {
+      window.removeEventListener("popstate", checkUrlTheme);
+      clearInterval(interval);
+    };
+  }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
