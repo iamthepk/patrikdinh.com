@@ -27,13 +27,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       // Nejprve zkontroluj URL parametr
       const urlParams = new URLSearchParams(window.location.search);
       const urlTheme = urlParams.get("theme") as Theme | null;
-      
+
       if (urlTheme === "dark" || urlTheme === "light") {
         // Aktualizuj localStorage podle URL parametru
         localStorage.setItem("theme", urlTheme);
         return urlTheme;
       }
-      
+
       // Pokud není URL parametr, použij localStorage
       const stored = localStorage.getItem("theme") as Theme | null;
       return stored || "dark";
@@ -70,10 +70,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkUrlTheme = () => {
       if (typeof window === "undefined") return;
-      
+
       const urlParams = new URLSearchParams(window.location.search);
       const urlTheme = urlParams.get("theme") as Theme | null;
-      
+
       if (urlTheme === "dark" || urlTheme === "light") {
         if (urlTheme !== theme) {
           setTheme(urlTheme);
@@ -87,7 +87,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     // Sleduj změny URL (např. při použití browser back/forward)
     window.addEventListener("popstate", checkUrlTheme);
-    
+
     // Sleduj změny při navigaci v Next.js (pro případ, že by se URL změnilo bez reloadu)
     const interval = setInterval(checkUrlTheme, 100);
 

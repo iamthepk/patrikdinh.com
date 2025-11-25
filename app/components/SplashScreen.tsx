@@ -35,7 +35,7 @@ export default function SplashScreen({
     // Nejprve zkontroluj URL parametr
     const urlParams = new URLSearchParams(window.location.search);
     const urlTheme = urlParams.get("theme") as "dark" | "light" | null;
-    
+
     let theme: "dark" | "light" | null;
     if (urlTheme === "dark" || urlTheme === "light") {
       theme = urlTheme;
