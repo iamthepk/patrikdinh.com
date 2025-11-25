@@ -305,7 +305,14 @@ export function PrintAgentFlowAnimation({
             fill="none"
             strokeWidth={strokeWidth * 0.7}
           />
-          <text x={240} y={370} fill={textColor} fontSize={14} opacity={0.7} textAnchor="middle">
+          <text
+            x={240}
+            y={370}
+            fill={textColor}
+            fontSize={16}
+            opacity={0.7}
+            textAnchor="middle"
+          >
             POS App
           </text>
         </motion.g>
@@ -327,7 +334,14 @@ export function PrintAgentFlowAnimation({
             fill="none"
             strokeWidth={strokeWidth}
           />
-          <text x={510} y={310} fill={textColor} fontSize={18} fontWeight={600} textAnchor="middle">
+          <text
+            x={510}
+            y={310}
+            fill={textColor}
+            fontSize={20}
+            fontWeight={600}
+            textAnchor="middle"
+          >
             Order
           </text>
         </motion.g>
@@ -375,17 +389,45 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth}
             fill="none"
           />
-          <text x={840} y={308} fill={textColor} fontSize={18} fontWeight={600} textAnchor="middle">
+          <text
+            x={840}
+            y={308}
+            fill={textColor}
+            fontSize={20}
+            fontWeight={600}
+            textAnchor="middle"
+          >
             JS
           </text>
 
-          <text x={840} y={365} fill={textColor} fontSize={16} fontWeight={600} textAnchor="middle">
+          <text
+            x={840}
+            y={365}
+            fill={textColor}
+            fontSize={18}
+            fontWeight={600}
+            textAnchor="middle"
+          >
             Print Agent
           </text>
-          <text x={840} y={385} fill={textColor} fontSize={12} opacity={0.6} textAnchor="middle">
+          <text
+            x={840}
+            y={385}
+            fill={textColor}
+            fontSize={16}
+            opacity={0.7}
+            textAnchor="middle"
+          >
             :8000
           </text>
-          <text x={840} y={400} fill={textColor} fontSize={12} opacity={0.7} textAnchor="middle">
+          <text
+            x={840}
+            y={405}
+            fill={textColor}
+            fontSize={16}
+            opacity={0.7}
+            textAnchor="middle"
+          >
             REST API
           </text>
         </motion.g>
@@ -414,9 +456,9 @@ export function PrintAgentFlowAnimation({
         >
           <rect
             x={950}
-            y={325}
-            width={90}
-            height={18}
+            y={323}
+            width={100}
+            height={22}
             rx={4}
             fill={isDark ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)"}
             stroke={strokeColor}
@@ -424,10 +466,10 @@ export function PrintAgentFlowAnimation({
             opacity={0.8}
           />
           <text
-            x={995}
-            y={337}
+            x={1000}
+            y={338}
             fill={textColor}
-            fontSize={10}
+            fontSize={12}
             fontWeight={500}
             textAnchor="middle"
             opacity={0.9}
@@ -459,9 +501,9 @@ export function PrintAgentFlowAnimation({
         >
           <rect
             x={1050}
-            y={255}
-            width={95}
-            height={18}
+            y={253}
+            width={105}
+            height={22}
             rx={4}
             fill={isDark ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)"}
             stroke={strokeColor}
@@ -469,10 +511,10 @@ export function PrintAgentFlowAnimation({
             opacity={0.8}
           />
           <text
-            x={1097.5}
-            y={267}
+            x={1102.5}
+            y={268}
             fill={textColor}
-            fontSize={10}
+            fontSize={12}
             fontWeight={500}
             textAnchor="middle"
             opacity={0.9}
@@ -518,10 +560,24 @@ export function PrintAgentFlowAnimation({
             Receipt
           </text>
 
-          <text x={1425} y={305} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
+          <text
+            x={1425}
+            y={305}
+            fill={textColor}
+            fontSize={16}
+            opacity={0.8}
+            textAnchor="middle"
+          >
             Epson TM-T20III
           </text>
-          <text x={1425} y={323} fill={textColor} fontSize={12} opacity={0.5} textAnchor="middle">
+          <text
+            x={1425}
+            y={325}
+            fill={textColor}
+            fontSize={16}
+            opacity={0.7}
+            textAnchor="middle"
+          >
             PDFKit + SumatraPDF
           </text>
         </motion.g>
@@ -557,16 +613,30 @@ export function PrintAgentFlowAnimation({
             x={1225}
             y={398}
             fill={textColor}
-            fontSize={15}
+            fontSize={18}
             textAnchor="middle"
           >
             Sticker
           </text>
 
-          <text x={1225} y={460} fill={textColor} fontSize={14} opacity={0.8} textAnchor="middle">
+          <text
+            x={1225}
+            y={460}
+            fill={textColor}
+            fontSize={16}
+            opacity={0.8}
+            textAnchor="middle"
+          >
             Brother QL-700
           </text>
-          <text x={1225} y={478} fill={textColor} fontSize={12} opacity={0.5} textAnchor="middle">
+          <text
+            x={1225}
+            y={480}
+            fill={textColor}
+            fontSize={16}
+            opacity={0.7}
+            textAnchor="middle"
+          >
             Puppeteer + IrfanView
           </text>
         </motion.g>

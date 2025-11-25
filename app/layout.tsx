@@ -77,20 +77,30 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                // Detekce dark/light módu konzole
+                const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const textColor = isDarkMode ? '#d1d5db' : '#111827';
+                const accentColor = '#4ade80';
+                const highlightColor = isDarkMode ? '#22d3ee' : '#0891b2';
+                
                 // Úvodní zpráva při načtení
-                console.log('%cPatrik Dinh', 'color: #4ade80; font-size: 16px; font-weight: bold;');
-                console.log('%cFull-stack & AI Developer', 'color: #d1d5db; font-size: 12px;');
-                console.log('%cBuilding useful products with AI & TypeScript', 'color: #d1d5db; font-size: 12px;');
+                console.log('%cPatrik Dinh', 'color: ' + accentColor + '; font-size: 16px; font-weight: bold;');
+                console.log('%cFull-stack & AI Developer', 'color: ' + textColor + '; font-size: 12px;');
+                console.log('%cBuilding useful products with AI & TypeScript', 'color: ' + textColor + '; font-size: 12px;');
                 console.log('');
-                console.log('%c📧 me@patrikdinh.com', 'color: #d1d5db; font-size: 12px;');
-                console.log('%c🔗 linkedin.com/in/dinhpatrik', 'color: #d1d5db; font-size: 12px;');
-                console.log('%c🔗 github.com/iamthepk', 'color: #d1d5db; font-size: 12px;');
+                console.log('%c📧 me@patrikdinh.com', 'color: ' + textColor + '; font-size: 12px;');
+                console.log('%c🔗 linkedin.com/in/dinhpatrik', 'color: ' + textColor + '; font-size: 12px;');
+                console.log('%c🔗 github.com/iamthepk', 'color: ' + textColor + '; font-size: 12px;');
                 console.log('');
-                console.log('%cCurious? Try typing info() in the console', 'color: #4ade80; font-size: 12px;');
-                console.log('%cinfo()', 'color: #22d3ee; font-size: 12px; font-weight: bold;');
+                console.log('%cCurious? Try typing info() in the console', 'color: ' + accentColor + '; font-size: 12px;');
+                console.log('%cinfo()', 'color: ' + highlightColor + '; font-size: 12px; font-weight: bold;');
                 
                 // Funkce info() se spustí až když ji uživatel zavolá
                 window.info = function() {
+                  const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const txtColor = isDark ? '#d1d5db' : '#111827';
+                  const accColor = '#4ade80';
+                  
                   const info = {
                     'Framework': 'Next.js 16 (App Router)',
                     'Language': 'TypeScript',
@@ -102,16 +112,16 @@ export default function RootLayout({
                   
                   console.table(info);
                   
-                  console.log('%cLooking for a developer?', 'color: #4ade80; font-size: 14px; font-weight: bold;');
-                  console.log('%c• Experience with modern AI models (GPT, Gemini, Claude)', 'color: #d1d5db; font-size: 12px;');
-                  console.log('%c• Next.js, React, TypeScript - daily practice', 'color: #d1d5db; font-size: 12px;');
-                  console.log('%c• Clean, maintainable code + attention to detail', 'color: #d1d5db; font-size: 12px;');
-                  console.log('%c• Solving complex problems', 'color: #d1d5db; font-size: 12px;');
+                  console.log('%cLooking for a developer?', 'color: ' + accColor + '; font-size: 14px; font-weight: bold;');
+                  console.log('%c• Experience with modern AI models (GPT, Gemini, Claude)', 'color: ' + txtColor + '; font-size: 12px;');
+                  console.log('%c• Next.js, React, TypeScript - daily practice', 'color: ' + txtColor + '; font-size: 12px;');
+                  console.log('%c• Clean, maintainable code + attention to detail', 'color: ' + txtColor + '; font-size: 12px;');
+                  console.log('%c• Solving complex problems', 'color: ' + txtColor + '; font-size: 12px;');
                   
-                  console.log('%cContact:', 'color: #4ade80; font-size: 14px; font-weight: bold;');
-                  console.log('%cEmail: me@patrikdinh.com', 'color: #d1d5db; font-size: 12px;');
-                  console.log('%cLinkedIn: linkedin.com/in/dinhpatrik', 'color: #d1d5db; font-size: 12px;');
-                  console.log('%cGitHub: github.com/iamthepk', 'color: #d1d5db; font-size: 12px;');
+                  console.log('%cContact:', 'color: ' + accColor + '; font-size: 14px; font-weight: bold;');
+                  console.log('%cEmail: me@patrikdinh.com', 'color: ' + txtColor + '; font-size: 12px;');
+                  console.log('%cLinkedIn: linkedin.com/in/dinhpatrik', 'color: ' + txtColor + '; font-size: 12px;');
+                  console.log('%cGitHub: github.com/iamthepk', 'color: ' + txtColor + '; font-size: 12px;');
                   
                   return undefined;
                 };
