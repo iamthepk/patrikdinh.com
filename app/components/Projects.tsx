@@ -5,13 +5,154 @@ import { techIcons } from "../lib/tech-icons";
 import { SiGithub } from "react-icons/si";
 import Image from "next/image";
 import { useTheme } from "../lib/theme-provider";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PrintAgentFlowAnimation } from "./PrintAgentFlowAnimation";
+import { motion } from "framer-motion";
 import "./Projects.css";
+
+// Apple-style easing curves
+const appleEase = [0.25, 0.1, 0.25, 1] as const;
+
+// Variants pro scroll animace projektů
+const projectContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const projectContentVariants = (index: number) => ({
+  hidden: {
+    opacity: 0,
+    x: index % 2 === 0 ? -60 : 60,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1.4,
+      ease: appleEase,
+    },
+  },
+});
+
+const thumbnailVariants = (index: number) => ({
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+    x: index % 2 === 0 ? -40 : 40,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+    transition: {
+      duration: 1.2,
+      ease: appleEase,
+      delay: 0.3,
+    },
+  },
+});
+
+const contentVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.1,
+      ease: appleEase,
+      delay: 0.4,
+    },
+  },
+};
+
+// Speciální animace pro Invoice AI Extractor - simulace pohybu PDF vzhledem k JSON
+const invoiceAIThumbnailVariants = (index: number) => ({
+  hidden: {
+    opacity: 0,
+    scale: 0.9,
+    x: index % 2 === 0 ? -40 : 40,
+  },
+  visible: {
+    opacity: 1,
+    scale: [0.9, 1.05, 1],
+    x: 0,
+    transition: {
+      duration: 1.8,
+      ease: appleEase,
+      delay: 0.3,
+      scale: {
+        times: [0, 0.5, 1],
+        duration: 1.8,
+        ease: appleEase,
+      },
+    },
+  },
+});
 
 export default function Projects() {
   const { theme } = useTheme();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Spolehlivá detekce viewportu - vždy se spustí
+  useEffect(() => {
+    const checkViewport = () => {
+      if (containerRef.current) {
+        const rect = (
+          containerRef.current as HTMLElement
+        ).getBoundingClientRect();
+        // Element je ve viewportu pokud je viditelný (i částečně)
+        const visible =
+          rect.top < window.innerHeight * 1.5 &&
+          rect.bottom > -window.innerHeight * 0.5;
+
+        if (visible) {
+          // Nastav s malým delay pro plynulou animaci
+          setTimeout(() => {
+            setIsVisible(true);
+          }, 100);
+        }
+      }
+    };
+
+    // Zkontroluj hned a pak ještě několikrát
+    checkViewport();
+
+    const timeouts = [
+      setTimeout(checkViewport, 50),
+      setTimeout(checkViewport, 200),
+      setTimeout(checkViewport, 500),
+    ];
+
+    // requestAnimationFrame pro lepší načasování
+    requestAnimationFrame(() => {
+      requestAnimationFrame(checkViewport);
+    });
+
+    // Také poslouchej scroll event pro jistotu
+    const handleScroll = () => {
+      checkViewport();
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", checkViewport);
+
+    return () => {
+      timeouts.forEach((timeout) => clearTimeout(timeout));
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", checkViewport);
+    };
+  }, []);
 
   // Helper function to get theme-specific thumbnail path
   const getThumbnailPath = (basePath: string) => {
@@ -33,10 +174,12 @@ export default function Projects() {
   };
 
   // Helper function to handle image errors silently
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
     const img = e.currentTarget;
     const src = img.src;
-    
+
     // Pokud selhal theme-specific soubor, zkusíme základní soubor
     if (src.includes(`-${theme}.`)) {
       const fallbackSrc = src.replace(`-${theme}.`, ".");
@@ -51,12 +194,12 @@ export default function Projects() {
   // Helper function to open URL with theme passed via postMessage (hidden)
   const openUrlWithTheme = (url: string) => {
     const newWindow = window.open(url, "_blank", "noopener,noreferrer");
-    
+
     // Pošli theme přes postMessage když se okno načte
     if (newWindow) {
       // Ulož theme do sessionStorage jako fallback
       sessionStorage.setItem("theme", theme);
-      
+
       // Pošli theme přes postMessage
       const sendTheme = () => {
         try {
@@ -69,10 +212,10 @@ export default function Projects() {
           console.warn("Failed to send theme via postMessage", e);
         }
       };
-      
+
       // Zkus poslat theme hned
       sendTheme();
-      
+
       // Zkus znovu po chvíli (když se stránka načte)
       setTimeout(sendTheme, 100);
       setTimeout(sendTheme, 500);
@@ -87,9 +230,21 @@ export default function Projects() {
           Work
         </h2>
 
-        <div className="project-spacing">
+        <motion.div
+          ref={containerRef}
+          className="project-spacing"
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+          variants={projectContainerVariants}
+        >
           {projects.map((project, index) => (
-            <div key={project.id} className="projectContainer">
+            <motion.div
+              key={project.id}
+              className="projectContainer"
+              initial="hidden"
+              animate={isVisible ? "visible" : "hidden"}
+              variants={projectContentVariants(index)}
+            >
               <div
                 className={
                   "projectContent" +
@@ -98,7 +253,16 @@ export default function Projects() {
               >
                 {/* Thumbnail - Left side */}
                 {project.thumbnail && (
-                  <div className="thumbnailWrapper">
+                  <motion.div
+                    className="thumbnailWrapper"
+                    variants={
+                      project.id === "invoice-ai"
+                        ? invoiceAIThumbnailVariants(index)
+                        : thumbnailVariants(index)
+                    }
+                    initial="hidden"
+                    animate={isVisible ? "visible" : "hidden"}
+                  >
                     <div
                       className={`thumbnailContainer group ${
                         project.id === "print-agent" ? "" : "cursor-pointer"
@@ -139,11 +303,16 @@ export default function Projects() {
                         </div>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                 )}
 
                 {/* Content - Right side */}
-                <div className="content">
+                <motion.div
+                  className="content"
+                  variants={contentVariants}
+                  initial="hidden"
+                  animate={isVisible ? "visible" : "hidden"}
+                >
                   <h3 className="title">{project.title}</h3>
 
                   {project.subtitle && (
@@ -157,9 +326,7 @@ export default function Projects() {
                         <p
                           key={idx}
                           className={
-                            idx < array.length - 1
-                              ? "descriptionParagraph"
-                              : ""
+                            idx < array.length - 1 ? "descriptionParagraph" : ""
                           }
                         >
                           {sentence}
@@ -186,9 +353,7 @@ export default function Projects() {
                               </span>
                             </div>
                           ) : (
-                            <span className="techIconText">
-                              {tech.trim()}
-                            </span>
+                            <span className="techIconText">{tech.trim()}</span>
                           )}
                         </div>
                       );
@@ -208,11 +373,11 @@ export default function Projects() {
                       </a>
                     )}
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {selectedImage && (

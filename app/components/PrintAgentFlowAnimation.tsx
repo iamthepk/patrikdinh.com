@@ -5,6 +5,36 @@ import { useState, useEffect, useRef } from "react";
 import { Play, Pause } from "lucide-react";
 import { useTheme } from "../lib/theme-provider";
 
+// Apple-style easing
+const appleEase = [0.25, 0.1, 0.25, 1] as const;
+
+// Scroll-based variants pro postupné vykreslování
+const scrollCardVariants: Variants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: appleEase,
+    },
+  },
+};
+
+const scrollLineVariants: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: {
+    pathLength: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: appleEase,
+    },
+  },
+};
+
+// Timing-based variants pro loop animaci (původní)
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 8 },
   visible: (delay: number) => ({
@@ -121,6 +151,37 @@ export function PrintAgentFlowAnimation({
     setIsLooping((prev) => !prev);
   };
 
+  // Helper pro získání správných variant podle režimu
+  const getCardVariants = () => {
+    if (isThumbnail) {
+      return scrollCardVariants;
+    }
+    return cardVariants;
+  };
+
+  const getLineVariants = () => {
+    if (isThumbnail) {
+      return scrollLineVariants;
+    }
+    return lineVariants;
+  };
+
+  // Helper pro získání správných animačních props
+  const getAnimationProps = (customDelay?: number) => {
+    if (isThumbnail) {
+      return {
+        initial: "hidden" as const,
+        whileInView: "visible" as const,
+        viewport: { once: true, margin: "-50px" } as const,
+      };
+    }
+    return {
+      initial: "hidden" as const,
+      animate: "visible" as const,
+      custom: customDelay,
+    };
+  };
+
   return (
     <div
       className={`${
@@ -212,12 +273,7 @@ export function PrintAgentFlowAnimation({
           </marker>
         </defs>
         {/* --- POS App --- */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          custom={0.1}
-        >
+        <motion.g variants={getCardVariants()} {...getAnimationProps(0.1)}>
           <rect
             x={150}
             y={260}
@@ -318,12 +374,7 @@ export function PrintAgentFlowAnimation({
         </motion.g>
 
         {/* --- Order --- */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          custom={0.3}
-        >
+        <motion.g variants={getCardVariants()} {...getAnimationProps(0.3)}>
           <rect
             x={360}
             y={260}
@@ -354,10 +405,8 @@ export function PrintAgentFlowAnimation({
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
-          variants={lineVariants}
-          initial="hidden"
-          animate="visible"
-          custom={0.2}
+          variants={getLineVariants()}
+          {...getAnimationProps(0.2)}
           markerEnd="url(#arrowhead)"
         />
 
@@ -369,20 +418,13 @@ export function PrintAgentFlowAnimation({
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
-          variants={lineVariants}
-          initial="hidden"
-          animate="visible"
-          custom={0.5}
+          variants={getLineVariants()}
+          {...getAnimationProps(0.5)}
           markerEnd="url(#arrowhead)"
         />
 
         {/* --- ngrok --- */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          custom={0.7}
-        >
+        <motion.g variants={getCardVariants()} {...getAnimationProps(0.7)}>
           <rect
             x={620}
             y={260}
@@ -423,20 +465,13 @@ export function PrintAgentFlowAnimation({
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
-          variants={lineVariants}
-          initial="hidden"
-          animate="visible"
-          custom={0.8}
+          variants={getLineVariants()}
+          {...getAnimationProps(0.8)}
           markerEnd="url(#arrowhead)"
         />
 
         {/* --- Print Agent --- */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          custom={0.9}
-        >
+        <motion.g variants={getCardVariants()} {...getAnimationProps(0.9)}>
           <polygon
             points="800,285 840,265 880,285 880,325 840,345 800,325"
             stroke={strokeColor}
@@ -495,19 +530,12 @@ export function PrintAgentFlowAnimation({
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
-          variants={lineVariants}
-          initial="hidden"
-          animate="visible"
-          custom={1.2}
+          variants={getLineVariants()}
+          {...getAnimationProps(1.2)}
           markerEnd="url(#arrowhead)"
         />
         {/* Endpoint label on sticker line - positioned well above the arrow */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          custom={1.25}
-        >
+        <motion.g variants={getCardVariants()} {...getAnimationProps(1.25)}>
           <rect
             x={950}
             y={323}
@@ -540,19 +568,12 @@ export function PrintAgentFlowAnimation({
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
-          variants={lineVariants}
-          initial="hidden"
-          animate="visible"
-          custom={1.4}
+          variants={getLineVariants()}
+          {...getAnimationProps(1.4)}
           markerEnd="url(#arrowhead)"
         />
         {/* Endpoint label on receipt line - positioned well below the arrow */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          custom={1.45}
-        >
+        <motion.g variants={getCardVariants()} {...getAnimationProps(1.45)}>
           <rect
             x={1050}
             y={253}
@@ -578,12 +599,7 @@ export function PrintAgentFlowAnimation({
         </motion.g>
 
         {/* --- Epson receipt placeholder --- */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          custom={1.5}
-        >
+        <motion.g variants={getCardVariants()} {...getAnimationProps(1.5)}>
           <rect
             x={1350}
             y={190}
@@ -637,12 +653,7 @@ export function PrintAgentFlowAnimation({
         </motion.g>
 
         {/* --- Brother sticker placeholder --- */}
-        <motion.g
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          custom={1.3}
-        >
+        <motion.g variants={getCardVariants()} {...getAnimationProps(1.3)}>
           <rect
             x={1150}
             y={350}
