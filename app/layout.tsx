@@ -20,7 +20,10 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon-dark.svg", media: "(prefers-color-scheme: dark)" },
       { url: "/favicon-light.svg", media: "(prefers-color-scheme: light)" },
+      { url: "/favicon-dark.svg" }, // Fallback
     ],
+    shortcut: "/favicon-dark.svg",
+    apple: "/favicon-dark.svg",
   },
 };
 
