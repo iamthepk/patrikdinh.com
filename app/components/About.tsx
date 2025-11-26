@@ -5,7 +5,7 @@ import { techIcons } from "../lib/tech-icons";
 import { motion } from "framer-motion";
 
 // Apple-style easing curves
-const appleEase = [0.25, 0.1, 0.25, 1]; // Smooth, elegant easing
+const appleEase = [0.25, 0.1, 0.25, 1] as const; // Smooth, elegant easing
 
 // Variants pro scroll animace
 const fadeInUp = {

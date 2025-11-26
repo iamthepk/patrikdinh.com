@@ -3,10 +3,19 @@ export interface Project {
   title: string;
   subtitle?: string;
   description: string;
+  keyPoints?: string[];
   tech: string;
   liveUrl?: string;
   githubUrl?: string;
   thumbnail?: string;
+  caseStudy?: {
+    title: string;
+    sections: {
+      heading?: string;
+      content: string;
+      bullets?: string[];
+    }[];
+  };
 }
 
 export const projects: Project[] = [
@@ -34,11 +43,72 @@ export const projects: Project[] = [
   {
     id: "print-agent",
     title: "Print Agent",
-    subtitle: "Automated print job orchestration for document workflows.",
+    subtitle: "Local printing layer for a cloud-based POS system.",
     description:
-      "Local Node.js service that receives structured print jobs from the POS and routes them to the correct printer (Epson receipts or Brother stickers). Uses ngrok for secure, stable HTTPS tunneling, which bridges the gap between the cloud-hosted POS application and the local Print Agent, eliminating Mixed Content and CORS issues. Uses predefined templates for both receipts and stickers, ensuring consistent formatting, VAT accuracy, discounts, dual-currency totals, and refund handling. Prints fully silently - no dialogs, no pop-ups - and runs in the background on Windows with automatic startup. Exposes a small REST API for POS↔printer communication and generates outputs via PDFKit, Puppeteer and SumatraPDF.",
+      "Print Agent is a small desktop service that makes our cloud POS behave like a native local system, running on a Windows PC next to the cash desk and handling all receipts and product labels without any pop-ups or manual clicking.",
+    keyPoints: [
+      "Handles all receipt printing on the Epson POS printer, including discounts, VAT, refunds and <strong>dual-currency totals (CZK/EUR)</strong>.",
+      "Automatically prints a label for every drink as it’s added to the order — with <strong>zero extra steps</strong> for the barista.",
+      "Runs <strong>silently in the background</strong>, starts automatically with Windows and requires no staff interaction.",
+      "<strong>Connects cloud POS to local printers</strong> using a secure <strong>HTTPS tunnel</strong> (ngrok) and a custom REST API.",
+      "Reduced barista <strong>workflow time</strong>, removed <strong>all printing friction</strong> and made our cloud POS behave like a <strong>native on-premise system</strong>.",
+    ],
     tech: "Node.js · Express",
+
     thumbnail: "/thumbnails/print-agent.webp",
+    caseStudy: {
+      title: "Print Agent – Technical Overview",
+      sections: [
+        {
+          heading: "Context",
+          content:
+            "Our POS application runs in the cloud (Vercel, HTTPS) while both printers (Epson receipt printer and Brother label printer) live on a <strong>Windows PC</strong> inside the shop. Browsers can't talk directly to local printers, and mixing HTTPS (POS) with plain HTTP (local network) causes security issues (<strong>CORS, Mixed Content, .local hostname problems</strong>). I built Print Agent as a small <strong>Node.js service</strong> that sits on that Windows PC and acts as the single bridge between the cloud POS and all local printing.",
+        },
+        {
+          heading: "High-level architecture",
+          content:
+            'Local <strong>Node.js service</strong> listening on a fixed port on Windows. POS app sends structured print jobs over HTTPS to a <strong>tunnel endpoint</strong>. A lightweight <strong>HTTPS tunnel</strong> forwards those requests to the local agent. The agent converts each job into either: a receipt <strong>PDF</strong> (for the Epson printer), or a <strong>label layout</strong> (for the Brother QL-700), and then triggers the actual print on the right device. The service exposes a small <strong>REST API</strong> for "print receipt", "print label", health-checks and discovery. No printers are exposed directly to the internet – only the tunnel endpoint is.',
+        },
+        {
+          heading: "Receipts pipeline",
+          content:
+            "For receipts the flow is: POS sends a <strong>JSON payload</strong> describing the sale (items, VAT, discounts, totals, payment, refund flags, etc.). A dynamic template layer normalises the data (dates, VAT breakdown, multi-currency, negative totals for refunds). The template is rendered into a PDF using a <strong>PDF engine</strong>. A lightweight <strong>PDF viewer/CLI</strong> is used to send the document to the configured <strong>Epson printer</strong>. The agent returns a simple status back to the POS.",
+          bullets: [
+            "Normal sales, refunds and discounts (including percent-based discounts).",
+            "<strong>Dual-currency totals (CZK + EUR)</strong> with printed exchange rate.",
+            "Automatic <strong>cash change calculation</strong> when paying in cash.",
+            "A single <strong>dynamic template</strong> where branding (logo, footer, QR for reviews, etc.) comes from the POS payload instead of being hard-coded.",
+          ],
+        },
+        {
+          heading: "Labels pipeline",
+          content:
+            "For drink labels: POS sends a small JSON describing one drink (name, size, sweetness/ice level, toppings, order number, round, optional message). The agent renders a compact label layout (<strong>HTML/Canvas</strong>) optimised for fast scanning by staff. A <strong>headless browser engine</strong> converts the layout to a printable format. The job is sent to the <strong>Brother QL-700 label printer</strong>. Labels are printed one per drink immediately after confirmation, so baristas just stick it on the cup and don't have to re-enter anything manually.",
+        },
+        {
+          heading: "Reliability & operations",
+          content:
+            'Because this runs on a shop PC, reliability and "<strong>zero friction</strong>" for staff were priorities:',
+          bullets: [
+            '<strong>Automatic startup with Windows</strong> via a small helper script – no one has to remember to "turn the system on".',
+            "Runs in <strong>silent mode</strong>, no console windows or dialogs for baristas.",
+            "Simple restart/stop helpers for me as an admin (scripts instead of complex tooling).",
+            "Built-in <strong>health-check and network info endpoints</strong> so the POS can: verify that the agent is alive, discover the correct URL / hostname to use on different clients (web browser vs iPad vs Android terminal).",
+            "Basic logging so I can debug printing issues without přímý přístup k systému během směny.",
+          ],
+        },
+        {
+          heading: "Networking decisions",
+          content:
+            'To avoid <strong>Mixed Content/CORS issues</strong> between HTTPS POS and local HTTP, the agent uses an <strong>HTTPS tunnel (e.g. ngrok)</strong> in front of it. The tunnel URL is: started automatically together with the agent, stored locally and exposed through a tiny "what\'s my URL" endpoint for the POS. For production, the setup can be upgraded to a <strong>static tunnel/domain or a VPN</strong>, but the current design already works reliably for a single-shop environment.',
+        },
+        {
+          heading: "My role",
+          content:
+            "I designed and implemented the <strong>whole solution</strong>: requirements, architecture and data model, <strong>Node.js service and printing pipelines</strong>, <strong>Windows integration</strong> (startup, restart, background mode), templates for receipts and labels, operational scripts and <strong>health-check endpoints</strong>. The system runs every day in our own shop and prints all receipts and hundreds of labels per month.",
+        },
+      ],
+    },
   },
 ];
 

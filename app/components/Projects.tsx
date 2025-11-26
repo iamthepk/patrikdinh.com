@@ -5,7 +5,7 @@ import { techIcons } from "../lib/tech-icons";
 import { SiGithub } from "react-icons/si";
 import Image from "next/image";
 import { useTheme } from "../lib/theme-provider";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PrintAgentFlowAnimation } from "./PrintAgentFlowAnimation";
 import { motion } from "framer-motion";
 import "./Projects.css";
@@ -101,6 +101,42 @@ const invoiceAIThumbnailVariants = (index: number) => ({
 export default function Projects() {
   const { theme } = useTheme();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<string | null>(
+    null
+  );
+
+  // Close modals on ESC key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedImage(null);
+        setSelectedCaseStudy(null);
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, []);
+
+  // Prevent body scroll when modal is open (without moving the page)
+  useEffect(() => {
+    const isModalOpen = selectedImage !== null || selectedCaseStudy !== null;
+
+    if (isModalOpen) {
+      // Prevent scrolling without moving the page - just hide overflow
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      // Restore scrolling
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+
+    return () => {
+      // Cleanup on unmount
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [selectedImage, selectedCaseStudy]);
 
   // Helper function to get theme-specific thumbnail path
   const getThumbnailPath = (basePath: string) => {
@@ -281,6 +317,28 @@ export default function Projects() {
                           {idx < array.length - 1 ? "." : ""}
                         </p>
                       ))}
+                    {project.keyPoints && project.keyPoints.length > 0 && (
+                      <ul className="keyPoints">
+                        {project.keyPoints.map((point, pointIdx) => (
+                          <li
+                            key={pointIdx}
+                            dangerouslySetInnerHTML={{ __html: point }}
+                          />
+                        ))}
+                      </ul>
+                    )}
+                    {project.caseStudy && (
+                      <button
+                        type="button"
+                        className="caseStudyToggle"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSelectedCaseStudy(project.id);
+                        }}
+                      >
+                        View case study
+                      </button>
+                    )}
                   </div>
 
                   <div className="techIcons">
@@ -349,6 +407,90 @@ export default function Projects() {
           </div>
         </div>
       )}
+
+      {selectedCaseStudy &&
+        (() => {
+          const project = projects.find((p) => p.id === selectedCaseStudy);
+          if (!project?.caseStudy) return null;
+
+          return (
+            <div
+              className="modal caseStudyModal"
+              onClick={() => setSelectedCaseStudy(null)}
+              onWheel={(e) => {
+                const target = e.currentTarget.querySelector(
+                  ".caseStudyModalContent"
+                ) as HTMLElement;
+                if (!target) return;
+
+                const { scrollTop, scrollHeight, clientHeight } = target;
+                const isAtTop = scrollTop === 0;
+                const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+                // Prevent page scroll when modal is at top/bottom
+                if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+              }}
+              onTouchMove={(e) => {
+                // Prevent body scroll on touch devices
+                const target = e.currentTarget.querySelector(
+                  ".caseStudyModalContent"
+                ) as HTMLElement;
+                if (!target) return;
+
+                const { scrollTop, scrollHeight, clientHeight } = target;
+                const isAtTop = scrollTop === 0;
+                const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+                if (
+                  (isAtTop && e.touches[0].clientY > 0) ||
+                  (isAtBottom && e.touches[0].clientY < 0)
+                ) {
+                  e.stopPropagation();
+                }
+              }}
+            >
+              <div
+                className="modalContent caseStudyModalContent"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="modalClose"
+                  onClick={() => setSelectedCaseStudy(null)}
+                  aria-label="Close"
+                >
+                  ×
+                </button>
+                <div className="caseStudy">
+                  <h3 className="caseStudyTitle">{project.caseStudy.title}</h3>
+                  {project.caseStudy.sections.map((section, sectionIdx) => (
+                    <div key={sectionIdx} className="caseStudySection">
+                      {section.heading && (
+                        <h4 className="caseStudyHeading">{section.heading}</h4>
+                      )}
+                      <p
+                        className="caseStudyContent"
+                        dangerouslySetInnerHTML={{ __html: section.content }}
+                      />
+                      {section.bullets && section.bullets.length > 0 && (
+                        <ul className="caseStudyBullets">
+                          {section.bullets.map((bullet, bulletIdx) => (
+                            <li
+                              key={bulletIdx}
+                              dangerouslySetInnerHTML={{ __html: bullet }}
+                            />
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
     </section>
   );
 }
