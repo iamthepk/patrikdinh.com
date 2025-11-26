@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     "Building useful products with AI & TypeScript. Full-stack & AI developer focused on practical automation and intelligent systems.",
   icons: {
     icon: [
-      { url: "/favicon-dark.svg", media: "(prefers-color-scheme: dark)" },
-      { url: "/favicon-light.svg", media: "(prefers-color-scheme: light)" },
-      { url: "/favicon-dark.svg" }, // Fallback
+      { url: "/favicon-dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
+      { url: "/favicon-light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+      { url: "/favicon-dark.svg", type: "image/svg+xml" }, // Fallback
     ],
-    shortcut: "/favicon-dark.svg",
-    apple: "/favicon-dark.svg",
+    shortcut: [{ url: "/favicon-dark.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/favicon-dark.svg", type: "image/svg+xml" }],
   },
 };
 
@@ -35,6 +35,12 @@ export default function RootLayout({
   return (
     <html lang="cs" suppressHydrationWarning>
       <head>
+        {/* Favicon links - explicitně přidáno pro lepší kompatibilitu */}
+        <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" />
+        <link rel="shortcut icon" type="image/svg+xml" href="/favicon-dark.svg" />
+        <link rel="apple-touch-icon" href="/favicon-dark.svg" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -71,6 +77,18 @@ export default function RootLayout({
                     link.rel = 'icon';
                     link.href = isDark ? '/favicon-dark.svg' : '/favicon-light.svg';
                     document.getElementsByTagName('head')[0].appendChild(link);
+                    
+                    // Also add shortcut and apple touch icon
+                    const shortcut = document.createElement('link');
+                    shortcut.rel = 'shortcut icon';
+                    shortcut.type = 'image/svg+xml';
+                    shortcut.href = isDark ? '/favicon-dark.svg' : '/favicon-light.svg';
+                    document.getElementsByTagName('head')[0].appendChild(shortcut);
+                    
+                    const apple = document.createElement('link');
+                    apple.rel = 'apple-touch-icon';
+                    apple.href = isDark ? '/favicon-dark.svg' : '/favicon-light.svg';
+                    document.getElementsByTagName('head')[0].appendChild(apple);
                   };
                   
                   updateFavicon();
