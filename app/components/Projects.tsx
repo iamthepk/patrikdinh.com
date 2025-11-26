@@ -5,7 +5,7 @@ import { techIcons } from "../lib/tech-icons";
 import { SiGithub } from "react-icons/si";
 import Image from "next/image";
 import { useTheme } from "../lib/theme-provider";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { PrintAgentFlowAnimation } from "./PrintAgentFlowAnimation";
 import { motion } from "framer-motion";
 import "./Projects.css";
@@ -19,8 +19,8 @@ const projectContainerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.15,
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
     },
   },
 };
@@ -34,8 +34,8 @@ const projectContentVariants = (index: number) => ({
     opacity: 1,
     x: 0,
     transition: {
-      duration: 1.4,
-      ease: appleEase,
+      duration: 0.9,
+      ease: appleEase as [number, number, number, number],
     },
   },
 });
@@ -51,9 +51,9 @@ const thumbnailVariants = (index: number) => ({
     scale: 1,
     x: 0,
     transition: {
-      duration: 1.2,
-      ease: appleEase,
-      delay: 0.3,
+      duration: 0.8,
+      ease: appleEase as [number, number, number, number],
+      delay: 0.2,
     },
   },
 });
@@ -67,9 +67,9 @@ const contentVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1.1,
-      ease: appleEase,
-      delay: 0.4,
+      duration: 0.7,
+      ease: appleEase as [number, number, number, number],
+      delay: 0.3,
     },
   },
 };
@@ -86,13 +86,13 @@ const invoiceAIThumbnailVariants = (index: number) => ({
     scale: [0.9, 1.05, 1],
     x: 0,
     transition: {
-      duration: 1.8,
-      ease: appleEase,
-      delay: 0.3,
+      duration: 1.2,
+      ease: appleEase as [number, number, number, number],
+      delay: 0.2,
       scale: {
         times: [0, 0.5, 1],
-        duration: 1.8,
-        ease: appleEase,
+        duration: 1.2,
+        ease: appleEase as [number, number, number, number],
       },
     },
   },
@@ -101,58 +101,6 @@ const invoiceAIThumbnailVariants = (index: number) => ({
 export default function Projects() {
   const { theme } = useTheme();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const containerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Spolehlivá detekce viewportu - vždy se spustí
-  useEffect(() => {
-    const checkViewport = () => {
-      if (containerRef.current) {
-        const rect = (
-          containerRef.current as HTMLElement
-        ).getBoundingClientRect();
-        // Element je ve viewportu pokud je viditelný (i částečně)
-        const visible =
-          rect.top < window.innerHeight * 1.5 &&
-          rect.bottom > -window.innerHeight * 0.5;
-
-        if (visible) {
-          // Nastav s malým delay pro plynulou animaci
-          setTimeout(() => {
-            setIsVisible(true);
-          }, 100);
-        }
-      }
-    };
-
-    // Zkontroluj hned a pak ještě několikrát
-    checkViewport();
-
-    const timeouts = [
-      setTimeout(checkViewport, 50),
-      setTimeout(checkViewport, 200),
-      setTimeout(checkViewport, 500),
-    ];
-
-    // requestAnimationFrame pro lepší načasování
-    requestAnimationFrame(() => {
-      requestAnimationFrame(checkViewport);
-    });
-
-    // Také poslouchej scroll event pro jistotu
-    const handleScroll = () => {
-      checkViewport();
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", checkViewport);
-
-    return () => {
-      timeouts.forEach((timeout) => clearTimeout(timeout));
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", checkViewport);
-    };
-  }, []);
 
   // Helper function to get theme-specific thumbnail path
   const getThumbnailPath = (basePath: string) => {
@@ -231,18 +179,16 @@ export default function Projects() {
         </h2>
 
         <motion.div
-          ref={containerRef}
           className="project-spacing"
           initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-150px" }}
           variants={projectContainerVariants}
         >
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
               className="projectContainer"
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
               variants={projectContentVariants(index)}
             >
               <div
@@ -261,7 +207,8 @@ export default function Projects() {
                         : thumbnailVariants(index)
                     }
                     initial="hidden"
-                    animate={isVisible ? "visible" : "hidden"}
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
                   >
                     <div
                       className={`thumbnailContainer group ${
@@ -311,7 +258,8 @@ export default function Projects() {
                   className="content"
                   variants={contentVariants}
                   initial="hidden"
-                  animate={isVisible ? "visible" : "hidden"}
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
                 >
                   <h3 className="title">{project.title}</h3>
 

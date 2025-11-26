@@ -3,10 +3,9 @@
 import { techStack } from "../lib/projects";
 import { techIcons } from "../lib/tech-icons";
 import { motion } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
 
 // Apple-style easing curves
-const appleEase = [0.25, 0.1, 0.25, 1] as const; // Smooth, elegant easing
+const appleEase = [0.25, 0.1, 0.25, 1]; // Smooth, elegant easing
 
 // Variants pro scroll animace
 const fadeInUp = {
@@ -15,7 +14,7 @@ const fadeInUp = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1.2,
+      duration: 0.8,
       ease: appleEase,
     },
   },
@@ -26,8 +25,8 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
     },
   },
 };
@@ -38,74 +37,22 @@ const iconItem = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.8,
+      duration: 0.5,
       ease: appleEase,
     },
   },
 };
 
 export default function About() {
-  const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Spolehlivá detekce viewportu - vždy se spustí
-  useEffect(() => {
-    const checkViewport = () => {
-      if (sectionRef.current) {
-        const rect = (
-          sectionRef.current as HTMLElement
-        ).getBoundingClientRect();
-        // Element je ve viewportu pokud je viditelný (i částečně)
-        const visible =
-          rect.top < window.innerHeight * 1.5 &&
-          rect.bottom > -window.innerHeight * 0.5;
-
-        if (visible) {
-          // Nastav s malým delay pro plynulou animaci
-          setTimeout(() => {
-            setIsVisible(true);
-          }, 100);
-        }
-      }
-    };
-
-    // Zkontroluj hned a pak ještě několikrát
-    checkViewport();
-
-    const timeouts = [
-      setTimeout(checkViewport, 50),
-      setTimeout(checkViewport, 200),
-      setTimeout(checkViewport, 500),
-    ];
-
-    // requestAnimationFrame pro lepší načasování
-    requestAnimationFrame(() => {
-      requestAnimationFrame(checkViewport);
-    });
-
-    // Také poslouchej scroll event pro jistotu
-    const handleScroll = () => {
-      checkViewport();
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", checkViewport);
-
-    return () => {
-      timeouts.forEach((timeout) => clearTimeout(timeout));
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", checkViewport);
-    };
-  }, []);
-
   return (
-    <section ref={sectionRef} className="section-padding section-spacing">
+    <section className="section-padding section-spacing">
       <div className="max-w-[1300px] mx-auto px-6">
         <motion.h2
           className="text-5xl md:text-6xl font-black tracking-tight heading-spacing"
           style={{ color: "var(--text)" }}
           initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           variants={fadeInUp}
         >
           About
@@ -116,7 +63,8 @@ export default function About() {
             className="text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.2] tracking-tight"
             style={{ color: "var(--text)" }}
             initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
             I build full-stack web apps that actually get used - from POS
@@ -127,7 +75,8 @@ export default function About() {
             className="text-2xl md:text-3xl font-normal leading-[1.5]"
             style={{ color: "var(--text)" }}
             initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             variants={{
               ...fadeInUp,
               visible: {
@@ -147,11 +96,12 @@ export default function About() {
           <motion.div
             className="mt-8"
             initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
             variants={staggerContainer}
           >
             <ul className="flex flex-wrap gap-4 md:gap-6">
-              {techStack.primary.map((tech) => {
+              {techStack.primary.map((tech, index) => {
                 const IconComponent = techIcons[tech];
                 return (
                   <motion.li
