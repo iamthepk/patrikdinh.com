@@ -35,10 +35,69 @@ export const projects: Project[] = [
     title: "Invoice AI Extractor",
     subtitle: "AI-powered invoice data extraction using Google Gemini.",
     description:
-      "Parses complex PDF invoices into a structured, unified JSON schema. The output includes key financial data (items, VAT breakdown, totals) and comprehensive metadata (suppliers, customers). The system features built-in validation and correction logic (e.g., VAT fixes, date normalization) to ensure data integrity, which is then used directly in our internal ERP system for automated processing.",
+      "Parses <strong>complex PDF invoices</strong> into a <strong>structured, unified JSON schema</strong>. The output includes <strong>key financial data</strong> (items, <strong>VAT breakdown</strong>, totals) and comprehensive <strong>metadata</strong> (suppliers, customers). The system features built-in <strong>validation and correction logic</strong> (e.g., <strong>VAT fixes</strong>, date normalization) to ensure <strong>data integrity</strong>, which is then used directly in our internal <strong>ERP system</strong> for automated processing.",
     tech: "React · Next.js · TypeScript · Gemini",
     liveUrl: "https://invoice.ai.extractor.patrikdinh.com/",
     thumbnail: "/thumbnails/invoice-ai-extractor.webp",
+    caseStudy: {
+      title: "Invoice AI Extractor – Technical Overview",
+      sections: [
+        {
+          heading: "Context & Challenge",
+          content:
+            "Processing invoices manually is time-consuming, expensive, and <strong>error-prone</strong>. Different suppliers use wildly varying invoice formats and layouts. <strong>Czech invoices</strong> are especially complex due to specific VAT rates (0/12/21 %), DUZP, and IČO/DIČ formats. I built Invoice AI Extractor to automatically parse PDF invoices into a <strong>unified JSON schema</strong> that our ERP system can consume directly, eliminating manual transcription and drastically reducing errors.",
+        },
+        {
+          heading: "Architecture & Tech Stack",
+          content:
+            "The application is built on a high-performance stack for data integrity and speed. It uses <strong>Google Gemini 2.0 Flash</strong> for core analysis. The frontend and API are built with <strong>Next.js</strong> and strictly typed using <strong>TypeScript</strong>, which facilitates the <strong>JSON schema validation</strong> necessary for accounting data. Crucially, the extraction process is designed to be <strong>fully client-side</strong> (in a production environment) for maximum privacy and compliance.",
+        },
+        {
+          heading: "Processing Pipeline",
+          content:
+            "The system employs a multi-step pipeline to ensure high accuracy:",
+          bullets: [
+            "<strong>Document Type Detection</strong>: Automatically classifies the document as an Invoice or Receipt, using a separate, optimized prompt and schema for each type.",
+            "<strong>AI Extraction</strong>: A custom prompt is fine-tuned to enforce specific <strong>Czech accounting semantics</strong> (DUZP, IČO/DIČ, tax base) and request clean JSON output.",
+            "<strong>Data Extraction</strong>: Extracts <strong>50+ critical accounting fields</strong> including financial data (line items, <strong>VAT breakdown</strong>), and comprehensive metadata (supplier/customer details, dates).",
+          ],
+        },
+        {
+          heading: "Validation & Correction Layer",
+          content:
+            "To achieve near-perfect accuracy, the system includes a post-processing logic that enforces <strong>accounting integrity</strong>:",
+          bullets: [
+            "<strong>Strict Validation</strong>: Uses TypeScript interfaces and runtime checks to validate data types and structures, fixing common AI syntax errors.",
+            "<strong>Financial Recalculation</strong>: Automatically <strong>recalculates</strong> missing totals or <strong>corrects VAT base</strong> to match the VAT summary, ensuring data consistency.",
+            "<strong>Date & Format Normalization</strong>: Standardizes date formats and applies <strong>Czech rounding rules</strong> to numerical values.",
+          ],
+        },
+        {
+          heading: "Security & Privacy",
+          content:
+            "Given the sensitivity of corporate financial data, security was a core design principle:",
+          bullets: [
+            "<strong>In-Memory Processing</strong>: <strong>No raw PDF data</strong> is stored in any database or persistent storage; all processing is handled exclusively in memory.",
+            "<strong>Data Isolation</strong>: The PDF is sent only to the Gemini API for extraction, ensuring it does not reside on external infrastructure.",
+          ],
+        },
+        {
+          heading: "ERP Integration & Results",
+          content:
+            "The extracted and validated JSON is designed to integrate seamlessly with our internal ERP system. The unified schema ensures automated processing without manual intervention.",
+          bullets: [
+            "<strong>Accuracy</strong>: Achieved <strong>~99% accuracy</strong> across diverse real-world Czech invoices.",
+            "<strong>Speed</strong>: Reduced invoice processing time from minutes to <strong>12-18 seconds per PDF</strong>.",
+            "<strong>Auditing UI</strong>: Provides a clean interface with synchronized <strong>Form view</strong> and <strong>JSON view</strong> for transparent auditing.",
+          ],
+        },
+        {
+          heading: "My Role",
+          content:
+            "I designed and implemented the <strong>entire end-to-end solution</strong>: the Next.js application, the <strong>Gemini API integration</strong>, the <strong>PDF processing pipeline</strong>, the core validation and correction logic, and the unified JSON schema design. The system currently processes invoices daily and integrates directly with our ERP. <strong>I continuously monitor real-world failure cases (the remaining 1%) to further refine the prompt and improve the post-processing and validation logic.</strong>",
+        },
+      ],
+    },
   },
   {
     id: "print-agent",

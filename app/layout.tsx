@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "./lib/theme-provider";
 import SplashWrapper from "./components/SplashWrapper";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,8 +19,16 @@ export const metadata: Metadata = {
     "Building useful products with AI & TypeScript. Full-stack & AI developer focused on practical automation and intelligent systems.",
   icons: {
     icon: [
-      { url: "/favicon-dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
-      { url: "/favicon-light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+      {
+        url: "/favicon-dark.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/favicon-light.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: light)",
+      },
       { url: "/favicon-dark.svg", type: "image/svg+xml" }, // Fallback
     ],
     shortcut: [{ url: "/favicon-dark.svg", type: "image/svg+xml" }],
@@ -36,10 +45,24 @@ export default function RootLayout({
     <html lang="cs" suppressHydrationWarning>
       <head>
         {/* Favicon links - explicitně přidáno pro lepší kompatibilitu */}
-        <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
-        <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/favicon-dark.svg"
+          media="(prefers-color-scheme: dark)"
+        />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/favicon-light.svg"
+          media="(prefers-color-scheme: light)"
+        />
         <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" />
-        <link rel="shortcut icon" type="image/svg+xml" href="/favicon-dark.svg" />
+        <link
+          rel="shortcut icon"
+          type="image/svg+xml"
+          href="/favicon-dark.svg"
+        />
         <link rel="apple-touch-icon" href="/favicon-dark.svg" />
         <script
           dangerouslySetInnerHTML={{
@@ -168,6 +191,7 @@ export default function RootLayout({
           <SplashWrapper>{children}</SplashWrapper>
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

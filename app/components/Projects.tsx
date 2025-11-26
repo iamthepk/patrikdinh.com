@@ -304,19 +304,9 @@ export default function Projects() {
                   )}
 
                   <div className="description">
-                    {project.description
-                      .split(". ")
-                      .map((sentence, idx, array) => (
-                        <p
-                          key={idx}
-                          className={
-                            idx < array.length - 1 ? "descriptionParagraph" : ""
-                          }
-                        >
-                          {sentence}
-                          {idx < array.length - 1 ? "." : ""}
-                        </p>
-                      ))}
+                    <p
+                      dangerouslySetInnerHTML={{ __html: project.description }}
+                    />
                     {project.keyPoints && project.keyPoints.length > 0 && (
                       <ul className="keyPoints">
                         {project.keyPoints.map((point, pointIdx) => (
@@ -327,43 +317,46 @@ export default function Projects() {
                         ))}
                       </ul>
                     )}
-                    {project.caseStudy && (
-                      <button
-                        type="button"
-                        className="caseStudyToggle"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setSelectedCaseStudy(project.id);
-                        }}
-                      >
-                        View case study
-                      </button>
-                    )}
-                  </div>
-
-                  <div className="techIcons">
-                    {project.tech.split(" · ").map((tech) => {
-                      const IconComponent = techIcons[tech.trim()];
-                      return (
-                        <div key={tech} className="techIcon group">
-                          {IconComponent ? (
-                            <div
-                              className="techIconWrapper"
-                              title={tech.trim()}
-                              role="img"
-                              aria-label={tech.trim()}
-                            >
-                              <IconComponent className="techIconSvg" />
-                              <span className="techIconTooltip">
-                                {tech.trim()}
-                              </span>
+                    <div className="caseStudyAndTechWrapper">
+                      {project.caseStudy && (
+                        <button
+                          type="button"
+                          className="caseStudyToggle"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setSelectedCaseStudy(project.id);
+                          }}
+                        >
+                          View case study
+                        </button>
+                      )}
+                      <div className="techIcons">
+                        {project.tech.split(" · ").map((tech) => {
+                          const IconComponent = techIcons[tech.trim()];
+                          return (
+                            <div key={tech} className="techIcon group">
+                              {IconComponent ? (
+                                <div
+                                  className="techIconWrapper"
+                                  title={tech.trim()}
+                                  role="img"
+                                  aria-label={tech.trim()}
+                                >
+                                  <IconComponent className="techIconSvg" />
+                                  <span className="techIconTooltip">
+                                    {tech.trim()}
+                                  </span>
+                                </div>
+                              ) : (
+                                <span className="techIconText">
+                                  {tech.trim()}
+                                </span>
+                              )}
                             </div>
-                          ) : (
-                            <span className="techIconText">{tech.trim()}</span>
-                          )}
-                        </div>
-                      );
-                    })}
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
 
                   <div className="links">
