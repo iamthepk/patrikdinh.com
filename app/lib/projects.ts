@@ -118,7 +118,7 @@ export const projects: Project[] = [
     ],
     
     tech: "Next.js · TypeScript", 
-    
+    liveUrl: "https://voucher.generator.patrikdinh.com/",
     thumbnail: "/thumbnails/voucher-generator.webp",
     
     caseStudy: {
