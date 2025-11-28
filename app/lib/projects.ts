@@ -31,75 +31,6 @@ export const projects: Project[] = [
     thumbnail: "/thumbnails/pos-app.webp",
   },
   {
-    id: "invoice-ai",
-    title: "Invoice AI Extractor",
-    subtitle: "AI-powered invoice data extraction using Google Gemini.",
-    description:
-      "Parses <strong>complex PDF invoices</strong> into a <strong>structured, unified JSON schema</strong>. The output includes <strong>key financial data</strong> (items, <strong>VAT breakdown</strong>, totals) and comprehensive <strong>metadata</strong> (suppliers, customers). The system features built-in <strong>validation and correction logic</strong> (e.g., <strong>VAT fixes</strong>, date normalization) to ensure <strong>data integrity</strong>, which is then used directly in our internal <strong>ERP system</strong> for automated processing.",
-    tech: "React · Next.js · TypeScript · Gemini",
-    liveUrl: "https://invoice.ai.extractor.patrikdinh.com/",
-    thumbnail: "/thumbnails/invoice-ai-extractor.webp",
-    caseStudy: {
-      title: "Invoice AI Extractor – Technical Overview",
-      sections: [
-        {
-          heading: "Context & Challenge",
-          content:
-            "Processing invoices manually is time-consuming, expensive, and <strong>error-prone</strong>. Different suppliers use wildly varying invoice formats and layouts. <strong>Czech invoices</strong> are especially complex due to specific VAT rates (0/12/21 %), DUZP, and IČO/DIČ formats. I built Invoice AI Extractor to automatically parse PDF invoices into a <strong>unified JSON schema</strong> that our ERP system can consume directly, eliminating manual transcription and drastically reducing errors.",
-        },
-        {
-          heading: "Architecture & Tech Stack",
-          content:
-            "The application is built on a high-performance stack for data integrity and speed. It uses <strong>Google Gemini 2.0 Flash</strong> for core analysis. The frontend and API are built with <strong>Next.js</strong> and strictly typed using <strong>TypeScript</strong>, which facilitates the <strong>JSON schema validation</strong> necessary for accounting data. Crucially, the extraction process is designed to be <strong>fully client-side</strong> (in a production environment) for maximum privacy and compliance.",
-        },
-        {
-          heading: "Processing Pipeline",
-          content:
-            "The system employs a multi-step pipeline to ensure high accuracy:",
-          bullets: [
-            "<strong>Document Type Detection</strong>: Automatically classifies the document as an Invoice or Receipt, using a separate, optimized prompt and schema for each type.",
-            "<strong>AI Extraction</strong>: A custom prompt is fine-tuned to enforce specific <strong>Czech accounting semantics</strong> (DUZP, IČO/DIČ, tax base) and request clean JSON output.",
-            "<strong>Data Extraction</strong>: Extracts <strong>50+ critical accounting fields</strong> including financial data (line items, <strong>VAT breakdown</strong>), and comprehensive metadata (supplier/customer details, dates).",
-          ],
-        },
-        {
-          heading: "Validation & Correction Layer",
-          content:
-            "To achieve near-perfect accuracy, the system includes a post-processing logic that enforces <strong>accounting integrity</strong>:",
-          bullets: [
-            "<strong>Strict Validation</strong>: Uses TypeScript interfaces and runtime checks to validate data types and structures, fixing common AI syntax errors.",
-            "<strong>Financial Recalculation</strong>: Automatically <strong>recalculates</strong> missing totals or <strong>corrects VAT base</strong> to match the VAT summary, ensuring data consistency.",
-            "<strong>Date & Format Normalization</strong>: Standardizes date formats and applies <strong>Czech rounding rules</strong> to numerical values.",
-          ],
-        },
-        {
-          heading: "Security & Privacy",
-          content:
-            "Given the sensitivity of corporate financial data, security was a core design principle:",
-          bullets: [
-            "<strong>In-Memory Processing</strong>: <strong>No raw PDF data</strong> is stored in any database or persistent storage; all processing is handled exclusively in memory.",
-            "<strong>Data Isolation</strong>: The PDF is sent only to the Gemini API for extraction, ensuring it does not reside on external infrastructure.",
-          ],
-        },
-        {
-          heading: "ERP Integration & Results",
-          content:
-            "The extracted and validated JSON is designed to integrate seamlessly with our internal ERP system. The unified schema ensures automated processing without manual intervention.",
-          bullets: [
-            "<strong>Accuracy</strong>: Achieved <strong>~99% accuracy</strong> across diverse real-world Czech invoices.",
-            "<strong>Speed</strong>: Reduced invoice processing time from minutes to <strong>12-18 seconds per PDF</strong>.",
-            "<strong>Auditing UI</strong>: Provides a clean interface with synchronized <strong>Form view</strong> and <strong>JSON view</strong> for transparent auditing.",
-          ],
-        },
-        {
-          heading: "My Role",
-          content:
-            "I designed and implemented the <strong>entire end-to-end solution</strong>: the Next.js application, the <strong>Gemini API integration</strong>, the <strong>PDF processing pipeline</strong>, the core validation and correction logic, and the unified JSON schema design. The system currently processes invoices daily and integrates directly with our ERP. <strong>I continuously monitor real-world failure cases (the remaining 1%) to further refine the prompt and improve the post-processing and validation logic.</strong>",
-        },
-      ],
-    },
-  },
-  {
     id: "print-agent",
     title: "Print Agent",
     subtitle: "Local printing layer for a cloud-based POS system.",
@@ -169,6 +100,174 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
+    id: "voucher-generator",
+    title: "VOUCHER BUILDER",
+    subtitle:
+      "Automated PDF voucher generation with live preview, batch creation, and Supabase-backed sequencing.",
+    description:
+      "A precision utility for marketing operations. Generates print-ready voucher PDFs with pixel-perfect coordinate mapping, automatic sequential ID logic, and robust DEMO/PROD mode control. Designed to replace error-prone manual workflows and ensure database integrity for high-volume campaigns.", // Nová formulace
+    
+    keyPoints: [
+      "Generates <strong>print-ready PDF vouchers</strong> using a high-resolution template (A4, 300 DPI).",
+      "Supports <strong>batch generation</strong> of up to 200 vouchers in a single transaction.", 
+      "Pixel-perfect <strong>X/Y coordinate mapping</strong> with real-time live preview.", 
+      "Automatic <strong>sequential numbering</strong> pulled from Supabase (PROD) or fixed sandbox start (DEMO).",
+      "Built-in <strong>DEMO mode</strong> with mandatory “NOT VALID” watermark and disabled database writes.",
+      "Multi-page PDF output with clean formatting and consistent layout across the entire batch."
+    ],
+    
+    tech: "Next.js · TypeScript", 
+    
+    thumbnail: "/thumbnails/voucher-generator.webp",
+    
+    caseStudy: {
+      title: "Voucher Generator: Architectural & Technical Overview",
+      sections: [
+        {
+          heading: "Context: Automation of Print-Ready Assets",
+          content:
+            "Marketing operations required a robust solution for large-batch, unique customer voucher generation. Manual layout and data entry (expiration dates, sequential numbering) were error-prone and severely limited throughput. The Voucher Builder automates the entire print pipeline: incorporating live precision positioning, secure Supabase-backed sequencing, and multi-page batch processing."
+        },
+        
+        {
+          heading: "High-level System Architecture",
+          content:
+            "The system is a **Next.js application** built on a **TypeScript** foundation. The backend utilizes **PDFKit** for a strongly typed rendering pipeline. The client handles **Zero Scroll** preview, positioning, and batch parameters. In **PROD** mode, the server securely writes each voucher record and metadata to Supabase. In **DEMO** mode, it applies a large watermark and skips all database transactions."
+        },
+        
+        {
+          heading: "PDF Generation Pipeline: Precision & Consistency",
+          content:
+            "Each page is rendered using a fixed A4 high-resolution PNG template layered with dynamic text fields. A consistent coordinate mapping ensures pixel-perfect placement for physical print. The pipeline handles:",
+          bullets: [
+            "Embedding brand fonts (Bebas Neue + Road Rage) for style compliance.",
+            "Drawing unique **sequential Voucher IDs** derived from the database.",
+            "Rendering expiration date, dynamic text, and metadata using coordinate mapping.",
+            "Mandatory **DEMO watermark** applied as a rotated, low-opacity layer.",
+            "Appending each voucher as a separate page within a single output PDF file."
+          ]
+        },
+        
+        {
+          heading: "Live Preview Engine (Frontend)",
+          content:
+            "The client-side engine mirrors the final PDF layout in real-time using an optimized HTML canvas wrapper. This delivers critical user feedback:",
+          bullets: [
+            "Real-time X/Y coordinate adjustments for all dynamic fields.",
+            "Batch preview thumbnails for sequential validation (#1, #2, #3 …).",
+            "Zoom functionality (50–200%) for critical fine-tuning.",
+            "Light/dark theme switching that is independent of the print output."
+          ]
+        },
+        
+        {
+          heading: "Deployment Modes: DEMO vs PROD",
+          content:
+            "The application supports a secure two-tier environment controlled by environment variables:",
+          bullets: [
+            "**DEMO Mode**: Uses a sandbox prefix ('DEMO-'), forces sequence start at 1, and applies a mandatory **'NOT VALID' watermark**. All Supabase writes are disabled.",
+            "**PROD Mode**: Uses the official campaign prefix ('10073A-'), pulls the latest sequence number from Supabase, and ensures secure storage of each voucher record without a watermark."
+          ]
+        },
+        
+        {
+          heading: "Database Integrity (Supabase)",
+          content:
+            "Database integration is performed exclusively in PROD mode using a service role key to maintain security. Each generated voucher configuration is stored in Supabase (PostgreSQL) with key metadata for lifecycle tracking:",
+          bullets: [
+            "**voucher_id** (globally unique code generated by sequence engine)",
+            "**sequence number** (for next batch calculation)",
+            "**expires_at** (string)",
+            "**note** (campaign name/batch reference)",
+            "**status** + **timestamps** (redeemed_at, created_at)"
+          ]
+        },
+        
+        {
+          heading: "Reliability & Performance",
+          content:
+            "The system is optimized for high-volume execution on Vercel's serverless platform. It reliably handles batches of **up to 200 pages** within the serverless execution limit. Optimisations include streaming PDF output to prevent memory issues, loading a single shared template bitmap, and asynchronous batch writing to Supabase. Robust validation logic prevents invalid inputs, ensuring clean data and reliable output."
+        },
+        
+        {
+          heading: "My Role & Ownership",
+          content:
+            "I was responsible for the entire full-stack pipeline: Architectural design, Next.js/TypeScript implementation, canvas-based live preview engine, secure PDFKit rendering logic, DEMO/PROD mode management, the prefix/sequence engine, Supabase integration, and final Vercel deployment setup. The tool is currently in use for live marketing campaigns."
+        }
+      ]
+    }
+  },
+  {
+    id: "invoice-ai",
+    title: "Invoice AI Extractor",
+    subtitle: "AI-powered invoice data extraction using Google Gemini.",
+    description:
+      "Parses <strong>complex PDF invoices</strong> into a <strong>structured, unified JSON schema</strong>. The output includes <strong>key financial data</strong> (items, <strong>VAT breakdown</strong>, totals) and comprehensive <strong>metadata</strong> (suppliers, customers). The system features built-in <strong>validation and correction logic</strong> (e.g., <strong>VAT fixes</strong>, date normalization) to ensure <strong>data integrity</strong>, which is then used directly in our internal <strong>ERP system</strong> for automated processing.",
+    tech: "React · Next.js · TypeScript · Gemini",
+    liveUrl: "https://invoice.ai.extractor.patrikdinh.com/",
+    thumbnail: "/thumbnails/invoice-ai-extractor.webp",
+    caseStudy: {
+      title: "Invoice AI Extractor – Technical Overview",
+      sections: [
+        {
+          heading: "Context & Challenge",
+          content:
+            "Processing invoices manually is time-consuming, expensive, and <strong>error-prone</strong>. Different suppliers use wildly varying invoice formats and layouts. <strong>Czech invoices</strong> are especially complex due to specific VAT rates (0/12/21 %), DUZP, and IČO/DIČ formats. I built Invoice AI Extractor to automatically parse PDF invoices into a <strong>unified JSON schema</strong> that our ERP system can consume directly, eliminating manual transcription and drastically reducing errors.",
+        },
+        {
+          heading: "Architecture & Tech Stack",
+          content:
+            "The application is built on a high-performance stack for data integrity and speed. It uses <strong>Google Gemini 2.0 Flash</strong> for core analysis. The frontend and API are built with <strong>Next.js</strong> and strictly typed using <strong>TypeScript</strong>, which facilitates the <strong>JSON schema validation</strong> necessary for accounting data. Crucially, the extraction process is designed to be <strong>fully client-side</strong> (in a production environment) for maximum privacy and compliance.",
+        },
+        {
+          heading: "Processing Pipeline",
+          content:
+            "The system employs a multi-step pipeline to ensure high accuracy:",
+          bullets: [
+            "<strong>Document Type Detection</strong>: Automatically classifies the document as an Invoice or Receipt, using a separate, optimized prompt and schema for each type.",
+            "<strong>AI Extraction</strong>: A custom prompt is fine-tuned to enforce specific <strong>Czech accounting semantics</strong> (DUZP, IČO/DIČ, tax base) and request clean JSON output.",
+            "<strong>Data Extraction</strong>: Extracts <strong>50+ critical accounting fields</strong> including financial data (line items, <strong>VAT breakdown</strong>), and comprehensive metadata (supplier/customer details, dates).",
+          ],
+        },
+        {
+          heading: "Validation & Correction Layer",
+          content:
+            "To achieve near-perfect accuracy, the system includes a post-processing logic that enforces <strong>accounting integrity</strong>:",
+          bullets: [
+            "<strong>Strict Validation</strong>: Uses TypeScript interfaces and runtime checks to validate data types and structures, fixing common AI syntax errors.",
+            "<strong>Financial Recalculation</strong>: Automatically <strong>recalculates</strong> missing totals or <strong>corrects VAT base</strong> to match the VAT summary, ensuring data consistency.",
+            "<strong>Date & Format Normalization</strong>: Standardizes date formats and applies <strong>Czech rounding rules</strong> to numerical values.",
+          ],
+        },
+        {
+          heading: "Security & Privacy",
+          content:
+            "Given the sensitivity of corporate financial data, security was a core design principle:",
+          bullets: [
+            "<strong>In-Memory Processing</strong>: <strong>No raw PDF data</strong> is stored in any database or persistent storage; all processing is handled exclusively in memory.",
+            "<strong>Data Isolation</strong>: The PDF is sent only to the Gemini API for extraction, ensuring it does not reside on external infrastructure.",
+          ],
+        },
+        {
+          heading: "ERP Integration & Results",
+          content:
+            "The extracted and validated JSON is designed to integrate seamlessly with our internal ERP system. The unified schema ensures automated processing without manual intervention.",
+          bullets: [
+            "<strong>Accuracy</strong>: Achieved <strong>~99% accuracy</strong> across diverse real-world Czech invoices.",
+            "<strong>Speed</strong>: Reduced invoice processing time from minutes to <strong>12-18 seconds per PDF</strong>.",
+            "<strong>Auditing UI</strong>: Provides a clean interface with synchronized <strong>Form view</strong> and <strong>JSON view</strong> for transparent auditing.",
+          ],
+        },
+        {
+          heading: "My Role",
+          content:
+            "I designed and implemented the <strong>entire end-to-end solution</strong>: the Next.js application, the <strong>Gemini API integration</strong>, the <strong>PDF processing pipeline</strong>, the core validation and correction logic, and the unified JSON schema design. The system currently processes invoices daily and integrates directly with our ERP. <strong>I continuously monitor real-world failure cases (the remaining 1%) to further refine the prompt and improve the post-processing and validation logic.</strong>",
+        },
+      ],
+    },
+  },
+
 ];
 
 export const techStack = {
