@@ -102,11 +102,11 @@ export const projects: Project[] = [
   },
   {
     id: "voucher-generator",
-    title: "VOUCHER BUILDER",
+    title: "VOUCHER GENERATOR",
     subtitle:
       "Automated PDF voucher generation with live preview, batch creation, and Supabase-backed sequencing.",
     description:
-      "A precision utility for marketing operations. Generates print-ready voucher PDFs with pixel-perfect coordinate mapping, automatic sequential ID logic, and robust DEMO/PROD mode control. Designed to replace error-prone manual workflows and ensure database integrity for high-volume campaigns.", // Nová formulace
+      "A precision utility for marketing operations. Generates print-ready voucher PDFs with pixel-perfect coordinate mapping, automatic sequential ID logic, and robust DEMO/PROD mode control. Designed to replace error-prone manual workflows and ensure database integrity for high-volume campaigns.",
     
     keyPoints: [
       "Generates <strong>print-ready PDF vouchers</strong> using a high-resolution template (A4, 300 DPI).",
@@ -122,18 +122,18 @@ export const projects: Project[] = [
     thumbnail: "/thumbnails/voucher-generator.webp",
     
     caseStudy: {
-      title: "Voucher Generator: Architectural & Technical Overview",
+      title: "Voucher Generator: Precision Utility & Technical Overview",
       sections: [
         {
           heading: "Context: Automation of Print-Ready Assets",
           content:
-            "Marketing operations required a robust solution for large-batch, unique customer voucher generation. Manual layout and data entry (expiration dates, sequential numbering) were error-prone and severely limited throughput. The Voucher Builder automates the entire print pipeline: incorporating live precision positioning, secure Supabase-backed sequencing, and multi-page batch processing."
+            "Marketing operations required a robust solution for large-batch, unique customer voucher generation. Manual layout and data entry (expiration dates, sequential numbering) were error-prone and severely limited throughput. The Voucher Generator automates the entire print pipeline: incorporating live precision positioning, secure Supabase-backed sequencing, and multi-page batch processing." // Změněno na Generator
         },
         
         {
           heading: "High-level System Architecture",
           content:
-            "The system is a **Next.js application** built on a **TypeScript** foundation. The backend utilizes **PDFKit** for a strongly typed rendering pipeline. The client handles **Zero Scroll** preview, positioning, and batch parameters. In **PROD** mode, the server securely writes each voucher record and metadata to Supabase. In **DEMO** mode, it applies a large watermark and skips all database transactions."
+            "The system is a <strong>Next.js application</strong> built on a <strong>TypeScript</strong> foundation. The backend utilizes <strong>PDFKit</strong> for a strongly typed rendering pipeline. The client handles <strong>Zero Scroll</strong> preview, positioning, and batch parameters. In <strong>PROD</strong> mode, the server securely writes each voucher record and metadata to Supabase. In <strong>DEMO</strong> mode, it applies a large watermark and skips all database transactions."
         },
         
         {
@@ -142,9 +142,9 @@ export const projects: Project[] = [
             "Each page is rendered using a fixed A4 high-resolution PNG template layered with dynamic text fields. A consistent coordinate mapping ensures pixel-perfect placement for physical print. The pipeline handles:",
           bullets: [
             "Embedding brand fonts (Bebas Neue + Road Rage) for style compliance.",
-            "Drawing unique **sequential Voucher IDs** derived from the database.",
+            "Drawing unique <strong>sequential Voucher IDs</strong> derived from the database.",
             "Rendering expiration date, dynamic text, and metadata using coordinate mapping.",
-            "Mandatory **DEMO watermark** applied as a rotated, low-opacity layer.",
+            "Mandatory <strong>DEMO watermark</strong> applied as a rotated, low-opacity layer.",
             "Appending each voucher as a separate page within a single output PDF file."
           ]
         },
@@ -156,7 +156,7 @@ export const projects: Project[] = [
           bullets: [
             "Real-time X/Y coordinate adjustments for all dynamic fields.",
             "Batch preview thumbnails for sequential validation (#1, #2, #3 …).",
-            "Zoom functionality (50–200%) for critical fine-tuning.",
+            "Zoom functionality (50-200%) for critical fine-tuning.",
             "Light/dark theme switching that is independent of the print output."
           ]
         },
@@ -166,8 +166,8 @@ export const projects: Project[] = [
           content:
             "The application supports a secure two-tier environment controlled by environment variables:",
           bullets: [
-            "**DEMO Mode**: Uses a sandbox prefix ('DEMO-'), forces sequence start at 1, and applies a mandatory **'NOT VALID' watermark**. All Supabase writes are disabled.",
-            "**PROD Mode**: Uses the official campaign prefix ('10073A-'), pulls the latest sequence number from Supabase, and ensures secure storage of each voucher record without a watermark."
+            "<strong>DEMO Mode</strong>: Uses a sandbox prefix ('DEMO-'), forces sequence start at 1, and applies a mandatory <strong>'NOT VALID' watermark</strong>. All Supabase writes are disabled.",
+            "<strong>PROD Mode</strong>: Uses the official campaign prefix ('10073A-'), pulls the latest sequence number from Supabase, and ensures secure storage of each voucher record without a watermark."
           ]
         },
         
@@ -176,18 +176,18 @@ export const projects: Project[] = [
           content:
             "Database integration is performed exclusively in PROD mode using a service role key to maintain security. Each generated voucher configuration is stored in Supabase (PostgreSQL) with key metadata for lifecycle tracking:",
           bullets: [
-            "**voucher_id** (globally unique code generated by sequence engine)",
-            "**sequence number** (for next batch calculation)",
-            "**expires_at** (string)",
-            "**note** (campaign name/batch reference)",
-            "**status** + **timestamps** (redeemed_at, created_at)"
+            "<strong>voucher_id</strong> (globally unique code generated by sequence engine)",
+            "<strong>sequence number</strong> (for next batch calculation)",
+            "<strong>expires_at</strong> (string)",
+            "<strong>note</strong> (campaign name/batch reference)",
+            "<strong>status</strong> + <strong>timestamps</strong> (redeemed_at, created_at)"
           ]
         },
         
         {
           heading: "Reliability & Performance",
           content:
-            "The system is optimized for high-volume execution on Vercel's serverless platform. It reliably handles batches of **up to 200 pages** within the serverless execution limit. Optimisations include streaming PDF output to prevent memory issues, loading a single shared template bitmap, and asynchronous batch writing to Supabase. Robust validation logic prevents invalid inputs, ensuring clean data and reliable output."
+            "The system is optimized for high-volume execution on Vercel's serverless platform. It reliably handles batches of <strong>up to 200 pages</strong> within the serverless execution limit. Optimisations include streaming PDF output to prevent memory issues, loading a single shared template bitmap, and asynchronous batch writing to Supabase. Robust validation logic prevents invalid inputs, ensuring clean data and reliable output."
         },
         
         {
@@ -208,7 +208,7 @@ export const projects: Project[] = [
     liveUrl: "https://invoice.ai.extractor.patrikdinh.com/",
     thumbnail: "/thumbnails/invoice-ai-extractor.webp",
     caseStudy: {
-      title: "Invoice AI Extractor – Technical Overview",
+      title: "Invoice AI Extractor - Technical Overview",
       sections: [
         {
           heading: "Context & Challenge",
