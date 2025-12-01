@@ -20,15 +20,78 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "pos-system",
-    title: "POS System",
-    subtitle:
-      "Modern point-of-sale with real-time inventory, smart invoicing, and automated workflows.",
+    id: "lootea-pos",
+    title: "Lootea POS System",
+    subtitle: "A full in-house POS solution built for real café operations.",
     description:
-      "Designed for high-throughput bubble tea operations with instant printing, dual-currency support, and live sync with the internal ERP. Includes order flow, inventory deduction, discounts, VAT handling, shift management, and customer database integration.",
-    tech: "React · TypeScript · Supabase · Vite · MUI",
-    liveUrl: "https://pos.system.patrikdinh.com/",
-    thumbnail: "/thumbnails/pos-app.webp",
+      "Lootea POS is a production-ready point-of-sale system running every day in our bubble-tea shop. It replaces commercial POS subscriptions, handles orders, receipts, refunds, shifts, closures, customers, exchange rates and temperature monitoring, and integrates with our custom Print Agent for instant local printing.",
+    keyPoints: [
+      "Covers <strong>98% of café operations</strong> with 80+ features built on a modular Supabase PostgreSQL architecture.",
+      "<strong>9 standalone database systems</strong> (receipts, customers, drinks, toppings, employees, shifts, closures, exchange rates, company info).",
+      "Fully featured <strong>POS interface</strong>: orders, customizations, discounts, refunds, multi-currency, payment methods, customer lookup.",
+      "<strong>Advanced management panel</strong> for employees, shifts, daily closures, statistics, exchange rate changes and customer analytics.",
+      "Seamless printing of receipts and drink labels via a <strong>custom Print Agent</strong> running locally on Windows.",
+      "Designed for <strong>real-world workflow speed</strong>, reduced staff errors and zero friction for baristas."
+    ],
+    tech: "React · TypeScript · PostgreSQL",
+  
+    thumbnail: "/thumbnails/pos-system.webp",
+  
+    caseStudy: {
+      title: "Lootea POS – Technical Case Study",
+      sections: [
+        {
+          heading: "Context",
+          content:
+            "Commercial POS systems are expensive, rigid and often designed for generic restaurants rather than a fast-paced bubble-tea workflow. We needed a solution fully tailored to how our shop operates: drink customization, instant label printing, multi-currency receipts, manual closures, employee shifts, discounts, refunds, customer sync and reliable statistics. I built Lootea POS as a complete in-house system that runs in production every day on pos.lootea.cz."
+        },
+        {
+          heading: "Architecture overview",
+          content:
+            "The system is structured around <strong>9 independent Supabase PostgreSQL modules</strong> (receipts, daily closures, customers, drinks, toppings, employees, shifts, exchange rates, company info). The frontend is built with <strong>React + TypeScript</strong> using a modular component/hook/service architecture. A custom <strong>Print Agent</strong> bridges cloud POS and local printers, enabling a native, instant printing experience. Data sync, migrations and automation (e.g., daily customer sync) run through <strong>API routes and Vercel Cron jobs</strong>."
+        },
+        {
+          heading: "POS interface",
+          content:
+            "The POS screen is optimized for barista speed: big tiles, minimal clicks and clear workflows. Each drink supports size, sweetness, ice, milk, toppings, alcohol and extra shots. Payments include cash, card and delivery services. Multi-currency support (CZK/EUR) works through a dedicated Exchange Rate system. On confirmation, the POS sends structured print jobs to the Print Agent, which prints <strong>receipts and drink labels instantly</strong>, without pop-ups or manual dialogs."
+        },
+        {
+          heading: "Receipt editing & refunds",
+          content:
+            "The system includes a full post-sale correction pipeline: <strong>ReceiptEditModal</strong>, <strong>DrinkEditModal</strong>, <strong>ReceiptDiscountModal</strong> and <strong>RefundModal</strong>. All edits re-calculate totals, VAT, discounts and multi-currency amounts. Audit safety rules ensure <strong>receipt_number and order_number are immutable</strong>. Refunds use a soft-refund model, creating a dedicated record while keeping the original receipt intact. Updated receipts and refunds are printed through the Print Agent."
+        },
+        {
+          heading: "Customers & daily sync",
+          content:
+            "<strong>Mobile app customer</strong> data is stored in Firebase, while customers created in the POS are native to the PostgreSQL database. I built a migration pipeline with <strong>Supabase migrations, a migration script and a daily cron job</strong> that ensures the mobile app customers are kept in sync with the primary database. Each customer receives a unique incremental number via a PostgreSQL sequence. The customer module supports favorites, discounts, validation, duplicate detection, real-time updates and manual sync operations."
+        },
+        {
+          heading: "Employees, roles & shifts",
+          content:
+            "The system implements a full <strong>RBAC model with 6 roles</strong> (Administrator, Manager, Leader, Employee, Part-timer, NULL). Role-based visibility hides or shows features dynamically in the UI. Employees can be managed through CRUD operations, profile avatars, and permissions. Shift management includes weekly/monthly calendars, performance statistics, earnings tracking, payment status tracking and a leader-bonus system."
+        },
+        {
+          heading: "Daily closures & financial accuracy",
+          content:
+            "Managers perform manual daily closures with cash counting, payment method reconciliation, merging of totals and verification of discrepancies. The Receipt and Daily Closures systems are tightly connected to ensure accurate reporting, independent of network issues or delayed syncs. Multi-currency totals (CZK/EUR) are consistently computed across receipts, closures and statistics."
+        },
+        {
+          heading: "Temperature monitoring",
+          content:
+            "For hygiene compliance, I implemented a dedicated <strong>temperature_logs</strong> system that tracks refrigerators and freezers. Staff can record temperatures, add notes after deviations and export data during inspections. The system supports timestamps, devices, locations and daily routines, enabling a traceable audit trail."
+        },
+        {
+          heading: "Reliability & operations",
+          content:
+            "The POS uses optimized queries, indexes, strict data validation and a modular service layer. Error handling and retry logic are being expanded. Offline-first architecture existed in a previous version but is temporarily disabled while RLS, error boundaries and connection stability are improved. All core features run in production with near-zero downtime."
+        },
+        {
+          heading: "My role",
+          content:
+            "I designed and built the entire system end-to-end: database schema, migrations, RBAC, POS interface, management panel, shift system, customer sync pipeline, daily closures, refund logic, exchange rate module and temperature monitoring. I also built the custom Print Agent responsible for all real-time printing. The system is actively used in our shop, printing hundreds of receipts and labels each month."
+        }
+      ]
+    }
   },
   {
     id: "print-agent",
@@ -273,12 +336,13 @@ export const projects: Project[] = [
 export const techStack = {
   primary: [
     "React",
+    "Next.js",
     "TypeScript",
     "JavaScript",
-    "Next.js",
     "Node.js",
-    "Firebase",
     "Supabase",
+    "Firebase",
+    "PostgreSQL",
     "Vercel",
   ],
 };
