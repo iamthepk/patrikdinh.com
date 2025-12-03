@@ -153,7 +153,7 @@ export const projects: Project[] = [
             "Runs in <strong>silent mode</strong>, no console windows or dialogs for baristas.",
             "Simple restart/stop helpers for me as an admin (scripts instead of complex tooling).",
             "Built-in <strong>health-check and network info endpoints</strong> so the POS can: verify that the agent is alive, discover the correct URL / hostname to use on different clients (web browser vs iPad vs Android terminal).",
-            "Basic logging so I can debug printing issues without přímý přístup k systému během směny.",
+            "Basic logging so I can debug printing issues without direct access to the system during the shift.",
           ],
         },
         {
