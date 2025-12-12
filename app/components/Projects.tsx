@@ -273,12 +273,11 @@ export default function Projects() {
                             src={getThumbnailPath(project.thumbnail)}
                             alt=""
                             fill
-                            quality={100}
-                            unoptimized={true}
+                            quality={90}
                             className={`thumbnailImage ${
                               theme === "dark" ? "thumbnailImageDark" : ""
                             }`}
-                            sizes="100vw"
+                            sizes="(max-width: 1023px) 100vw, 55vw"
                             priority={project.id === projects[0].id}
                             onError={handleImageError}
                           />
@@ -386,7 +385,7 @@ export default function Projects() {
               src={selectedImage}
               alt="Full size preview"
               fill
-              quality={100}
+              quality={95}
               className="modalImage"
               sizes="100vw"
             />
