@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { ThemeProvider } from "./lib/theme-provider";
 import SplashWrapper from "./components/SplashWrapper";
@@ -36,11 +37,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Přečíst cookie si_eu na serveru
+  const cookieStore = await cookies();
+  const siEu = cookieStore.get("si_eu")?.value;
+
+  // Speed Insights se načte pouze pro EU návštěvníky (si_eu === "1")
+  const shouldLoadSpeedInsights = siEu === "1";
+
   return (
     <html lang="cs" suppressHydrationWarning>
       <head>
@@ -191,7 +199,7 @@ export default function RootLayout({
           <SplashWrapper>{children}</SplashWrapper>
         </ThemeProvider>
         <Analytics />
-        <SpeedInsights />
+        {shouldLoadSpeedInsights && <SpeedInsights />}
       </body>
     </html>
   );
