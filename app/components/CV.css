@@ -1,0 +1,221 @@
+/* CV Component Styles - compact modal-friendly layout */
+
+.cvRoot {
+  color: var(--text);
+}
+
+.cvCompactLayout {
+  max-width: 100%;
+}
+
+.cvHeader {
+  max-width: 86rem;
+  padding-top: 1rem;
+  padding-bottom: 1.25rem;
+}
+
+.cvEyebrow {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+}
+
+.cvTitle {
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 0.45rem;
+}
+
+.cvSubtitle {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.cvIntro {
+  max-width: 54rem;
+  font-size: clamp(0.98rem, 1.8vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.cvLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.cvLink {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.cvIconLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.cvMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.cvMainGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .cvMainGrid {
+    grid-template-columns: minmax(0, 1.55fr) minmax(340px, 0.85fr);
+    gap: 3rem;
+  }
+}
+
+.cvPrimaryColumn,
+.cvSidebar {
+  min-width: 0;
+}
+
+.cvBlock + .cvBlock {
+  margin-top: 1.5rem;
+}
+
+.cvSidebarBlock + .cvSidebarBlock {
+  margin-top: 1.25rem;
+}
+
+.cvSectionTitle {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+}
+
+.cvProjectList,
+.cvExperienceList,
+.cvEducationListCompact {
+  display: flex;
+  flex-direction: column;
+}
+
+.cvProject,
+.cvExperience,
+.cvEducationItem {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.cvProjectHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.45rem;
+}
+
+.cvProjectTitle,
+.cvExperienceCompany,
+.cvEducationSchool {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.cvProjectStack,
+.cvExperiencePeriod,
+.cvEducationPeriod {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.cvProjectSubtitle,
+.cvExperienceRole,
+.cvEducationProgram {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text);
+  margin-bottom: 0.45rem;
+}
+
+.cvProjectSummary {
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 64rem;
+}
+
+.cvExperienceTop {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.45rem;
+}
+
+@media (min-width: 900px) {
+  .cvExperienceTop {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.cvExperienceBullets,
+.cvEducationDetails,
+.cvLanguagesCompact,
+.cvBulletGridCompact {
+  padding-left: 1.1rem;
+}
+
+.cvExperienceBullets li,
+.cvEducationDetails li,
+.cvLanguagesCompact li,
+.cvBulletGridCompact li {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.cvTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cvTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  color: var(--text);
+  font-size: 0.8rem;
+  line-height: 1;
+}

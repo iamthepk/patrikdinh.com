@@ -4,6 +4,7 @@ export interface Project {
   subtitle?: string;
   description: string;
   keyPoints?: string[];
+  challenge?: string;
   tech: string;
   liveUrl?: string;
   githubUrl?: string;
@@ -21,39 +22,46 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "lootea-pos",
-    title: "Lootea POS System",
-    subtitle: "A full in-house POS solution built for real café operations.",
+    title: "Lootea Operations System",
+    subtitle: "An in-house system built to run real day-to-day café operations.",
     description:
-      "Lootea POS is a production-ready point-of-sale system running every day in our bubble-tea shop. It replaces commercial POS subscriptions, handles orders, receipts, refunds, shifts, closures, customers, exchange rates and temperature monitoring, and integrates with our custom Print Agent for instant local printing.",
+      "An in-house operations system built around real bubble tea workflows, not generic restaurant assumptions. It combines POS, printing, stock, recipes, reporting, shifts, invoices and daily management into one production system used every day.",
     keyPoints: [
-      "Covers <strong>98% of café operations</strong> with 80+ features built on a modular Supabase PostgreSQL architecture.",
-      "<strong>9 standalone database systems</strong> (receipts, customers, drinks, toppings, employees, shifts, closures, exchange rates, company info).",
-      "Fully featured <strong>POS interface</strong>: orders, customizations, discounts, refunds, multi-currency, payment methods, customer lookup.",
-      "<strong>Advanced management panel</strong> for employees, shifts, daily closures, statistics, exchange rate changes and customer analytics.",
-      "Seamless printing of receipts and drink labels via a <strong>custom Print Agent</strong> running locally on Windows.",
-      "Designed for <strong>real-world workflow speed</strong>, reduced staff errors and zero friction for baristas."
+      "Built for <strong>real café workflow speed</strong> across checkout, prep, back office and daily management.",
+      "Combines <strong>POS, local printing, stock, recipes, reporting, invoices and shifts</strong> in one production system.",
+      "Supports <strong>parked orders, split payments, cash rounding, refunds, vouchers and dual-currency receipts</strong> in daily use.",
+      "Includes <strong>RBAC, investor reporting, customer sync, Google Calendar shift sync and security alerts</strong> for real operations.",
+      "Connected to a custom <strong>Print Agent</strong> for instant receipts, drink labels and cash drawer actions without extra staff steps.",
+      "Reduced operational friction, replaced rigid subscription tooling and gave the business a system it can keep evolving in-house."
     ],
+    challenge:
+      "Keeping checkout, printing, refunds, stock, permissions and reporting coherent in daily operation.",
     tech: "React · TypeScript · PostgreSQL",
   
     thumbnail: "/thumbnails/pos-system.webp",
   
     caseStudy: {
-      title: "Lootea POS – Technical Case Study",
+      title: "Lootea Operations System: Technical Case Study",
       sections: [
         {
           heading: "Context",
           content:
-            "Commercial POS systems are expensive, rigid and often designed for generic restaurants rather than a fast-paced bubble-tea workflow. We needed a solution fully tailored to how our shop operates: drink customization, instant label printing, multi-currency receipts, manual closures, employee shifts, discounts, refunds, customer sync and reliable statistics. I built Lootea POS as a complete in-house system that runs in production every day on pos.lootea.cz."
+            "Commercial POS systems solved only part of the problem. What we actually needed was a system built around how the shop runs every day: ordering, label printing, refunds, parked orders, shifts, stock, recipes, invoices, reporting and management workflows. I built Lootea as an in-house production system that now runs day-to-day operations on pos.lootea.cz."
+        },
+        {
+          heading: "Technical challenges <em>aka the nightmares</em>",
+          content:
+            "The hard part was not building screens. It was keeping checkout, printing, refunds, stock, recipes, reporting, permissions and daily workflows coherent under real shop conditions. Receipts and labels had to print instantly, totals had to survive edits and refunds, and management data had to stay trustworthy enough for closures, reporting and back-office work."
         },
         {
           heading: "Architecture overview",
           content:
-            "The system is structured around <strong>9 independent Supabase PostgreSQL modules</strong> (receipts, daily closures, customers, drinks, toppings, employees, shifts, exchange rates, company info). The frontend is built with <strong>React + TypeScript</strong> using a modular component/hook/service architecture. A custom <strong>Print Agent</strong> bridges cloud POS and local printers, enabling a native, instant printing experience. Data sync, migrations and automation (e.g., daily customer sync) run through <strong>API routes and Vercel Cron jobs</strong>."
+            "The core stack is <strong>React + TypeScript + Vite PWA</strong> on the frontend with <strong>Supabase</strong> as the main backend for Postgres, auth, storage, realtime and edge functions. Around that, I built serverless API routes, scheduled jobs and integrations for customer sync, Google Calendar shifts, invoice processing and security alerts. A custom <strong>Print Agent</strong> bridges the cloud app with local hardware so the system can behave like native in-store software."
         },
         {
-          heading: "POS interface",
+          heading: "POS and front-of-house workflows",
           content:
-            "The POS screen is optimized for barista speed: big tiles, minimal clicks and clear workflows. Each drink supports size, sweetness, ice, milk, toppings, alcohol and extra shots. Payments include cash, card and delivery services. Multi-currency support (CZK/EUR) works through a dedicated Exchange Rate system. On confirmation, the POS sends structured print jobs to the Print Agent, which prints <strong>receipts and drink labels instantly</strong>, without pop-ups or manual dialogs."
+            "The POS layer is optimized for barista speed: big tiles, minimal clicks and clear product flows. Orders support drink configuration, parked orders, vouchers, split payments, cash rounding, refunds and multiple payment methods. On confirmation, the system sends structured jobs to the Print Agent so receipts, labels and cash drawer actions happen without browser popups or extra staff interaction."
         },
         {
           heading: "Receipt editing & refunds",
@@ -66,9 +74,9 @@ export const projects: Project[] = [
             "<strong>Mobile app customer</strong> data is stored in Firebase, while customers created in the POS are native to the PostgreSQL database. I built a migration pipeline with <strong>Supabase migrations, a migration script and a daily cron job</strong> that ensures the mobile app customers are kept in sync with the primary database. Each customer receives a unique incremental number via a PostgreSQL sequence. The customer module supports favorites, discounts, validation, duplicate detection, real-time updates and manual sync operations."
         },
         {
-          heading: "Employees, roles & shifts",
+          heading: "Operations layer",
           content:
-            "The system implements a full <strong>RBAC model with 6 roles</strong> (Administrator, Manager, Leader, Employee, Part-timer, NULL). Role-based visibility hides or shows features dynamically in the UI. Employees can be managed through CRUD operations, profile avatars, and permissions. Shift management includes weekly/monthly calendars, performance statistics, earnings tracking, payment status tracking and a leader-bonus system."
+            "Beyond checkout, the system covers the operational side of the business: employees, role-based permissions, shifts, customer data, daily closures, office workflows and reporting. It includes a dedicated stock engine, recipes engine, nutrition and allergen display in POS, Google Calendar sync for shifts, investor-specific reporting access and internal tools for invoices, cash and bank transactions."
         },
         {
           heading: "Daily closures & financial accuracy",
@@ -76,9 +84,9 @@ export const projects: Project[] = [
             "Managers perform manual daily closures with cash counting, payment method reconciliation, merging of totals and verification of discrepancies. The Receipt and Daily Closures systems are tightly connected to ensure accurate reporting, independent of network issues or delayed syncs. Multi-currency totals (CZK/EUR) are consistently computed across receipts, closures and statistics."
         },
         {
-          heading: "Temperature monitoring",
+          heading: "Reliability, security and automation",
           content:
-            "For hygiene compliance, I implemented a dedicated <strong>temperature_logs</strong> system that tracks refrigerators and freezers. Staff can record temperatures, add notes after deviations and export data during inspections. The system supports timestamps, devices, locations and daily routines, enabling a traceable audit trail."
+            "The system is built around migrations, strict data handling and feature-level access control rather than loose admin shortcuts. It includes customer sync from legacy sources, scheduled cleanup and sync jobs, security alert detection, invoice AI processing and production checks around VAT, discounts, cash rounding and reporting. Offline mode existed in an earlier version, but the current priority is stable online-first operation with strong data integrity."
         },
         {
           heading: "Reliability & operations",
@@ -86,9 +94,14 @@ export const projects: Project[] = [
             "The POS uses optimized queries, indexes, strict data validation and a modular service layer. Error handling and retry logic are being expanded. Offline-first architecture existed in a previous version but is temporarily disabled while RLS, error boundaries and connection stability are improved. All core features run in production with near-zero downtime."
         },
         {
+          heading: "Impact",
+          content:
+            "Lootea replaced a more limited subscription-style setup with a system tailored to the way the business actually operates. It brought checkout, management and back-office workflows into one place, reduced friction for staff, and made it possible to improve the system continuously based on real daily use instead of vendor constraints."
+        },
+        {
           heading: "My role",
           content:
-            "I designed and built the entire system end-to-end: database schema, migrations, RBAC, POS interface, management panel, shift system, customer sync pipeline, daily closures, refund logic, exchange rate module and temperature monitoring. I also built the custom Print Agent responsible for all real-time printing. The system is actively used in our shop, printing hundreds of receipts and labels each month."
+            "I designed and built the system end-to-end: product structure, database schema, migrations, POS flows, management screens, permissions, stock and recipes, reporting, shift tools, customer sync, invoice workflows, integrations and production hardening. I used AI tools to move faster, but the architecture, implementation decisions, testing and day-to-day reliability were my responsibility. The system is actively used in daily operation."
         }
       ]
     }
@@ -98,14 +111,17 @@ export const projects: Project[] = [
     title: "Print Agent",
     subtitle: "Local printing layer for a cloud-based POS system.",
     description:
-      "Print Agent is a small desktop service that makes our cloud POS behave like a native local system, running on a Windows PC next to the cash desk and handling all receipts and product labels without any pop-ups or manual clicking.",
+      "A local desktop bridge that makes a cloud-based POS behave like a native in-store system. Running on a Windows PC next to the cash desk, it handles receipt and label printing without browser dialogs, manual clicks or staff intervention.",
     keyPoints: [
-      "Handles all receipt printing on the Epson POS printer, including discounts, VAT, refunds and <strong>dual-currency totals (CZK/EUR)</strong>.",
-      "Automatically prints a label for every drink as it’s added to the order — with <strong>zero extra steps</strong> for the barista.",
-      "Runs <strong>silently in the background</strong>, starts automatically with Windows and requires no staff interaction.",
-      "<strong>Connects cloud POS to local printers</strong> using a secure <strong>HTTPS tunnel</strong> (ngrok) and a custom REST API.",
-      "Reduced barista <strong>workflow time</strong>, removed <strong>all printing friction</strong> and made our cloud POS behave like a <strong>native on-premise system</strong>.",
+      "Built to solve the real gap between a <strong>cloud POS</strong> and <strong>local in-shop printers</strong>.",
+      "Prints receipts with discounts, VAT, refunds and <strong>dual-currency totals (CZK/EUR)</strong>.",
+      "Automatically prints a drink label for every confirmed item with <strong>zero extra barista steps</strong>.",
+      "Runs <strong>silently in the background</strong>, starts with Windows and is designed for day-to-day reliability.",
+      "Uses a custom REST API and secure HTTPS tunnel to connect cloud workflows with local hardware.",
+      "Turned slow, fragile browser printing into a workflow that feels like a <strong>native on-prem system</strong>.",
     ],
+    challenge:
+      "Browser printing was too slow and too fragile for live café workflow.",
     tech: "Node.js · Express",
 
     thumbnail: "/thumbnails/print-agent.webp",
@@ -139,6 +155,11 @@ export const projects: Project[] = [
             "For drink labels: POS sends a small JSON describing one drink (name, size, sweetness/ice level, toppings, order number, round, optional message). The agent renders a compact label layout (<strong>HTML/Canvas</strong>) optimised for fast scanning by staff. A <strong>headless browser engine</strong> converts the layout to a printable format. The job is sent to the <strong>Brother QL-700 label printer</strong>. Labels are printed one per drink immediately after confirmation, so baristas just stick it on the cup and don't have to re-enter anything manually.",
         },
         {
+          heading: "Technical challenges <em>aka the nightmares</em>",
+          content:
+            "The first versions proved the main problem quickly: browser-style printing was too fragile and too slow for live café operation. Even small delays or popups break the flow when staff are handling a queue. I had to optimize the pipeline so receipt and label generation felt immediate, make the whole thing survive day-to-day Windows reality, and keep failure points small enough to debug during a live shift."
+        },
+        {
           heading: "Reliability & operations",
           content:
             'Because this runs on a shop PC, reliability and "<strong>zero friction</strong>" for staff were priorities:',
@@ -156,9 +177,14 @@ export const projects: Project[] = [
             'To avoid <strong>Mixed Content/CORS issues</strong> between HTTPS POS and local HTTP, the agent uses an <strong>HTTPS tunnel (e.g. ngrok)</strong> in front of it. The tunnel URL is: started automatically together with the agent, stored locally and exposed through a tiny "what\'s my URL" endpoint for the POS. For production, the setup can be upgraded to a <strong>static tunnel/domain or a VPN</strong>, but the current design already works reliably for a single-shop environment.',
         },
         {
+          heading: "Impact",
+          content:
+            "Print Agent removed the weakest part of the whole POS workflow: local printing from a cloud app. Instead of staff fighting browser dialogs or unreliable device behavior, printing became part of the flow. That made the cloud POS feel local, faster and operationally dependable."
+        },
+        {
           heading: "My role",
           content:
-            "I designed and implemented the <strong>whole solution</strong>: requirements, architecture and data model, <strong>Node.js service and printing pipelines</strong>, <strong>Windows integration</strong> (startup, restart, background mode), templates for receipts and labels, operational scripts and <strong>health-check endpoints</strong>. The system runs every day in our own shop and prints all receipts and hundreds of labels per month.",
+            "I designed and implemented the <strong>whole solution</strong>: requirements, architecture and data model, <strong>Node.js service and printing pipelines</strong>, <strong>Windows integration</strong> (startup, restart, background mode), templates for receipts and labels, operational scripts and <strong>health-check endpoints</strong>. I used AI tools where they helped me move faster, but the real work was making the system stable, testable and trustworthy in daily operation."
         },
       ],
     },
@@ -169,16 +195,18 @@ export const projects: Project[] = [
     subtitle:
       "Automated PDF voucher generation with live preview, batch creation, and Supabase-backed sequencing.",
     description:
-      "A precision utility for marketing operations. Generates print-ready voucher PDFs with pixel-perfect coordinate mapping, automatic sequential ID logic, and robust DEMO/PROD mode control. Designed to replace error-prone manual workflows and ensure database integrity for high-volume campaigns.",
+      "A precision tool for marketing operations that replaced slow, error-prone manual voucher preparation with a controlled PDF generation workflow. It handles print-ready output, batch creation, sequential IDs and DEMO/PROD safeguards without sacrificing layout accuracy.",
     
     keyPoints: [
-      "Generates <strong>print-ready PDF vouchers</strong> using a high-resolution template (A4, 300 DPI).",
+      "Replaced a <strong>manual voucher workflow</strong> with a faster, more reliable batch process.",
+      "Generates <strong>print-ready PDF vouchers</strong> using a high-resolution A4 template.",
       "Supports <strong>batch generation</strong> of up to 200 vouchers in a single transaction.", 
-      "Pixel-perfect <strong>X/Y coordinate mapping</strong> with real-time live preview.", 
-      "Automatic <strong>sequential numbering</strong> pulled from Supabase (PROD) or fixed sandbox start (DEMO).",
-      "Built-in <strong>DEMO mode</strong> with mandatory “NOT VALID” watermark and disabled database writes.",
-      "Multi-page PDF output with clean formatting and consistent layout across the entire batch."
+      "Uses pixel-perfect <strong>X/Y coordinate mapping</strong> with live preview for layout accuracy.", 
+      "Handles <strong>sequential numbering</strong> safely via Supabase in PROD and sandbox logic in DEMO.",
+      "Protects production data with a clear <strong>DEMO mode</strong>, watermarking and disabled writes."
     ],
+    challenge:
+      "Keeping print precision, batch sequencing and DEMO/PROD safety reliable at once.",
     
     tech: "Next.js · TypeScript", 
     liveUrl: "https://voucher.generator.patrikdinh.com/",
@@ -197,6 +225,11 @@ export const projects: Project[] = [
           heading: "High-level System Architecture",
           content:
             "The system is a <strong>Next.js application</strong> built on a <strong>TypeScript</strong> foundation. The backend utilizes <strong>PDFKit</strong> for a strongly typed rendering pipeline. The client handles <strong>Zero Scroll</strong> preview, positioning, and batch parameters. In <strong>PROD</strong> mode, the server securely writes each voucher record and metadata to Supabase. In <strong>DEMO</strong> mode, it applies a large watermark and skips all database transactions."
+        },
+        {
+          heading: "Technical challenges <em>aka the nightmares</em>",
+          content:
+            "What looks simple on the surface - placing text on a voucher - becomes annoying fast when precision, sequencing and print consistency all matter at once. The hard part was making batch generation reliable, keeping coordinate mapping accurate across the whole PDF pipeline, and preventing DEMO/PROD mistakes that could pollute real campaign data."
         },
         
         {
@@ -254,9 +287,14 @@ export const projects: Project[] = [
         },
         
         {
+          heading: "Impact",
+          content:
+            "The tool turned a fragile manual process into a repeatable workflow with predictable output, safer sequencing and less room for human error. That matters most during live campaigns, where mistakes in numbering or print preparation create operational noise very quickly."
+        },
+        {
           heading: "My Role & Ownership",
           content:
-            "I was responsible for the entire full-stack pipeline: Architectural design, Next.js/TypeScript implementation, canvas-based live preview engine, secure PDFKit rendering logic, DEMO/PROD mode management, the prefix/sequence engine, Supabase integration, and final Vercel deployment setup. The tool is currently in use for live marketing campaigns."
+            "I was responsible for the entire full-stack pipeline: architectural design, Next.js/TypeScript implementation, canvas-based live preview engine, secure PDFKit rendering logic, DEMO/PROD mode management, the prefix/sequence engine, Supabase integration, and final Vercel deployment setup. AI tools helped with speed, but the production rules, layout precision and safety guarantees were mine to define and test."
         }
       ]
     }
@@ -266,7 +304,9 @@ export const projects: Project[] = [
     title: "Invoice AI Extractor",
     subtitle: "AI-powered invoice data extraction using Google Gemini.",
     description:
-      "Parses <strong>complex PDF invoices</strong> into a <strong>structured, unified JSON schema</strong>. The output includes <strong>key financial data</strong> (items, <strong>VAT breakdown</strong>, totals) and comprehensive <strong>metadata</strong> (suppliers, customers). The system features built-in <strong>validation and correction logic</strong> (e.g., <strong>VAT fixes</strong>, date normalization) to ensure <strong>data integrity</strong>, which is then used directly in our internal <strong>ERP system</strong> for automated processing.",
+      "An AI-powered invoice extraction pipeline built for real accounting workflows, not demo screenshots. It converts complex PDF invoices into a structured JSON schema, then validates, corrects and normalizes the result so it can be used directly in our internal ERP.",
+    challenge:
+      "Making AI extraction trustworthy enough for accounting and ERP use, not just demos.",
     tech: "React · Next.js · TypeScript · Gemini",
     liveUrl: "https://invoice.ai.extractor.patrikdinh.com/",
     thumbnail: "/thumbnails/invoice-ai-extractor.webp",
@@ -282,6 +322,11 @@ export const projects: Project[] = [
           heading: "Architecture & Tech Stack",
           content:
             "The application is built on a high-performance stack for data integrity and speed. It uses <strong>Google Gemini 2.0 Flash</strong> for core analysis. The frontend and API are built with <strong>Next.js</strong> and strictly typed using <strong>TypeScript</strong>, which facilitates the <strong>JSON schema validation</strong> necessary for accounting data. Crucially, the extraction process is designed to be <strong>fully client-side</strong> (in a production environment) for maximum privacy and compliance.",
+        },
+        {
+          heading: "Technical challenges <em>aka the nightmares</em>",
+          content:
+            "The difficult part was never just calling an AI model - it was making the output trustworthy enough for accounting workflows. Real invoices arrive in inconsistent formats, Czech tax details have edge cases, and even small extraction mistakes can create downstream problems. That is why the system includes a heavy validation and correction layer instead of pretending the model output is perfect by default."
         },
         {
           heading: "Processing Pipeline",
@@ -325,7 +370,7 @@ export const projects: Project[] = [
         {
           heading: "My Role",
           content:
-            "I designed and implemented the <strong>entire end-to-end solution</strong>: the Next.js application, the <strong>Gemini API integration</strong>, the <strong>PDF processing pipeline</strong>, the core validation and correction logic, and the unified JSON schema design. The system currently processes invoices daily and integrates directly with our ERP. <strong>I continuously monitor real-world failure cases (the remaining 1%) to further refine the prompt and improve the post-processing and validation logic.</strong>",
+            "I designed and implemented the <strong>entire end-to-end solution</strong>: the Next.js application, the <strong>Gemini API integration</strong>, the <strong>PDF processing pipeline</strong>, the core validation and correction logic, and the unified JSON schema design. AI is part of the extraction layer, but reliability comes from the surrounding engineering, validation and real-world testing. The system currently processes invoices daily and integrates directly with our ERP. <strong>I continuously monitor real-world failure cases (the remaining 1%) to further refine the prompt and improve the post-processing and validation logic.</strong>"
         },
       ],
     },

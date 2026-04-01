@@ -4,6 +4,23 @@
   color: var(--text);
 }
 
+.projectsIntro {
+  color: var(--text);
+  font-size: clamp(1.125rem, 2.5vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.45;
+  max-width: 52rem;
+  margin-bottom: 0.9rem;
+}
+
+.projectsDisclosure {
+  color: var(--text-muted);
+  font-size: clamp(0.95rem, 2vw, 1rem);
+  line-height: 1.6;
+  max-width: 52rem;
+  margin-bottom: 2.5rem;
+}
+
 /* Jeden projektový blok */
 .projectContainer {
   padding-top: 4rem;
@@ -203,8 +220,21 @@
   font-weight: 600;
 }
 
+.projectChallenge {
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-size: clamp(0.95rem, 2vw, 1rem);
+  line-height: 1.55;
+  font-style: normal;
+}
+
+.projectChallengeLabel {
+  font-weight: 600;
+}
+
 .caseStudyAndTechWrapper {
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -444,6 +474,12 @@
   margin-top: 0;
   color: var(--text);
   line-height: 1.3;
+}
+
+.caseStudyHeading em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
 .caseStudyContent {

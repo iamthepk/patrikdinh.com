@@ -17,7 +17,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Patrik Dinh - Full-stack & AI Developer",
   description:
-    "Building useful products with AI & TypeScript. Full-stack & AI developer focused on practical automation and intelligent systems.",
+    "Building production-ready systems with AI & TypeScript. Full-stack developer focused on practical automation, internal tools and intelligent systems used in real daily operation.",
   icons: {
     icon: [
       {

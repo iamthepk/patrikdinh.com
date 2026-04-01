@@ -1,108 +1,142 @@
-# Portfolio — Editorial Minimalism
+# Patrik Dinh Portfolio
 
-Pure text-first design. Massive typography. Zero noise.
+Personal portfolio website for showcasing selected full-stack and AI projects through focused case studies, interactive previews, and concise product storytelling.
 
-## Design Philosophy
+This repository contains the portfolio site itself, not the source code of the featured products. Some showcased systems are private internal tools, production systems, or client/business assets, so the portfolio presents them through write-ups, screenshots, live demos where possible, and technical summaries instead of public repositories.
 
-**Editorial minimalism:**
-- Text as the only design element
-- Massive whitespace creates hierarchy
-- Pure black and white
-- Zero decorative elements
-- Content is king
+## What This Site Includes
 
-## Features
+- Monochrome visual direction with dark/light theme support
+- Fullscreen splash intro
+- Editorial-style hero section and project storytelling
+- Animated project blocks with responsive layouts
+- Case study modal for each featured project
+- Custom animated thumbnail for the Print Agent project
+- Theme-aware thumbnails and favicons
+- Vercel Analytics and geo-gated Speed Insights loading
 
-- 🖤 Monochrome design (dark/light)
-- 📝 Text-first approach
-- 📐 Responsive typography (clamp)
-- ⚡ Zero animations (except hover)
-- 🎯 Brutally simple
+## Featured Project Policy
 
-## Typography Scale
+The products presented on the site are real projects, but their source code is not automatically public.
 
-```
-Hero:     3rem - 9rem   (48px - 144px)
-Section:  2.5rem - 6rem (40px - 96px)
-Project:  2.25rem - 4.5rem (36px - 72px)
-Body:     1.25rem - 1.875rem (20px - 30px)
-```
+- Internal business systems stay private
+- Client or operational tooling stays private
+- Live demos are linked only where sharing is safe
+- GitHub links are shown only for projects that are intentionally public
 
-## Layout Spacing
-
-```
-Sections:    128-192px apart
-Components:  64-80px apart
-Elements:    32-64px apart
-```
+If you are reviewing the portfolio, the main signal is the quality of the case studies and the scope of the shipped work, not the number of open-source repositories.
 
 ## Tech Stack
 
-- Next.js 16
+- Next.js 16 App Router
+- React 19
 - TypeScript
-- TailwindCSS
-- Inter Variable font
+- Tailwind CSS v4
+- Custom CSS modules/files for layout and visual styling
+- Framer Motion
+- Lucide React
+- React Icons
+- Vercel Analytics
+- Vercel Speed Insights
 
-## Run
+## Local Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000).
 
-## Structure
+## Scripts
 
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
 ```
+
+## Project Structure
+
+```text
 app/
 ├── components/
-│   ├── Hero.tsx                    # Fullscreen intro
-│   ├── Projects.tsx                 # Project list with alternating layout
-│   ├── About.tsx                    # Text blocks with tech stack icons
-│   ├── Footer.tsx                   # Contact footer
-│   ├── PrintAgentFlowAnimation.tsx  # SVG animation for Print Agent project
-│   ├── SplashScreen.tsx             # Splash screen animation
-│   └── SplashWrapper.tsx            # Splash screen wrapper
+│   ├── Hero.tsx                    # Intro section and theme toggle
+│   ├── Projects.tsx                # Project list, thumbnails, modals
+│   ├── About.tsx                   # Positioning text and tech stack
+│   ├── Footer.tsx                  # Contact section
+│   ├── PrintAgentFlowAnimation.tsx # Custom animated project preview
+│   ├── SplashScreen.tsx            # Intro animation
+│   └── SplashWrapper.tsx           # Splash lifecycle wrapper
 ├── lib/
-│   ├── theme-provider.tsx           # Theme context provider
-│   ├── projects.ts                  # Projects data
-│   └── tech-icons.tsx               # Tech stack icons mapping
-└── page.tsx
+│   ├── projects.ts                 # Project data and case studies
+│   ├── tech-icons.tsx              # Icon mapping for tech badges
+│   └── theme-provider.tsx          # Theme state and persistence
+├── globals.css                     # Global tokens and shared styles
+├── layout.tsx                      # Root layout, metadata, analytics
+└── page.tsx                        # Home page composition
+
+middleware.ts                       # EU detection cookie for insights loading
+public/
+└── thumbnails/                     # Project thumbnails and preview assets
 ```
 
-## Customize
+## Content Editing
 
-### Colors (globals.css)
+### Project Data
 
-```css
-:root {
-  --bg: #ffffff;
-  --text: #000000;
-  --text-muted: #737373;
-}
+Edit [app/lib/projects.ts](app/lib/projects.ts) to update:
 
-:root.dark {
-  --bg: #000000;
-  --text: #ffffff;
-  --text-muted: #a3a3a3;
-}
-```
+- project titles and subtitles
+- descriptions and key points
+- tech labels
+- live URLs
+- optional GitHub URLs
+- case study content
 
-### Projects (lib/projects.ts)
+### Page Copy
 
-Edit the `projects` array with your work.
+Edit these files for top-level site copy:
 
-### Screenshots
+- `app/components/Hero.tsx`
+- `app/components/About.tsx`
+- `app/components/Footer.tsx`
 
-Add project screenshots to `public/screenshots/`:
-- Screenshot: `{project-id}.jpg` (16:9 landscape aspect ratio, displayed on the left side of project)
+### Visual Styling
 
-Screenshots are displayed with low-contrast styling (opacity + grayscale) to maintain minimal aesthetic while providing proof of work.
+Shared theme tokens and spacing live in:
 
-### Content
+- `app/globals.css`
+- `app/components/Hero.css`
+- `app/components/Projects.css`
 
-All text is directly in components - simple to edit.
+## Thumbnails and Assets
+
+Project thumbnails live in `public/thumbnails/`.
+
+The project preview logic supports two modes:
+
+1. A base thumbnail such as `project-name.webp`
+2. Theme-specific thumbnails such as `project-name-dark.webp` and `project-name-light.webp`
+
+If theme-specific files exist, the UI will use them automatically. If not, it falls back to the base file.
+
+The Print Agent project is a special case: it uses a custom animated preview instead of a static thumbnail.
+
+## Theme Behavior
+
+The portfolio stores theme preference locally and applies it before hydration to reduce visual flashing. Theme state is also used for:
+
+- favicon switching
+- theme-aware project previews
+- outbound preview synchronization for linked live demos
+
+## Analytics Behavior
+
+Vercel Analytics loads globally.
+
+Speed Insights is loaded conditionally based on the `si_eu` cookie set by `middleware.ts`, which uses Vercel geo headers to decide whether the visitor is from an EU/EEA-related country list used in this project.
 
 ## Build
 
@@ -110,18 +144,4 @@ All text is directly in components - simple to edit.
 npm run build
 ```
 
-Deploy to Vercel for best results.
-
----
-
-## Design Rules
-
-1. Text is design
-2. Whitespace is content
-3. Bigger is clearer
-4. Less is more
-5. Remove if unsure
-
----
-
-Editorial minimalism. Text-first. Zero bullshit.
+Deploying on Vercel is the intended setup.

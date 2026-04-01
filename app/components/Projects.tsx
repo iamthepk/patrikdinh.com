@@ -214,6 +214,16 @@ export default function Projects() {
           Work
         </h2>
 
+        <p className="projectsIntro">
+          Real systems built for everyday use, not just portfolio demos.
+        </p>
+
+        <p className="projectsDisclosure">
+          What you see here are public-facing versions of larger production
+          systems. I share enough to explain the thinking and the work, but not
+          the private logic, prompts and internal workflows behind them.
+        </p>
+
         <motion.div
           className="project-spacing"
           initial="hidden"
@@ -315,6 +325,12 @@ export default function Projects() {
                           />
                         ))}
                       </ul>
+                    )}
+                    {project.challenge && (
+                      <p className="projectChallenge">
+                        <span className="projectChallengeLabel">Challenge:</span>{" "}
+                        {project.challenge}
+                      </p>
                     )}
                     <div className="caseStudyAndTechWrapper">
                       {project.caseStudy && (
@@ -460,7 +476,10 @@ export default function Projects() {
                   {project.caseStudy.sections.map((section, sectionIdx) => (
                     <div key={sectionIdx} className="caseStudySection">
                       {section.heading && (
-                        <h4 className="caseStudyHeading">{section.heading}</h4>
+                        <h4
+                          className="caseStudyHeading"
+                          dangerouslySetInnerHTML={{ __html: section.heading }}
+                        />
                       )}
                       <p
                         className="caseStudyContent"
