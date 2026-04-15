@@ -113,9 +113,11 @@ export default function CVContent({ mode = "modal" }: CVContentProps) {
                 {cvData.education.map((item) => (
                   <article
                     key={`${item.school}-${item.program}`}
-                    className="cvEducationItem"
+                    className={`cvEducationItem${item.school ? "" : " cvEducationItemSub"}`}
                   >
-                    <h3 className="cvEducationSchool">{item.school}</h3>
+                    {item.school ? (
+                      <h3 className="cvEducationSchool">{item.school}</h3>
+                    ) : null}
                     <p className="cvEducationProgram">{item.program}</p>
                     {item.period && (
                       <p className="cvEducationPeriod">{item.period}</p>

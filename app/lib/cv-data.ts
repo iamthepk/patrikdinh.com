@@ -52,7 +52,7 @@ export const cvData: CvData = {
   },
 
   profile:
-    "I build internal systems, workflow automation and AI-assisted tools for real business use. My background in finance and operations gives me strong context for messy workflows, data validation and the practical constraints software has to handle in day-to-day operation. I focus on building reliable tools that reduce manual work, improve clarity and support teams in real production environments.",
+    "I build internal systems, workflow automation and AI-assisted tools for real business use. My background in finance and operations helps me design software around messy workflows, validation and the constraints of day-to-day production use.",
 
   strengths: [
     "Internal systems for real operational workflows",
@@ -81,14 +81,14 @@ export const cvData: CvData = {
       subtitle: "Production system built around real daily cafe operations.",
       stack: ["React", "TypeScript", "PostgreSQL", "Supabase"],
       summary:
-        "Built and evolved a production system that combines POS, local printing, stock, recipes, reporting, shifts, invoices and back-office workflows into one platform used in daily operation.",
+        "Built and evolved a production system combining POS, local printing, stock, recipes, reporting, shifts, invoices and back-office workflows into one platform used in daily operation.",
     },
     {
       title: "Invoice AI Extractor",
       subtitle: "AI-assisted invoice extraction for structured accounting workflows.",
       stack: ["Next.js", "TypeScript", "Gemini API"],
       summary:
-        "Built a tool that converts invoice PDFs into a validated JSON schema with correction logic for VAT, dates and accounting fields, designed for downstream ERP use rather than demo output.",
+        "Built a tool that converts invoice PDFs into validated JSON with correction logic for VAT, dates and accounting fields, designed for downstream ERP use rather than demo output.",
     },
     {
       title: "Voucher Generator",
@@ -102,7 +102,7 @@ export const cvData: CvData = {
       subtitle: "Local integration layer connecting a cloud POS with physical printers.",
       stack: ["Node.js", "Express"],
       summary:
-        "Built a local desktop service that handles receipt and label printing without browser dialogs or manual steps, bridging cloud POS workflows with in-store hardware in live operation.",
+        "Built a local desktop service that handles receipt and label printing without browser dialogs or manual steps, bridging cloud POS workflows with in-store hardware.",
     },
   ],
 
@@ -112,10 +112,10 @@ export const cvData: CvData = {
       role: "Finance & Operations",
       period: "2021 - Present",
       bullets: [
-        "Work in a live business environment where internal software, reporting, validation and operational correctness have direct day-to-day impact.",
-        "Translate real workflow problems from finance, reporting and operations into practical system requirements and software improvements.",
-        "Contribute to internal tools and process design with strong focus on reliability, clarity and whether the system actually works in production use.",
-        "Built practical context around data handling, validation, financial logic and operational edge cases that directly informs the software I build.",
+        "Work in a live business environment where software, reporting and operational correctness have direct day-to-day impact.",
+        "Translate workflow problems from finance and operations into practical system requirements and software improvements.",
+        "Contribute to internal tools and process design with strong focus on reliability, clarity and production usability.",
+        "Built practical context around data validation, financial logic and operational edge cases that directly informs the software I build.",
       ],
     },
     {
@@ -124,8 +124,8 @@ export const cvData: CvData = {
       period: "Jan 2020 - Aug 2021",
       bullets: [
         "Helped build the Czech branch from the ground up and set up workflows for a business combining wholesale supply with an in-house bar operation.",
-        "Handled pricing, invoicing, purchasing, goods logistics and day-to-day operational coordination in a fast-moving environment.",
-        "Gained direct experience with the kind of process friction, data flow issues and operational constraints that later shaped my approach to internal tools and automation.",
+        "Handled pricing, invoicing, purchasing, goods logistics and daily operational coordination in a fast-moving environment.",
+        "Gained direct experience with process friction, data flow issues and operational constraints that later shaped my approach to internal tools and automation.",
       ],
     },
     {

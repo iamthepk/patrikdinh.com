@@ -163,6 +163,22 @@
   color: var(--cv-paper-text);
 }
 
+.cvEducationDetails li {
+  position: relative;
+  padding-left: 0.8rem;
+}
+
+.cvEducationDetails li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.24rem;
+  height: 0.24rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cv-paper-text) 72%, transparent);
+}
+
 .cvSidebarEducation {
   display: grid;
   gap: 0.85rem;
@@ -170,6 +186,10 @@
 
 .cvEducationItem {
   min-width: 0;
+}
+
+.cvEducationItemSub {
+  margin-top: -0.15rem;
 }
 
 .cvEducationSchool {
