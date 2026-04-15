@@ -1,131 +1,121 @@
 import { cvData } from "../lib/cv-data";
-import { SiGithub, SiLinkedin } from "react-icons/si";
 import "./CV.css";
 
-export default function CVContent() {
+type CVContentProps = {
+  mode?: "modal" | "page" | "print";
+};
+
+const formatDisplayUrl = (url: string) =>
+  url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+export default function CVContent({ mode = "modal" }: CVContentProps) {
+  const contactItems = [
+    {
+      label: "Email",
+      value: cvData.basics.email,
+      href: `mailto:${cvData.basics.email}`,
+    },
+    {
+      label: "Phone",
+      value: cvData.basics.phone,
+      href: `tel:${cvData.basics.phone.replace(/\s+/g, "")}`,
+    },
+    {
+      label: "Location",
+      value: cvData.basics.location,
+    },
+    {
+      label: "Website",
+      value: formatDisplayUrl(cvData.basics.website),
+      href: cvData.basics.website,
+    },
+    {
+      label: "GitHub",
+      value: formatDisplayUrl(cvData.basics.github),
+      href: cvData.basics.github,
+    },
+    ...(cvData.basics.linkedin
+      ? [
+          {
+            label: "LinkedIn",
+            value: formatDisplayUrl(cvData.basics.linkedin),
+            href: cvData.basics.linkedin,
+          },
+        ]
+      : []),
+  ];
+
   return (
-    <div className="cvRoot">
-      <div className="cvCompactLayout">
-        <header className="cvHeader">
-          <p className="cvEyebrow">Curriculum Vitae</p>
-          <h2 className="cvTitle">{cvData.basics.name}</h2>
-          <h3 className="cvSubtitle">{cvData.basics.title}</h3>
-          <p className="cvIntro">{cvData.profile}</p>
-
-          <div className="cvLinks">
-            <a href={`mailto:${cvData.basics.email}`} className="cvLink">
-              {cvData.basics.email}
-            </a>
-            <a
-              href={cvData.basics.github}
-              target="_blank"
-              rel="noreferrer"
-              className="cvIconLink"
-              aria-label="GitHub"
-            >
-              <SiGithub />
-            </a>
-            {cvData.basics.linkedin && (
-              <a
-                href={cvData.basics.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="cvIconLink"
-                aria-label="LinkedIn"
-              >
-                <SiLinkedin />
-              </a>
-            )}
-          </div>
-
-          <div className="cvMeta">
-            <span>{cvData.basics.location}</span>
-            <span>{cvData.basics.phone}</span>
-          </div>
+    <div className={`cvRoot cvRoot--${mode}`}>
+      <article className="cvPaper">
+        <header className="cvHero">
+          <h1 className="cvHeroName">{cvData.basics.name}</h1>
+          <p className="cvHeroTitle">{cvData.basics.title}</p>
         </header>
 
-        <div className="cvMainGrid">
-          <div className="cvPrimaryColumn">
-            <section className="cvBlock">
-              <h3 className="cvSectionTitle">Vybrané projekty</h3>
-              <div className="cvProjectList">
-                {cvData.projects.map((project) => (
-                  <article key={project.title} className="cvProject">
-                    <div className="cvProjectHeader">
-                      <h4 className="cvProjectTitle">{project.title}</h4>
-                      {project.stack && project.stack.length > 0 && (
-                        <p className="cvProjectStack">
-                          {project.stack.join(" · ")}
-                        </p>
-                      )}
-                    </div>
-
-                    {project.subtitle && (
-                      <p className="cvProjectSubtitle">{project.subtitle}</p>
-                    )}
-
-                    <p className="cvProjectSummary">{project.summary}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section className="cvBlock">
-              <h3 className="cvSectionTitle">Zkušenosti</h3>
-              <div className="cvExperienceList">
-                {cvData.experience.map((item) => (
-                  <article
-                    key={`${item.company}-${item.period}`}
-                    className="cvExperience"
-                  >
-                    <div className="cvExperienceTop">
-                      <div>
-                        <h4 className="cvExperienceCompany">{item.company}</h4>
-                        <p className="cvExperienceRole">{item.role}</p>
-                      </div>
-                      <p className="cvExperiencePeriod">{item.period}</p>
-                    </div>
-                    <ul className="cvExperienceBullets">
-                      {item.bullets.map((bullet) => (
-                        <li key={bullet}>{bullet}</li>
-                      ))}
-                    </ul>
-                  </article>
-                ))}
-              </div>
-            </section>
-          </div>
-
+        <div className="cvDocumentGrid">
           <aside className="cvSidebar">
-            <section className="cvBlock cvSidebarBlock">
-              <h3 className="cvSectionTitle">Tech stack</h3>
-              <div className="cvTags">
-                {cvData.technologies.map((tech) => (
-                  <span key={tech} className="cvTag">
-                    {tech}
-                  </span>
+            <section className="cvSidebarSection">
+              <h2 className="cvSidebarHeading">Contact</h2>
+              <ul className="cvContactList">
+                {contactItems.map((item) => (
+                  <li key={item.label} className="cvContactRow">
+                    <span className="cvMetaLabel">{item.label}</span>
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                        rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                        className="cvSidebarLink"
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <span className="cvSidebarText">{item.value}</span>
+                    )}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </section>
 
-            <section className="cvBlock cvSidebarBlock">
-              <h3 className="cvSectionTitle">Silné stránky</h3>
-              <ul className="cvBulletGridCompact">
+            <section className="cvSidebarSection">
+              <h2 className="cvSidebarHeading">Core Focus</h2>
+              <ul className="cvSidebarList">
                 {cvData.strengths.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
             </section>
 
-            <section className="cvBlock cvSidebarBlock">
-              <h3 className="cvSectionTitle">Vzdělání</h3>
-              <div className="cvEducationListCompact">
+            <section className="cvSidebarSection">
+              <h2 className="cvSidebarHeading">Tech Stack</h2>
+              <ul className="cvSidebarList">
+                {cvData.technologies.map((tech) => (
+                  <li key={tech}>
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="cvSidebarSection">
+              <h2 className="cvSidebarHeading">Languages</h2>
+              <ul className="cvSidebarList">
+                {cvData.languages.map((language) => (
+                  <li key={language}>{language}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="cvSidebarSection">
+              <h2 className="cvSidebarHeading">Education</h2>
+              <div className="cvSidebarEducation">
                 {cvData.education.map((item) => (
                   <article
                     key={`${item.school}-${item.program}`}
                     className="cvEducationItem"
                   >
-                    <h4 className="cvEducationSchool">{item.school}</h4>
+                    <h3 className="cvEducationSchool">{item.school}</h3>
                     <p className="cvEducationProgram">{item.program}</p>
                     {item.period && (
                       <p className="cvEducationPeriod">{item.period}</p>
@@ -141,18 +131,59 @@ export default function CVContent() {
                 ))}
               </div>
             </section>
-
-            <section className="cvBlock cvSidebarBlock">
-              <h3 className="cvSectionTitle">Jazyky</h3>
-              <ul className="cvLanguagesCompact">
-                {cvData.languages.map((language) => (
-                  <li key={language}>{language}</li>
-                ))}
-              </ul>
-            </section>
           </aside>
+
+          <div className="cvMain">
+            <section className="cvMainSection">
+              <h2 className="cvMainHeading">Profile</h2>
+              <p className="cvProfileText">{cvData.profile}</p>
+            </section>
+
+            <section className="cvMainSection">
+              <h2 className="cvMainHeading">Selected Projects</h2>
+              <div className="cvProjectGrid">
+                {cvData.projects.map((project) => (
+                  <article key={project.title} className="cvProjectCard">
+                    <h3 className="cvProjectTitle">{project.title}</h3>
+                    {project.subtitle && (
+                      <p className="cvProjectSubtitle">{project.subtitle}</p>
+                    )}
+                    {project.stack && project.stack.length > 0 && (
+                      <p className="cvProjectStack">{project.stack.join(" · ")}</p>
+                    )}
+                    <p className="cvProjectSummary">{project.summary}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="cvMainSection">
+              <h2 className="cvMainHeading">Experience</h2>
+              <div className="cvExperienceList">
+                {cvData.experience.map((item) => (
+                  <article
+                    key={`${item.company}-${item.period}`}
+                    className="cvExperienceItem"
+                  >
+                    <div className="cvExperienceHeader">
+                      <div>
+                        <h3 className="cvExperienceCompany">{item.company}</h3>
+                        <p className="cvExperienceRole">{item.role}</p>
+                      </div>
+                      <p className="cvExperiencePeriod">{item.period}</p>
+                    </div>
+                    <ul className="cvExperienceBullets">
+                      {item.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </div>
         </div>
-      </div>
+      </article>
     </div>
   );
 }

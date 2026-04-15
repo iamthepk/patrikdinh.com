@@ -42,8 +42,8 @@ export type CvData = {
 export const cvData: CvData = {
   basics: {
     name: "Patrik Dinh",
-    title: "Software Developer",
-    location: "Praha, Česká republika",
+    title: "Full-stack Developer focused on internal systems, automation and AI tools",
+    location: "Prague, Czech Republic",
     phone: "+420 720 279 090",
     email: "me@patrikdinh.com",
     website: "https://patrikdinh.com",
@@ -52,15 +52,13 @@ export const cvData: CvData = {
   },
 
   profile:
-    "Vyvíjím interní nástroje a aplikace pro reálný provoz se zaměřením na automatizaci, práci s daty a zefektivnění každodenních workflow. Mám zkušenost s návrhem a rozvojem business aplikací, document processing nástrojů i lokálních integračních služeb. V technických řešeních propojuji produktové uvažování, znalost provozu a důraz na použitelnost, logiku a spolehlivost.",
+    "I build internal systems, workflow automation and AI-assisted tools for real business use. My background in finance and operations gives me strong context for messy workflows, data validation and the practical constraints software has to handle in day-to-day operation. I focus on building reliable tools that reduce manual work, improve clarity and support teams in real production environments.",
 
   strengths: [
-    "návrh a rozvoj interních nástrojů pro reálný provoz",
-    "analytické a systémové myšlení",
-    "automatizace workflow a zpracování dat",
-    "schopnost převést byznysový problém do funkčního software řešení",
-    "pečlivost, validace dat a důraz na správnost výstupů",
-    "rychlá orientace v aplikační logice a existujícím kódu",
+    "Internal systems for real operational workflows",
+    "Workflow automation, validation and reliability",
+    "Turning messy business processes into usable software",
+    "Building tools that hold up in daily production use",
   ],
 
   technologies: [
@@ -72,42 +70,39 @@ export const cvData: CvData = {
     "Express",
     "PostgreSQL",
     "Supabase",
-    "Vercel",
-    "REST API",
-    "PDF generation",
-    "Gemini API",
+    "REST APIs",
     "Git",
-    "GitHub",
+    "Vercel",
   ],
 
   projects: [
     {
       title: "Lootea Operations System",
-      subtitle: "Interní systém postavený pro reálný každodenní provoz kavárny.",
+      subtitle: "Production system built around real daily cafe operations.",
       stack: ["React", "TypeScript", "PostgreSQL", "Supabase"],
       summary:
-        "In-house operations systém spojující POS, lokální tisk, sklad, receptury, reporting, směny, faktury a další provozní workflow do jednoho produkčního řešení používaného každý den.",
+        "Built and evolved a production system that combines POS, local printing, stock, recipes, reporting, shifts, invoices and back-office workflows into one platform used in daily operation.",
     },
     {
       title: "Invoice AI Extractor",
-      subtitle: "Nástroj pro automatickou extrakci dat z PDF faktur do strukturovaného výstupu.",
+      subtitle: "AI-assisted invoice extraction for structured accounting workflows.",
       stack: ["Next.js", "TypeScript", "Gemini API"],
       summary:
-        "Aplikace pro parsování faktur do jednotného JSON schema s validační a korekční logikou pro DPH, data a účetní pole. Výstup je připravený pro návazné interní ERP workflow.",
+        "Built a tool that converts invoice PDFs into a validated JSON schema with correction logic for VAT, dates and accounting fields, designed for downstream ERP use rather than demo output.",
     },
     {
       title: "Voucher Generator",
-      subtitle: "Nástroj pro dávkové generování voucherů s důrazem na přesnost a bezpečný workflow.",
+      subtitle: "Batch PDF voucher generation with precision and production safeguards.",
       stack: ["Next.js", "TypeScript", "Supabase", "PDFKit"],
       summary:
-        "Aplikace pro generování print-ready voucherů v PDF s live preview, sekvenční logikou a oddělenými DEMO a PROD režimy. Navrženo pro přesné kampaně a spolehlivou práci s daty.",
+        "Built a voucher generation tool with live preview, sequential logic and separate DEMO and PROD modes, designed for reliable campaign workflows and print accuracy.",
     },
     {
       title: "Print Agent",
-      subtitle: "Lokální integrační vrstva mezi cloudovým POS a fyzickými tiskárnami.",
+      subtitle: "Local integration layer connecting a cloud POS with physical printers.",
       stack: ["Node.js", "Express"],
       summary:
-        "Desktop service běžící na lokálním Windows zařízení, která zajišťuje tisk účtenek a štítků bez browser dialogů a manuálních kroků. Řeší propojení cloudového workflow s lokálním hardwarem v reálném provozu.",
+        "Built a local desktop service that handles receipt and label printing without browser dialogs or manual steps, bridging cloud POS workflows with in-store hardware in live operation.",
     },
   ],
 
@@ -115,52 +110,57 @@ export const cvData: CvData = {
     {
       company: "We Are Lootea s. r. o.",
       role: "Finance & Operations",
-      period: "2021 – současnost",
+      period: "2021 - Present",
       bullets: [
-        "Práce s daty, reportingem a kontrolou správnosti údajů.",
-        "Nastavování procesů a řešení provozních problémů.",
-        "Spolupráce na návrhu a rozvoji interních systémů.",
-        "Zkušenost s prostředím, kde technická řešení přímo podporují každodenní provoz firmy.",
+        "Work in a live business environment where internal software, reporting, validation and operational correctness have direct day-to-day impact.",
+        "Translate real workflow problems from finance, reporting and operations into practical system requirements and software improvements.",
+        "Contribute to internal tools and process design with strong focus on reliability, clarity and whether the system actually works in production use.",
+        "Built practical context around data handling, validation, financial logic and operational edge cases that directly informs the software I build.",
+      ],
+    },
+    {
+      company: "BoBoQ Czech",
+      role: "Co-Founder / Operations Lead",
+      period: "Jan 2020 - Aug 2021",
+      bullets: [
+        "Helped build the Czech branch from the ground up and set up workflows for a business combining wholesale supply with an in-house bar operation.",
+        "Handled pricing, invoicing, purchasing, goods logistics and day-to-day operational coordination in a fast-moving environment.",
+        "Gained direct experience with the kind of process friction, data flow issues and operational constraints that later shaped my approach to internal tools and automation.",
       ],
     },
     {
       company: "Vinatrans s.r.o.",
       role: "Operations Manager",
-      period: "2015 – 2020",
+      period: "2015 - 2020",
       bullets: [
-        "Plánování nákupů, cenotvorba a finanční reporting.",
-        "Koordinace provozních procesů, logistiky a skladového hospodářství.",
-        "Vedení týmu a řešení operativních problémů.",
+        "Managed purchasing, pricing, reporting and daily operational coordination.",
+        "Worked across logistics, warehouse processes and operational problem-solving in a live business environment.",
+        "Built strong practical understanding of process design, information flow and the importance of dependable systems in day-to-day work.",
       ],
     },
     {
-      company: "G4S Česká republika",
-      role: "Vedoucí týmu",
-      period: "2014 – 2015",
+      company: "G4S Cash Solutions a. s.",
+      role: "Team Leader",
+      period: "2014 - 2015",
       bullets: [
-        "Vedení týmu a plánování směn.",
-        "Příprava dokumentace a koordinace provozních činností.",
-        "Řešení požadavků a problémů klientů.",
+        "Led a team, planned shift coverage and coordinated daily operational activities.",
+        "Prepared documentation, handled issue resolution and worked in an environment where accuracy and reliability mattered.",
       ],
     },
   ],
 
   education: [
     {
-      school: "Euroškola Praha",
-      program: "Ekonomika a management (maturita)",
+      school: "Euroskola Prague",
+      program: "Economics and Management",
     },
     {
-      school: "Samostudium",
-      program: "Webový vývoj, databáze, backend a automatizace",
-      details: [
-        "TypeScript / JavaScript",
-        "práce s databázemi",
-        "základy backendového vývoje",
-        "cloudové služby a moderní webové aplikace",
-      ],
+      school: "Independent study",
+      program:
+        "Programming, backend fundamentals, databases and cloud services (JavaScript / TypeScript)",
+      details: ["Accounting and tax studies"],
     },
   ],
 
-  languages: ["Čeština – rodilý mluvčí", "Angličtina – středně pokročilá"],
+  languages: ["Czech - Native", "English - Working proficiency"],
 };
