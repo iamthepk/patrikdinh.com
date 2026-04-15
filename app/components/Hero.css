@@ -10,92 +10,131 @@
 }
 
 .heroContainer {
-  max-width: 80rem; /* 5xl */
+  max-width: 76rem;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heroEyebrowDot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #7bf1a8;
+  box-shadow: 0 0 18px rgba(123, 241, 168, 0.55);
 }
 
 /* Theme Toggle Button */
 .themeToggle {
   position: fixed;
-  top: 3rem;
-  right: 3rem;
-  padding: 0.5rem;
-  transition: opacity 150ms;
+  top: 2rem;
+  right: 2rem;
+  z-index: 80;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition:
+    opacity 150ms,
+    background-color 150ms,
+    border-color 150ms,
+    transform 150ms;
   color: var(--text);
-  background: none;
-  border: none;
+  background: color-mix(in srgb, var(--bg) 90%, var(--text) 4%);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 999px;
   cursor: pointer;
+  backdrop-filter: blur(12px);
 }
 
 .themeToggle:hover {
-  opacity: 0.7;
+  opacity: 1;
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--bg) 82%, var(--text) 7%);
 }
 
 .themeToggleIcon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 /* Typography */
 .heroTitle {
-  font-size: clamp(3rem, 12vw, 8.5rem);
+  font-size: clamp(3rem, 12vw, 8.2rem);
   font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
   color: var(--text);
-  margin-bottom: 2rem;
+  margin-bottom: 1.35rem;
 }
 
 .heroSubtitle {
-  font-size: clamp(2.5rem, 10vw, 6rem);
+  font-size: clamp(2.4rem, 8vw, 5.6rem);
   font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
   color: var(--text);
-  margin-bottom: 5rem;
+  max-width: 14ch;
+  margin-bottom: 2.4rem;
+  text-wrap: balance;
 }
 
 .heroDescription {
-  font-size: 1.75rem;
+  font-size: clamp(1.1rem, 2.2vw, 1.75rem);
   font-weight: 500;
-  line-height: 1.4;
-  color: var(--text);
-  max-width: 64rem; /* 4xl */
-  margin-bottom: 6rem;
-}
-
-@media (min-width: 768px) {
-  .heroDescription {
-    font-size: 2.25rem; /* 3xl */
-  }
-}
-
-@media (min-width: 1024px) {
-  .heroDescription {
-    font-size: 2.75rem; /* 4xl */
-  }
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+  max-width: 46rem;
+  margin-bottom: 3rem;
+  text-wrap: pretty;
 }
 
 /* Navigation Links */
 .heroNavigation {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  font-size: 1.5rem;
-  font-weight: 500;
+  align-items: flex-start;
+  gap: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 @media (min-width: 640px) {
   .heroNavigation {
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.9rem;
   }
 }
 
 .heroLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.7rem 1rem;
   color: var(--text);
   text-decoration: none;
-  transition: opacity 150ms;
-  background: none;
-  border: none;
+  transition:
+    opacity 150ms,
+    background-color 150ms,
+    border-color 150ms,
+    transform 150ms;
+  background: color-mix(in srgb, var(--bg) 92%, var(--text) 2%);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: 999px;
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
@@ -103,79 +142,113 @@
 }
 
 .heroLink:hover {
-  opacity: 0.5;
+  opacity: 1;
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--bg) 82%, var(--text) 7%);
 }
 
-.cvModal {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.82);
-  cursor: pointer;
+.heroLinkPrimary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
 }
 
-.cvModalContent {
-  width: min(1760px, calc(100vw - 32px));
-  height: min(94vh, 1400px);
-  overflow-y: auto;
-  background: var(--bg);
-  color: var(--text);
-  border-radius: 1.25rem;
-  position: relative;
-  cursor: default;
-  padding: 2.5rem 2.75rem;
-}
-
-.cvModalInner {
-  padding-top: 1rem;
-}
-
-.cvModalActions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
+.heroLinkPrimary:hover {
+  background: color-mix(in srgb, var(--text) 88%, var(--bg) 12%);
 }
 
 @media (max-width: 767px) {
-  .cvModal {
-    padding: 0.5rem;
+  .heroSection {
+    padding-top: 7rem;
+    padding-bottom: 2rem;
   }
 
-  .cvModalContent {
-    width: calc(100vw - 12px);
-    height: calc(100vh - 12px);
-    padding: 1.5rem;
-    border-radius: 0.85rem;
+  .themeToggle {
+    top: 1.25rem;
+    right: 1.25rem;
   }
 
-  .cvModalInner {
-    padding-top: 1rem;
+  .heroEyebrow {
+    margin-bottom: 1.15rem;
+    font-size: 0.82rem;
   }
 
-  .cvModalActions {
-    margin-bottom: 1.5rem;
+  .heroSubtitle {
+    max-width: 12ch;
+    margin-bottom: 1.8rem;
   }
+
+  .heroDescription {
+    margin-bottom: 2.25rem;
+  }
+
+  .heroNavigation {
+    width: 100%;
+  }
+}
+
+.cvModalContent {
+  width: min(1100px, calc(100vw - 24px));
+  height: calc(100vh - 24px);
+  max-height: none;
+}
+
+.cvModalTopBar {
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.95rem 1rem 0.85rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--bg) 94%, var(--text) 2%);
+}
+
+.cvModalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0.85rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cvModalInner {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.cvModalToolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .cvActionButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 1.2rem;
-  border: 1px solid var(--text);
-  border-radius: 0.5rem;
+  padding: 0.72rem 1.05rem;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--bg) 86%, var(--text) 4%);
   color: var(--text);
   text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: background 150ms, color 150ms, opacity 150ms;
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition:
+    background 150ms,
+    color 150ms,
+    border-color 150ms,
+    opacity 150ms;
+}
+
+.cvActionButtonPrimary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
 }
 
 .cvActionButton:hover {
@@ -185,20 +258,24 @@
 }
 
 .cvModalClose {
-  position: sticky;
-  top: 0;
-  float: right;
-  z-index: 10;
-  font-size: 2.25rem;
-  line-height: 1;
-  color: var(--text);
-  background: var(--bg);
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem 0.65rem;
-  border-radius: 0.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.85rem;
 }
 
-.cvModalClose:hover {
-  opacity: 0.7;
+@media (max-width: 767px) {
+  .cvModalContent {
+    width: calc(100vw - 12px);
+    height: calc(100vh - 12px);
+    border-radius: 0.85rem;
+  }
+
+  .cvModalTopBar {
+    align-items: flex-start;
+    padding: 0.75rem;
+  }
+
+  .cvModalBody {
+    padding: 0.75rem;
+  }
 }

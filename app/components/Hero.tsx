@@ -2,13 +2,27 @@
 
 import { useTheme } from "../lib/theme-provider";
 import { Sun, Moon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CVContent from "./CVContent";
+import Modal from "./Modal";
 import "./Hero.css";
 
 export default function Hero() {
   const { theme, toggleTheme } = useTheme();
   const [cvOpen, setCvOpen] = useState(false);
+
+  const openCvPage = () => {
+    window.open("/cv", "_blank", "noopener,noreferrer");
+  };
+
+  const downloadCvPdf = () => {
+    const link = document.createElement("a");
+    link.href = "/cv/download";
+    link.download = "CV - Patrik Dinh.pdf";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
 
   const scrollToSection = (id: string): void => {
     const element = document.getElementById(id);
@@ -17,24 +31,6 @@ export default function Hero() {
     }
   };
 
-  useEffect(() => {
-    if (!cvOpen) return;
-
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setCvOpen(false);
-    };
-
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-    window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, [cvOpen]);
-
   return (
     <>
       <section className="heroSection section-padding">
@@ -42,6 +38,8 @@ export default function Hero() {
           onClick={toggleTheme}
           className="themeToggle"
           aria-label="Toggle theme"
+          aria-pressed={theme === "light"}
+          type="button"
         >
           {theme === "dark" ? (
             <Sun className="themeToggleIcon" />
@@ -51,6 +49,11 @@ export default function Hero() {
         </button>
 
         <div className="heroContainer">
+          <div className="heroEyebrow">
+            <span className="heroEyebrowDot" aria-hidden="true" />
+            <span>Available for work</span>
+          </div>
+
           <h1 className="heroTitle">Patrik Dinh</h1>
           <h2 className="heroSubtitle">
             Full-stack developer building internal systems, automation and AI
@@ -63,10 +66,10 @@ export default function Hero() {
             in day-to-day use.
           </p>
 
-          <div className="heroNavigation">
+          <div className="heroNavigation" aria-label="Primary">
             <button
               onClick={() => scrollToSection("work")}
-              className="heroLink"
+              className="heroLink heroLinkPrimary"
               aria-label="Scroll to work section"
             >
               Work ↓
@@ -74,6 +77,14 @@ export default function Hero() {
             <a href="mailto:me@patrikdinh.com" className="heroLink">
               Email
             </a>
+            <button
+              onClick={() => setCvOpen(true)}
+              className="heroLink"
+              type="button"
+              aria-haspopup="dialog"
+            >
+              CV
+            </button>
             <a
               href="https://github.com/iamthepk"
               target="_blank"
@@ -86,22 +97,34 @@ export default function Hero() {
         </div>
       </section>
 
-      {cvOpen && (
-        <div className="cvModal" onClick={() => setCvOpen(false)}>
-          <div className="cvModalContent" onClick={(e) => e.stopPropagation()}>
+      <Modal
+        isOpen={cvOpen}
+        onClose={() => setCvOpen(false)}
+        ariaLabel="Curriculum Vitae"
+        closeLabel="Close CV"
+        panelClassName="cvModalContent"
+        bodyClassName="cvModalBody"
+        topBarClassName="cvModalTopBar"
+        closeButtonClassName="cvModalClose"
+        topBarContent={
+          <div className="cvModalToolbar">
             <button
-              className="cvModalClose"
-              onClick={() => setCvOpen(false)}
-              aria-label="Close CV"
+              className="cvActionButton cvActionButtonPrimary"
+              onClick={downloadCvPdf}
+              type="button"
             >
-              ×
+              Download PDF
             </button>
-            <div className="cvModalInner">
-              <CVContent />
-            </div>
+            <button className="cvActionButton" onClick={openCvPage} type="button">
+              Open full page
+            </button>
           </div>
+        }
+      >
+        <div className="cvModalInner">
+          <CVContent mode="modal" />
         </div>
-      )}
+      </Modal>
     </>
   );
 }
