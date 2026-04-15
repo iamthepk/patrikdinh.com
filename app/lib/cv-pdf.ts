@@ -233,7 +233,7 @@ export function createCvPdf() {
     if (compact) {
       let line = "";
       for (const item of items) {
-        const candidate = line ? `${line} · ${item}` : item;
+        const candidate = line ? `${line} | ${item}` : item;
         if (estimateTextWidth(candidate, 8.3) <= width) {
           line = candidate;
         } else {
@@ -286,11 +286,11 @@ export function createCvPdf() {
       drawText(pageOne, item.school, sidebarX + 10, sidebarY, 9.0, "F2", [0.1, 0.13, 0.18]);
       sidebarY += 12;
     }
-    drawText(pageOne, `• ${item.program}`, sidebarX + 10, sidebarY, 8.9, "F2", [0.1, 0.13, 0.18]);
+    drawText(pageOne, `- ${item.program}`, sidebarX + 10, sidebarY, 8.9, "F2", [0.1, 0.13, 0.18]);
     sidebarY += 12;
     if (item.details) {
       for (const detail of item.details) {
-        drawText(pageOne, `• ${detail}`, sidebarX + 18, sidebarY, 8.6, "F1", [0.1, 0.13, 0.18]);
+        drawText(pageOne, `- ${detail}`, sidebarX + 18, sidebarY, 8.6, "F1", [0.1, 0.13, 0.18]);
         sidebarY += 11;
       }
     }
@@ -316,7 +316,7 @@ export function createCvPdf() {
     drawText(pageOne, item.role, mainX, mainY, 9.8, "F1", [0.1, 0.13, 0.18]);
     mainY += 14;
     for (const bullet of item.bullets) {
-      drawText(pageOne, "•", mainX, mainY, 9.2, "F1", [0.1, 0.13, 0.18]);
+      drawText(pageOne, "-", mainX, mainY, 9.2, "F1", [0.1, 0.13, 0.18]);
       mainY += drawWrappedText(pageOne, bullet, mainX + 9, mainY, mainWidth - 9, 9.2, 12.8, "F1", [0.1, 0.13, 0.18]);
       mainY += 2;
     }
@@ -343,7 +343,7 @@ export function createCvPdf() {
 
     const titleLines = wrapText(project.title, cardWidth - 24, 11.5);
     const subtitleLines = project.subtitle ? wrapText(project.subtitle, cardWidth - 24, 9.6) : [];
-    const stackText = project.stack?.join(" · ") ?? "";
+    const stackText = project.stack?.join(" | ") ?? "";
     const stackLines = stackText ? wrapText(stackText, cardWidth - 24, 8.6) : [];
     const summaryLines = wrapText(project.summary, cardWidth - 24, 9.3);
 
