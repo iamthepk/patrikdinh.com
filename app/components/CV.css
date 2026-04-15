@@ -481,7 +481,7 @@
   .cvPaper {
     width: 190mm;
     max-width: 190mm;
-    min-height: 277mm;
+    min-height: 271mm;
     margin: 0 auto;
     border: none;
     border-radius: 0;
@@ -497,57 +497,57 @@
   }
 
   .cvHero {
-    padding: 13mm 11mm 10mm;
+    padding: 11mm 10mm 8mm;
   }
 
   .cvHeroName {
-    font-size: 28pt;
+    font-size: 26pt;
     line-height: 0.94;
     letter-spacing: -0.04em;
   }
 
   .cvHeroTitle {
-    max-width: 120mm;
-    font-size: 10.5pt;
-    line-height: 1.45;
+    max-width: 118mm;
+    font-size: 9.9pt;
+    line-height: 1.4;
     letter-spacing: 0.03em;
   }
 
   .cvDocumentGrid {
     display: grid;
-    grid-template-columns: 60mm minmax(0, 1fr);
+    grid-template-columns: 58mm minmax(0, 1fr);
     align-items: start;
   }
 
   .cvSidebar {
-    padding: 8mm 7mm 9mm;
+    padding: 7mm 6mm 7.5mm;
     border-right: 1px solid var(--cv-paper-border);
     border-bottom: none;
   }
 
   .cvMain {
-    padding: 8mm 8.5mm 9mm;
+    padding: 7mm 7.5mm 7.5mm;
   }
 
   .cvSidebarHeading,
   .cvMainHeading {
-    margin-bottom: 4.5mm;
-    padding-bottom: 1.6mm;
-    font-size: 9pt;
+    margin-bottom: 3.6mm;
+    padding-bottom: 1.3mm;
+    font-size: 8.6pt;
     line-height: 1.2;
     letter-spacing: 0.16em;
   }
 
   .cvSidebarSection + .cvSidebarSection {
-    margin-top: 5mm;
+    margin-top: 4mm;
   }
 
   .cvMainSection + .cvMainSection {
-    margin-top: 6mm;
+    margin-top: 4.8mm;
   }
 
   .cvMetaLabel {
-    font-size: 7.1pt;
+    font-size: 6.7pt;
   }
 
   .cvSidebarLink,
@@ -557,69 +557,69 @@
   .cvEducationPeriod,
   .cvEducationDetails li,
   .cvEducationSchool {
-    font-size: 8.4pt;
-    line-height: 1.42;
+    font-size: 7.9pt;
+    line-height: 1.34;
   }
 
   .cvSidebarListCompact li {
-    font-size: 7.5pt;
-    line-height: 1.3;
+    font-size: 7.1pt;
+    line-height: 1.24;
   }
 
   .cvProfileText {
-    font-size: 10pt;
-    line-height: 1.58;
+    font-size: 9.4pt;
+    line-height: 1.46;
   }
 
   .cvExperienceList {
-    gap: 4.2mm;
+    gap: 3mm;
   }
 
   .cvExperienceItem {
-    padding-left: 4.2mm;
+    padding-left: 3.6mm;
   }
 
   .cvExperienceItem::before {
-    left: -1.2mm;
-    top: 2.2mm;
-    width: 2mm;
-    height: 2mm;
+    left: -1mm;
+    top: 2mm;
+    width: 1.8mm;
+    height: 1.8mm;
   }
 
   .cvExperienceHeader {
-    gap: 4mm;
-    margin-bottom: 1.8mm;
+    gap: 3mm;
+    margin-bottom: 1.2mm;
   }
 
   .cvProjectTitle,
   .cvExperienceCompany {
-    font-size: 10pt;
-    line-height: 1.25;
+    font-size: 9.4pt;
+    line-height: 1.2;
   }
 
   .cvProjectSubtitle,
   .cvExperienceRole {
-    margin-top: 0.8mm;
-    font-size: 8.8pt;
-    line-height: 1.38;
+    margin-top: 0.5mm;
+    font-size: 8.2pt;
+    line-height: 1.28;
   }
 
   .cvProjectStack,
   .cvExperiencePeriod {
-    margin-top: 0.8mm;
-    font-size: 7.8pt;
-    line-height: 1.3;
+    margin-top: 0.5mm;
+    font-size: 7.3pt;
+    line-height: 1.2;
   }
 
   .cvExperienceBullets {
-    gap: 1.2mm;
-    padding-left: 4mm;
+    gap: 0.7mm;
+    padding-left: 3.4mm;
   }
 
   .cvExperienceBullets li,
   .cvProjectSummary {
-    font-size: 8.6pt;
-    line-height: 1.42;
+    font-size: 8pt;
+    line-height: 1.3;
   }
 
   .cvPageHeader {
