@@ -58,7 +58,7 @@ export default function Footer() {
                 className="text-sm md:text-base font-medium"
                 style={{ color: "var(--text-muted)" }}
               >
-                Ready to work — open to full-time roles and selected freelance projects.
+                Available for full-time roles and selected freelance projects.
               </p>
             </div>
           </div>

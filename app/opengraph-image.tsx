@@ -171,7 +171,7 @@ export default function OpenGraphImage() {
                   boxShadow: "0 0 24px rgba(123, 241, 168, 0.65)",
                 }}
               />
-              <div style={{ display: "flex" }}>Ready to work</div>
+              <div style={{ display: "flex" }}>Available for work</div>
             </div>
           </div>
         </div>
