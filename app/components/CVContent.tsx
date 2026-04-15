@@ -90,7 +90,7 @@ export default function CVContent({ mode = "modal" }: CVContentProps) {
 
               <section className="cvSidebarSection">
                 <h2 className="cvSidebarHeading">Tech Stack</h2>
-                <ul className="cvSidebarList">
+                <ul className="cvSidebarList cvSidebarListCompact">
                   {cvData.technologies.map((tech) => (
                     <li key={tech}>{tech}</li>
                   ))}

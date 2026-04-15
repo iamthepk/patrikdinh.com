@@ -171,11 +171,24 @@
   list-style: none;
 }
 
+.cvSidebarListCompact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+}
+
 .cvSidebarList li,
 .cvEducationDetails li {
   font-size: var(--cv-sidebar-body-size);
   line-height: var(--cv-sidebar-body-line-height);
   color: var(--cv-paper-text);
+}
+
+.cvSidebarListCompact li {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--cv-paper-text);
+  white-space: nowrap;
 }
 
 .cvEducationDetails li {
