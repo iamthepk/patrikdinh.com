@@ -49,54 +49,50 @@ export default function Hero() {
         </button>
 
         <div className="heroContainer">
-          <div className="heroCopy">
-            <div className="heroEyebrow">
-              <span className="heroEyebrowDot" aria-hidden="true" />
-              <span>Available for work</span>
-            </div>
-
-            <h1 className="heroTitle">Patrik Dinh</h1>
-            <h2 className="heroSubtitle">
-              Full-stack developer building internal systems, automation and AI
-              tools for real-world use.
-            </h2>
+          <div className="heroEyebrow">
+            <span className="heroEyebrowDot" aria-hidden="true" />
+            <span>Available for work</span>
           </div>
 
-          <div className="heroMeta">
-            <p className="heroDescription">
-              I build practical software for real workflows, with a strong focus on
-              security, testing and whether the final system can actually be trusted
-              in day-to-day use.
-            </p>
+          <h1 className="heroTitle">Patrik Dinh</h1>
+          <h2 className="heroSubtitle">
+            Full-stack developer building internal systems, automation and AI
+            tools for real-world use.
+          </h2>
 
-            <div className="heroNavigation" aria-label="Primary">
-              <button
-                onClick={() => scrollToSection("work")}
-                className="heroLink heroLinkPrimary"
-                aria-label="Scroll to work section"
-              >
-                Work ↓
-              </button>
-              <a href="mailto:me@patrikdinh.com" className="heroLink">
-                Email
-              </a>
-              <button
-                onClick={() => setCvOpen(true)}
-                className="heroLink"
-                type="button"
-                aria-haspopup="dialog"
-              >
-                CV
-              </button>
-              <a
-                href="https://github.com/iamthepk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="heroLink"
-              >
-                GitHub
-              </a>
-            </div>
+          <p className="heroDescription">
+            I build practical software for real workflows, with a strong focus on
+            security, testing and whether the final system can actually be trusted
+            in day-to-day use.
+          </p>
+
+          <div className="heroNavigation" aria-label="Primary">
+            <button
+              onClick={() => scrollToSection("work")}
+              className="heroLink heroLinkPrimary"
+              aria-label="Scroll to work section"
+            >
+              Work ↓
+            </button>
+            <a href="mailto:me@patrikdinh.com" className="heroLink">
+              Email
+            </a>
+            <button
+              onClick={() => setCvOpen(true)}
+              className="heroLink"
+              type="button"
+              aria-haspopup="dialog"
+            >
+              CV
+            </button>
+            <a
+              href="https://github.com/iamthepk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="heroLink"
+            >
+              GitHub
+            </a>
           </div>
         </div>
       </section>
