@@ -18,6 +18,11 @@
   width: 100%;
 }
 
+.cvRoot--modal {
+  zoom: 0.72;
+  transform-origin: top center;
+}
+
 .cvRoot--print {
   min-height: 100svh;
   padding: 1rem;
