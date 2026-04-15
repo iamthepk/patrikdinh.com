@@ -314,8 +314,8 @@
 }
 
 .cvProfileText {
-  font-size: 0.96rem;
-  line-height: 1.68;
+  font-size: 1.02rem;
+  line-height: 1.72;
   color: var(--cv-paper-text);
 }
 
@@ -339,7 +339,7 @@
 
 .cvProjectTitle,
 .cvExperienceCompany {
-  font-size: 1rem;
+  font-size: 1.04rem;
   font-weight: 700;
   line-height: 1.3;
   color: var(--cv-paper-text);
@@ -348,7 +348,7 @@
 .cvProjectSubtitle,
 .cvExperienceRole {
   margin-top: 0.18rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: var(--cv-paper-text);
 }
@@ -356,7 +356,7 @@
 .cvProjectStack,
 .cvExperiencePeriod {
   margin-top: 0.2rem;
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   line-height: 1.4;
   color: var(--cv-paper-muted);
 }
@@ -410,8 +410,8 @@
 }
 
 .cvExperienceBullets li {
-  font-size: 0.9rem;
-  line-height: 1.52;
+  font-size: 0.95rem;
+  line-height: 1.58;
   color: var(--cv-paper-text);
 }
 
