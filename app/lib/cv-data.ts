@@ -156,11 +156,16 @@ export const cvData: CvData = {
     },
     {
       school: "Independent study",
-      program:
-        "Programming, backend fundamentals, databases and cloud services (JavaScript / TypeScript)",
+      program: "Programming",
+      details: [
+        "Backend fundamentals",
+        "Databases",
+        "Cloud services",
+        "JavaScript / TypeScript",
+      ],
     },
     {
-      school: "Independent study",
+      school: "",
       program: "Accounting and tax studies",
       details: ["Financial accounting", "Payroll accounting"],
     },
