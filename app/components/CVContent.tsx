@@ -170,7 +170,6 @@ export default function CVContent({ mode = "modal" }: CVContentProps) {
 
         <article className="cvPaper cvPaperSecondary">
           <header className="cvPageHeader">
-            <p className="cvPageEyebrow">Page 2</p>
             <h2 className="cvPageTitle">Selected Project Work</h2>
             <p className="cvPageSubtitle">
               Technical project highlights that complement the main CV.
