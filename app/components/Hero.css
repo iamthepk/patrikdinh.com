@@ -5,12 +5,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 6rem;
+  padding-top: 5rem;
   padding-bottom: 2rem;
 }
 
 .heroContainer {
-  max-width: 76rem;
+  width: min(100%, 1180px);
+}
+
+.heroCopy {
+  max-width: 54rem;
+}
+
+.heroMeta {
+  max-width: 34rem;
+  margin-top: 2.25rem;
 }
 
 .heroEyebrow {
@@ -71,32 +80,32 @@
 
 /* Typography */
 .heroTitle {
-  font-size: clamp(3rem, 12vw, 8.2rem);
+  font-size: clamp(3rem, 8vw, 6.2rem);
   font-weight: 900;
   line-height: 0.94;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.05em;
   color: var(--text);
-  margin-bottom: 1.35rem;
+  margin-bottom: 1rem;
 }
 
 .heroSubtitle {
-  font-size: clamp(2.4rem, 8vw, 5.6rem);
+  font-size: clamp(2rem, 5.2vw, 4.3rem);
   font-weight: 900;
-  line-height: 0.96;
-  letter-spacing: -0.04em;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
   color: var(--text);
-  max-width: 14ch;
-  margin-bottom: 2.4rem;
+  max-width: 11.5ch;
+  margin-bottom: 0;
   text-wrap: balance;
 }
 
 .heroDescription {
-  font-size: clamp(1.1rem, 2.2vw, 1.75rem);
+  font-size: clamp(1.05rem, 1.55vw, 1.4rem);
   font-weight: 500;
-  line-height: 1.55;
-  color: color-mix(in srgb, var(--text) 86%, transparent);
-  max-width: 46rem;
-  margin-bottom: 3rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+  max-width: 34rem;
+  margin-bottom: 2rem;
   text-wrap: pretty;
 }
 
@@ -115,6 +124,26 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.9rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroContainer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.78fr);
+    align-items: end;
+    column-gap: clamp(3rem, 6vw, 7rem);
+  }
+
+  .heroMeta {
+    margin-top: 0;
+    padding-bottom: 0.55rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .heroContainer {
+    grid-template-columns: minmax(0, 1.45fr) minmax(360px, 0.72fr);
   }
 }
 
@@ -173,13 +202,16 @@
     font-size: 0.82rem;
   }
 
+  .heroMeta {
+    margin-top: 1.75rem;
+  }
+
   .heroSubtitle {
     max-width: 12ch;
-    margin-bottom: 1.8rem;
   }
 
   .heroDescription {
-    margin-bottom: 2.25rem;
+    margin-bottom: 1.6rem;
   }
 
   .heroNavigation {
