@@ -187,43 +187,83 @@
   }
 }
 
-.cvModalContent {
-  width: min(1100px, calc(100vw - 24px));
+.cvPreviewPanel {
+  width: min(1280px, calc(100vw - 24px));
   height: calc(100vh - 24px);
   max-height: none;
+  border-radius: 1.35rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 98%, var(--text) 1%) 0%, color-mix(in srgb, var(--bg) 94%, var(--text) 3%) 100%);
 }
 
-.cvModalTopBar {
+.cvPreviewTopBar {
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
-  padding: 0.95rem 1rem 0.85rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
-  background: color-mix(in srgb, var(--bg) 94%, var(--text) 2%);
+  padding: 1rem 1rem 0.85rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  background: color-mix(in srgb, var(--bg) 92%, var(--text) 2%);
 }
 
-.cvModalBody {
+.cvPreviewHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.cvPreviewMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cvPreviewEyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cvPreviewTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cvPreviewActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cvPreviewBody {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 0.85rem;
+  padding: 1rem;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 
-.cvModalInner {
+.cvPreviewCanvas {
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  padding: 0.25rem 0 1rem;
+}
+
+.cvPreviewInner {
   flex: 0 0 auto;
   display: flex;
   justify-content: center;
+  width: 100%;
   overflow: visible;
-}
-
-.cvModalToolbar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
 .cvActionButton {
@@ -257,25 +297,39 @@
   opacity: 1;
 }
 
-.cvModalClose {
+.cvPreviewClose {
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: 0.85rem;
+  border-radius: 999px;
 }
 
 @media (max-width: 767px) {
-  .cvModalContent {
+  .cvPreviewPanel {
     width: calc(100vw - 12px);
     height: calc(100vh - 12px);
     border-radius: 0.85rem;
   }
 
-  .cvModalTopBar {
+  .cvPreviewTopBar {
     align-items: flex-start;
     padding: 0.75rem;
   }
 
-  .cvModalBody {
+  .cvPreviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cvPreviewActions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .cvPreviewBody {
     padding: 0.75rem;
+  }
+
+  .cvPreviewCanvas {
+    padding-bottom: 0.4rem;
   }
 }

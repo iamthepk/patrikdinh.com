@@ -24,6 +24,10 @@ export default function Hero() {
     link.remove();
   };
 
+  const printCv = () => {
+    window.open("/cv/print", "_blank", "noopener,noreferrer");
+  };
+
   const scrollToSection = (id: string): void => {
     const element = document.getElementById(id);
     if (element) {
@@ -100,28 +104,39 @@ export default function Hero() {
         isOpen={cvOpen}
         onClose={() => setCvOpen(false)}
         ariaLabel="Curriculum Vitae"
-        closeLabel="Close CV"
-        panelClassName="cvModalContent"
-        bodyClassName="cvModalBody"
-        topBarClassName="cvModalTopBar"
-        closeButtonClassName="cvModalClose"
+        closeLabel="Close CV preview"
+        panelClassName="cvPreviewPanel"
+        bodyClassName="cvPreviewBody"
+        topBarClassName="cvPreviewTopBar"
+        closeButtonClassName="cvPreviewClose"
         topBarContent={
-          <div className="cvModalToolbar">
-            <button
-              className="cvActionButton cvActionButtonPrimary"
-              onClick={downloadCvPdf}
-              type="button"
-            >
-              Download PDF
-            </button>
-            <button className="cvActionButton" onClick={openCvPage} type="button">
-              Open full page
-            </button>
+          <div className="cvPreviewHeader">
+            <div className="cvPreviewMeta">
+              <p className="cvPreviewEyebrow">Document preview</p>
+              <p className="cvPreviewTitle">Curriculum Vitae</p>
+            </div>
+            <div className="cvPreviewActions">
+              <button className="cvActionButton" onClick={printCv} type="button">
+                Print
+              </button>
+              <button
+                className="cvActionButton cvActionButtonPrimary"
+                onClick={downloadCvPdf}
+                type="button"
+              >
+                Download PDF
+              </button>
+              <button className="cvActionButton" onClick={openCvPage} type="button">
+                Open full page
+              </button>
+            </div>
           </div>
         }
       >
-        <div className="cvModalInner">
-          <CVContent mode="modal" />
+        <div className="cvPreviewCanvas">
+          <div className="cvPreviewInner">
+            <CVContent mode="modal" />
+          </div>
         </div>
       </Modal>
     </>
