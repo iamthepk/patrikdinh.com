@@ -190,8 +190,8 @@ export function createCvPdf() {
 
   drawRect(pageOne, PAGE_MARGIN_X, PAGE_MARGIN_Y, CONTENT_WIDTH, HEADER_HEIGHT, [0.18, 0.22, 0.28]);
 
-  const nameFontSize = 28;
-  const titleFontSize = 12;
+  const nameFontSize = 30;
+  const titleFontSize = 11.4;
   const nameWidth = estimateTextWidth(cvData.basics.name.toUpperCase(), nameFontSize);
   const titleWidth = estimateTextWidth(cvData.basics.title, titleFontSize);
 
@@ -199,7 +199,7 @@ export function createCvPdf() {
     pageOne,
     cvData.basics.name.toUpperCase(),
     PAGE_MARGIN_X + (CONTENT_WIDTH - nameWidth) / 2,
-    PAGE_MARGIN_Y + 22,
+    PAGE_MARGIN_Y + 20,
     nameFontSize,
     "F2",
     [1, 1, 1]
@@ -208,7 +208,7 @@ export function createCvPdf() {
     pageOne,
     cvData.basics.title,
     PAGE_MARGIN_X + (CONTENT_WIDTH - titleWidth) / 2,
-    PAGE_MARGIN_Y + 58,
+    PAGE_MARGIN_Y + 56,
     titleFontSize,
     "F1",
     [0.9, 0.93, 0.97]
@@ -222,7 +222,7 @@ export function createCvPdf() {
   let mainY = bodyTop + 18;
 
   const writeSidebarHeading = (title: string) => {
-    drawText(pageOne, title.toUpperCase(), sidebarX + 10, sidebarY, 10.2, "F2", [0.12, 0.16, 0.22]);
+    drawText(pageOne, title.toUpperCase(), sidebarX + 10, sidebarY, 9.9, "F2", [0.12, 0.16, 0.22]);
     sidebarY += 12;
     drawLine(pageOne, sidebarX + 10, sidebarY, sidebarX + sidebarWidth - 10, [0.18, 0.22, 0.28], 1.2);
     sidebarY += 10;
@@ -250,7 +250,7 @@ export function createCvPdf() {
     }
 
     for (const item of items) {
-      sidebarY += drawWrappedText(pageOne, item, sidebarX + 10, sidebarY, width, 8.9, 12.6, "F1", [0.1, 0.13, 0.18]);
+      sidebarY += drawWrappedText(pageOne, item, sidebarX + 10, sidebarY, width, 8.75, 12.3, "F1", [0.1, 0.13, 0.18]);
       sidebarY += 2;
     }
   };
@@ -283,14 +283,14 @@ export function createCvPdf() {
   writeSidebarHeading("Education");
   for (const item of cvData.education) {
     if (item.school) {
-      drawText(pageOne, item.school, sidebarX + 10, sidebarY, 9.0, "F2", [0.1, 0.13, 0.18]);
+      drawText(pageOne, item.school, sidebarX + 10, sidebarY, 8.85, "F2", [0.1, 0.13, 0.18]);
       sidebarY += 12;
     }
-    drawText(pageOne, `- ${item.program}`, sidebarX + 10, sidebarY, 8.9, "F2", [0.1, 0.13, 0.18]);
+    drawText(pageOne, `- ${item.program}`, sidebarX + 10, sidebarY, 8.8, "F2", [0.1, 0.13, 0.18]);
     sidebarY += 12;
     if (item.details) {
       for (const detail of item.details) {
-        drawText(pageOne, `- ${detail}`, sidebarX + 18, sidebarY, 8.6, "F1", [0.1, 0.13, 0.18]);
+        drawText(pageOne, `- ${detail}`, sidebarX + 18, sidebarY, 8.45, "F1", [0.1, 0.13, 0.18]);
         sidebarY += 11;
       }
     }
@@ -298,37 +298,37 @@ export function createCvPdf() {
   }
 
   const writeMainHeading = (title: string) => {
-    drawText(pageOne, title.toUpperCase(), mainX, mainY, 10.2, "F2", [0.12, 0.16, 0.22]);
+    drawText(pageOne, title.toUpperCase(), mainX, mainY, 9.9, "F2", [0.12, 0.16, 0.22]);
     mainY += 12;
     drawLine(pageOne, mainX, mainY, PAGE_WIDTH - PAGE_MARGIN_X, [0.18, 0.22, 0.28], 1.2);
     mainY += 14;
   };
 
   writeMainHeading("Profile");
-  mainY += drawWrappedText(pageOne, cvData.profile, mainX, mainY, mainWidth, 11, 15.6, "F1", [0.1, 0.13, 0.18]);
+  mainY += drawWrappedText(pageOne, cvData.profile, mainX, mainY, mainWidth, 10.7, 15.1, "F1", [0.1, 0.13, 0.18]);
   mainY += 16;
 
   writeMainHeading("Experience");
   for (const item of cvData.experience) {
-    drawText(pageOne, item.company, mainX, mainY, 10.8, "F2", [0.1, 0.13, 0.18]);
-    drawText(pageOne, item.period, PAGE_WIDTH - PAGE_MARGIN_X - estimateTextWidth(item.period, 8.9), mainY + 1, 8.9, "F1", [0.36, 0.41, 0.47]);
+    drawText(pageOne, item.company, mainX, mainY, 10.6, "F2", [0.1, 0.13, 0.18]);
+    drawText(pageOne, item.period, PAGE_WIDTH - PAGE_MARGIN_X - estimateTextWidth(item.period, 8.6), mainY + 1, 8.6, "F1", [0.36, 0.41, 0.47]);
     mainY += 13;
-    drawText(pageOne, item.role, mainX, mainY, 9.8, "F1", [0.1, 0.13, 0.18]);
+    drawText(pageOne, item.role, mainX, mainY, 9.5, "F1", [0.1, 0.13, 0.18]);
     mainY += 14;
     for (const bullet of item.bullets) {
-      drawText(pageOne, "-", mainX, mainY, 9.2, "F1", [0.1, 0.13, 0.18]);
-      mainY += drawWrappedText(pageOne, bullet, mainX + 9, mainY, mainWidth - 9, 9.2, 12.8, "F1", [0.1, 0.13, 0.18]);
+      drawText(pageOne, "-", mainX, mainY, 9.0, "F1", [0.1, 0.13, 0.18]);
+      mainY += drawWrappedText(pageOne, bullet, mainX + 9, mainY, mainWidth - 9, 8.95, 12.4, "F1", [0.1, 0.13, 0.18]);
       mainY += 2;
     }
     mainY += 6;
   }
 
   let pageTwoY = PAGE_MARGIN_Y + 2;
-  drawText(pageTwo, "PAGE 2", PAGE_MARGIN_X, pageTwoY, 8.8, "F2", [0.36, 0.41, 0.47]);
+  drawText(pageTwo, "PAGE 2", PAGE_MARGIN_X, pageTwoY, 8.4, "F2", [0.36, 0.41, 0.47]);
   pageTwoY += 16;
-  drawText(pageTwo, "SELECTED PROJECT WORK", PAGE_MARGIN_X, pageTwoY, 17, "F2", [0.1, 0.13, 0.18]);
+  drawText(pageTwo, "SELECTED PROJECT WORK", PAGE_MARGIN_X, pageTwoY, 16.2, "F2", [0.1, 0.13, 0.18]);
   pageTwoY += 17;
-  drawWrappedText(pageTwo, "Technical project highlights that complement the main CV.", PAGE_MARGIN_X, pageTwoY, CONTENT_WIDTH, 10.2, 14, "F1", [0.36, 0.41, 0.47]);
+  drawWrappedText(pageTwo, "Technical project highlights that complement the main CV.", PAGE_MARGIN_X, pageTwoY, CONTENT_WIDTH, 9.9, 13.5, "F1", [0.36, 0.41, 0.47]);
   pageTwoY += 23;
 
   const cardGap = 12;
@@ -341,18 +341,18 @@ export function createCvPdf() {
     const cardX = PAGE_MARGIN_X + col * (cardWidth + cardGap);
     let cardY = rowY + 14;
 
-    const titleLines = wrapText(project.title, cardWidth - 24, 11.5);
-    const subtitleLines = project.subtitle ? wrapText(project.subtitle, cardWidth - 24, 9.6) : [];
+    const titleLines = wrapText(project.title, cardWidth - 24, 11.1);
+    const subtitleLines = project.subtitle ? wrapText(project.subtitle, cardWidth - 24, 9.2) : [];
     const stackText = project.stack?.join(" | ") ?? "";
-    const stackLines = stackText ? wrapText(stackText, cardWidth - 24, 8.6) : [];
-    const summaryLines = wrapText(project.summary, cardWidth - 24, 9.3);
+    const stackLines = stackText ? wrapText(stackText, cardWidth - 24, 8.3) : [];
+    const summaryLines = wrapText(project.summary, cardWidth - 24, 9.0);
 
     const cardHeight =
       16 +
-      titleLines.length * 15 +
-      (subtitleLines.length ? subtitleLines.length * 13 + 6 : 0) +
-      (stackLines.length ? stackLines.length * 12 + 6 : 0) +
-      summaryLines.length * 13.5 +
+      titleLines.length * 14.4 +
+      (subtitleLines.length ? subtitleLines.length * 12.4 + 6 : 0) +
+      (stackLines.length ? stackLines.length * 11.4 + 6 : 0) +
+      summaryLines.length * 12.8 +
       16;
 
     drawRect(pageTwo, cardX, rowY, cardWidth, cardHeight, [0.98, 0.98, 0.99]);
@@ -360,24 +360,24 @@ export function createCvPdf() {
     drawLine(pageTwo, cardX, rowY, cardX + cardWidth, [0.88, 0.9, 0.93], 0.8);
 
     titleLines.forEach((line, index) => {
-      drawText(pageTwo, line, cardX + 12, cardY + index * 15, 11.5, "F2", [0.1, 0.13, 0.18]);
+      drawText(pageTwo, line, cardX + 12, cardY + index * 14.4, 11.1, "F2", [0.1, 0.13, 0.18]);
     });
-    cardY += titleLines.length * 15 + 4;
+    cardY += titleLines.length * 14.4 + 4;
 
     subtitleLines.forEach((line, index) => {
-      drawText(pageTwo, line, cardX + 12, cardY + index * 13, 9.6, "F1", [0.1, 0.13, 0.18]);
+      drawText(pageTwo, line, cardX + 12, cardY + index * 12.4, 9.2, "F1", [0.1, 0.13, 0.18]);
     });
-    cardY += subtitleLines.length * 13;
+    cardY += subtitleLines.length * 12.4;
     if (subtitleLines.length) cardY += 5;
 
     stackLines.forEach((line, index) => {
-      drawText(pageTwo, line, cardX + 12, cardY + index * 12, 8.6, "F1", [0.36, 0.41, 0.47]);
+      drawText(pageTwo, line, cardX + 12, cardY + index * 11.4, 8.3, "F1", [0.36, 0.41, 0.47]);
     });
-    cardY += stackLines.length * 12;
+    cardY += stackLines.length * 11.4;
     if (stackLines.length) cardY += 6;
 
     summaryLines.forEach((line, index) => {
-      drawText(pageTwo, line, cardX + 12, cardY + index * 13.5, 9.3, "F1", [0.1, 0.13, 0.18]);
+      drawText(pageTwo, line, cardX + 12, cardY + index * 12.8, 9.0, "F1", [0.1, 0.13, 0.18]);
     });
 
     rowHeight = Math.max(rowHeight, cardHeight);
