@@ -24,10 +24,6 @@ export default function Hero() {
     link.remove();
   };
 
-  const printCv = () => {
-    window.open("/cv/print", "_blank", "noopener,noreferrer");
-  };
-
   const scrollToSection = (id: string): void => {
     const element = document.getElementById(id);
     if (element) {
@@ -116,9 +112,6 @@ export default function Hero() {
               <p className="cvPreviewTitle">Curriculum Vitae</p>
             </div>
             <div className="cvPreviewActions">
-              <button className="cvActionButton" onClick={printCv} type="button">
-                Print
-              </button>
               <button
                 className="cvActionButton cvActionButtonPrimary"
                 onClick={downloadCvPdf}
