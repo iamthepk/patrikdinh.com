@@ -115,22 +115,14 @@
 
 .cvSidebarHeading,
 .cvMainHeading {
-  margin-bottom: 0.7rem;
-  padding-bottom: 0.34rem;
+  margin-bottom: 0.82rem;
+  padding-bottom: 0.42rem;
   border-bottom: 2px solid var(--cv-paper-accent);
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-size: var(--cv-sidebar-heading-size);
+  font-weight: 900;
   line-height: 1.2;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--cv-paper-accent);
-}
-
-.cvSidebarHeading {
-  margin-bottom: 0.82rem;
-  padding-bottom: 0.42rem;
-  font-size: var(--cv-sidebar-heading-size);
-  font-weight: 900;
   color: #1f2937;
 }
 
