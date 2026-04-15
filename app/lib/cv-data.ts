@@ -52,7 +52,7 @@ export const cvData: CvData = {
   },
 
   profile:
-    "I build internal systems, workflow automation and AI-assisted tools for real business use. My background in finance and operations helps me design software around messy workflows, validation and the constraints of day-to-day production use.",
+    "I build internal systems, workflow automation and AI-assisted tools for real business use. My background in finance and operations helps me design software around messy workflows, validation and the constraints of day-to-day production use. I am most useful in environments where software needs to support real operations, reduce manual work and stay reliable once people start depending on it. I care about practical systems, clear logic and whether the final solution actually holds up in everyday use.",
 
   strengths: [
     "Internal systems for real operational workflows",
