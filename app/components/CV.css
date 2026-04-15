@@ -19,8 +19,7 @@
 }
 
 .cvRoot--modal {
-  zoom: 0.72;
-  transform-origin: top center;
+  width: 100%;
 }
 
 .cvRoot--print {
@@ -37,6 +36,13 @@
     linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
 }
 
+.cvPaperStack {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+  justify-items: center;
+}
+
 .cvPaper {
   width: min(100%, 960px);
   overflow: hidden;
@@ -44,6 +50,10 @@
   border-radius: 1.6rem;
   background: var(--cv-paper-bg);
   box-shadow: var(--cv-paper-shadow);
+}
+
+.cvPaperSecondary {
+  align-self: start;
 }
 
 .cvHero {
@@ -249,6 +259,47 @@
   margin-top: 1rem;
 }
 
+.cvPageHeader {
+  padding: 1.6rem 1.5rem 1.1rem;
+  border-bottom: 1px solid var(--cv-paper-border);
+  background: color-mix(in srgb, var(--cv-paper-bg) 94%, var(--cv-paper-sidebar) 6%);
+}
+
+.cvPageEyebrow {
+  margin-bottom: 0.28rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cv-paper-muted);
+}
+
+.cvPageTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--cv-paper-text);
+}
+
+.cvPageSubtitle {
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--cv-paper-muted);
+}
+
+.cvPageBody {
+  padding: 1.2rem 1.4rem 1.45rem;
+}
+
+.cvPageBodyProjects {
+  padding-top: 1.1rem;
+}
+
+.cvMainSectionProjectsOnly {
+  margin-top: 0;
+}
+
 .cvProfileText {
   font-size: 0.96rem;
   line-height: 1.68;
@@ -259,6 +310,10 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.68rem;
+}
+
+.cvProjectGridStandalone {
+  gap: 0.85rem;
 }
 
 .cvProjectCard {
