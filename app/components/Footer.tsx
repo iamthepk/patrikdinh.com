@@ -1,7 +1,8 @@
 "use client";
 
 import { MapPin } from "lucide-react";
-import { SiGithub, SiLinkedin } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa6";
+import { SiGithub } from "react-icons/si";
 
 export default function Footer() {
   return (
@@ -36,20 +37,28 @@ export default function Footer() {
                   style={{ color: "var(--text)" }}
                   aria-label="LinkedIn"
                 >
-                  <SiLinkedin className="w-5 h-5" />
+                  <FaLinkedinIn className="w-5 h-5" />
                 </a>
               </div>
             </div>
-            <div className="flex items-center gap-2 mt-2">
-              <MapPin
-                className="w-4 h-4 shrink-0"
-                style={{ color: "var(--text)" }}
-              />
+            <div className="flex flex-col gap-2 mt-2">
+              <div className="flex items-center gap-2">
+                <MapPin
+                  className="w-4 h-4 shrink-0"
+                  style={{ color: "var(--text)" }}
+                />
+                <p
+                  className="text-base font-medium"
+                  style={{ color: "var(--text)" }}
+                >
+                  Prague, Czech Republic
+                </p>
+              </div>
               <p
-                className="text-base font-medium"
-                style={{ color: "var(--text)" }}
+                className="text-sm md:text-base font-medium"
+                style={{ color: "var(--text-muted)" }}
               >
-                Prague, Czech Republic
+                Ready to work — open to full-time roles and selected freelance projects.
               </p>
             </div>
           </div>
