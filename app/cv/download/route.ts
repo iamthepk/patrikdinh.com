@@ -30,11 +30,12 @@ export async function GET() {
     const pdf = await page.pdf({
       format: "A4",
       printBackground: true,
+      scale: 0.94,
       margin: {
-        top: "10mm",
-        right: "10mm",
-        bottom: "10mm",
-        left: "10mm",
+        top: "6mm",
+        right: "6mm",
+        bottom: "6mm",
+        left: "6mm",
       },
       preferCSSPageSize: true,
     });
