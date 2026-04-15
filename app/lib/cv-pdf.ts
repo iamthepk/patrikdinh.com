@@ -4,10 +4,10 @@ export const CV_PDF_FILE_NAME = "CV - Patrik Dinh.pdf";
 
 const PAGE_WIDTH = 595.28;
 const PAGE_HEIGHT = 841.89;
-const PAGE_MARGIN_X = 42;
-const PAGE_MARGIN_Y = 42;
+const PAGE_MARGIN_X = 26;
+const PAGE_MARGIN_Y = 24;
 const CONTENT_WIDTH = PAGE_WIDTH - PAGE_MARGIN_X * 2;
-const HEADER_HEIGHT = 92;
+const HEADER_HEIGHT = 82;
 
 type FontKey = "F1" | "F2";
 
@@ -184,8 +184,8 @@ export function createCvPdf() {
   const pageTwo = pages[1];
 
   const sidebarX = PAGE_MARGIN_X;
-  const sidebarWidth = 164;
-  const mainX = PAGE_MARGIN_X + sidebarWidth + 24;
+  const sidebarWidth = 170;
+  const mainX = PAGE_MARGIN_X + sidebarWidth + 18;
   const mainWidth = PAGE_WIDTH - PAGE_MARGIN_X - mainX;
 
   drawRect(pageOne, PAGE_MARGIN_X, PAGE_MARGIN_Y, CONTENT_WIDTH, HEADER_HEIGHT, [0.18, 0.22, 0.28]);
@@ -214,7 +214,7 @@ export function createCvPdf() {
     [0.9, 0.93, 0.97]
   );
 
-  const bodyTop = PAGE_MARGIN_Y + HEADER_HEIGHT + 18;
+  const bodyTop = PAGE_MARGIN_Y + HEADER_HEIGHT + 14;
   drawRect(pageOne, sidebarX, bodyTop, sidebarWidth, PAGE_HEIGHT - PAGE_MARGIN_Y - bodyTop, [0.93, 0.95, 0.97]);
   drawLine(pageOne, sidebarX + sidebarWidth + 12, bodyTop, sidebarX + sidebarWidth + 12, [0.82, 0.85, 0.9], 1);
 
@@ -222,14 +222,14 @@ export function createCvPdf() {
   let mainY = bodyTop + 18;
 
   const writeSidebarHeading = (title: string) => {
-    drawText(pageOne, title.toUpperCase(), sidebarX + 12, sidebarY, 10.5, "F2", [0.12, 0.16, 0.22]);
-    sidebarY += 13;
-    drawLine(pageOne, sidebarX + 12, sidebarY, sidebarX + sidebarWidth - 12, [0.18, 0.22, 0.28], 1.2);
+    drawText(pageOne, title.toUpperCase(), sidebarX + 10, sidebarY, 10.2, "F2", [0.12, 0.16, 0.22]);
     sidebarY += 12;
+    drawLine(pageOne, sidebarX + 10, sidebarY, sidebarX + sidebarWidth - 10, [0.18, 0.22, 0.28], 1.2);
+    sidebarY += 10;
   };
 
   const writeSidebarList = (items: string[], compact = false) => {
-    const width = sidebarWidth - 24;
+    const width = sidebarWidth - 20;
     if (compact) {
       let line = "";
       for (const item of items) {
@@ -237,21 +237,21 @@ export function createCvPdf() {
         if (estimateTextWidth(candidate, 8.3) <= width) {
           line = candidate;
         } else {
-          drawText(pageOne, line, sidebarX + 12, sidebarY, 8.3, "F1", [0.1, 0.13, 0.18]);
-          sidebarY += 12;
+          drawText(pageOne, line, sidebarX + 10, sidebarY, 8.1, "F1", [0.1, 0.13, 0.18]);
+          sidebarY += 11;
           line = item;
         }
       }
       if (line) {
-        drawText(pageOne, line, sidebarX + 12, sidebarY, 8.3, "F1", [0.1, 0.13, 0.18]);
-        sidebarY += 14;
+        drawText(pageOne, line, sidebarX + 10, sidebarY, 8.1, "F1", [0.1, 0.13, 0.18]);
+        sidebarY += 12;
       }
       return;
     }
 
     for (const item of items) {
-      sidebarY += drawWrappedText(pageOne, item, sidebarX + 12, sidebarY, width, 9.1, 13.5, "F1", [0.1, 0.13, 0.18]);
-      sidebarY += 3;
+      sidebarY += drawWrappedText(pageOne, item, sidebarX + 10, sidebarY, width, 8.9, 12.6, "F1", [0.1, 0.13, 0.18]);
+      sidebarY += 2;
     }
   };
 
@@ -283,55 +283,55 @@ export function createCvPdf() {
   writeSidebarHeading("Education");
   for (const item of cvData.education) {
     if (item.school) {
-      drawText(pageOne, item.school, sidebarX + 12, sidebarY, 9.2, "F2", [0.1, 0.13, 0.18]);
-      sidebarY += 13;
+      drawText(pageOne, item.school, sidebarX + 10, sidebarY, 9.0, "F2", [0.1, 0.13, 0.18]);
+      sidebarY += 12;
     }
-    drawText(pageOne, `• ${item.program}`, sidebarX + 12, sidebarY, 9.1, "F2", [0.1, 0.13, 0.18]);
-    sidebarY += 13;
+    drawText(pageOne, `• ${item.program}`, sidebarX + 10, sidebarY, 8.9, "F2", [0.1, 0.13, 0.18]);
+    sidebarY += 12;
     if (item.details) {
       for (const detail of item.details) {
-        drawText(pageOne, `• ${detail}`, sidebarX + 22, sidebarY, 8.8, "F1", [0.1, 0.13, 0.18]);
-        sidebarY += 12;
+        drawText(pageOne, `• ${detail}`, sidebarX + 18, sidebarY, 8.6, "F1", [0.1, 0.13, 0.18]);
+        sidebarY += 11;
       }
     }
     sidebarY += 5;
   }
 
   const writeMainHeading = (title: string) => {
-    drawText(pageOne, title.toUpperCase(), mainX, mainY, 10.5, "F2", [0.12, 0.16, 0.22]);
-    mainY += 13;
+    drawText(pageOne, title.toUpperCase(), mainX, mainY, 10.2, "F2", [0.12, 0.16, 0.22]);
+    mainY += 12;
     drawLine(pageOne, mainX, mainY, PAGE_WIDTH - PAGE_MARGIN_X, [0.18, 0.22, 0.28], 1.2);
     mainY += 14;
   };
 
   writeMainHeading("Profile");
-  mainY += drawWrappedText(pageOne, cvData.profile, mainX, mainY, mainWidth, 11.2, 16.5, "F1", [0.1, 0.13, 0.18]);
-  mainY += 20;
+  mainY += drawWrappedText(pageOne, cvData.profile, mainX, mainY, mainWidth, 11, 15.6, "F1", [0.1, 0.13, 0.18]);
+  mainY += 16;
 
   writeMainHeading("Experience");
   for (const item of cvData.experience) {
-    drawText(pageOne, item.company, mainX, mainY, 11.2, "F2", [0.1, 0.13, 0.18]);
-    drawText(pageOne, item.period, PAGE_WIDTH - PAGE_MARGIN_X - estimateTextWidth(item.period, 9.2), mainY + 1, 9.2, "F1", [0.36, 0.41, 0.47]);
+    drawText(pageOne, item.company, mainX, mainY, 10.8, "F2", [0.1, 0.13, 0.18]);
+    drawText(pageOne, item.period, PAGE_WIDTH - PAGE_MARGIN_X - estimateTextWidth(item.period, 8.9), mainY + 1, 8.9, "F1", [0.36, 0.41, 0.47]);
+    mainY += 13;
+    drawText(pageOne, item.role, mainX, mainY, 9.8, "F1", [0.1, 0.13, 0.18]);
     mainY += 14;
-    drawText(pageOne, item.role, mainX, mainY, 10.2, "F1", [0.1, 0.13, 0.18]);
-    mainY += 16;
     for (const bullet of item.bullets) {
-      drawText(pageOne, "•", mainX, mainY, 9.6, "F1", [0.1, 0.13, 0.18]);
-      mainY += drawWrappedText(pageOne, bullet, mainX + 10, mainY, mainWidth - 10, 9.6, 13.8, "F1", [0.1, 0.13, 0.18]);
-      mainY += 3;
+      drawText(pageOne, "•", mainX, mainY, 9.2, "F1", [0.1, 0.13, 0.18]);
+      mainY += drawWrappedText(pageOne, bullet, mainX + 9, mainY, mainWidth - 9, 9.2, 12.8, "F1", [0.1, 0.13, 0.18]);
+      mainY += 2;
     }
-    mainY += 8;
+    mainY += 6;
   }
 
-  let pageTwoY = PAGE_MARGIN_Y;
+  let pageTwoY = PAGE_MARGIN_Y + 2;
   drawText(pageTwo, "PAGE 2", PAGE_MARGIN_X, pageTwoY, 8.8, "F2", [0.36, 0.41, 0.47]);
   pageTwoY += 16;
-  drawText(pageTwo, "SELECTED PROJECT WORK", PAGE_MARGIN_X, pageTwoY, 18, "F2", [0.1, 0.13, 0.18]);
-  pageTwoY += 18;
-  drawWrappedText(pageTwo, "Technical project highlights that complement the main CV.", PAGE_MARGIN_X, pageTwoY, CONTENT_WIDTH, 10.5, 14.5, "F1", [0.36, 0.41, 0.47]);
-  pageTwoY += 26;
+  drawText(pageTwo, "SELECTED PROJECT WORK", PAGE_MARGIN_X, pageTwoY, 17, "F2", [0.1, 0.13, 0.18]);
+  pageTwoY += 17;
+  drawWrappedText(pageTwo, "Technical project highlights that complement the main CV.", PAGE_MARGIN_X, pageTwoY, CONTENT_WIDTH, 10.2, 14, "F1", [0.36, 0.41, 0.47]);
+  pageTwoY += 23;
 
-  const cardGap = 14;
+  const cardGap = 12;
   const cardWidth = (CONTENT_WIDTH - cardGap) / 2;
   let col = 0;
   let rowY = pageTwoY;
@@ -383,7 +383,7 @@ export function createCvPdf() {
     rowHeight = Math.max(rowHeight, cardHeight);
 
     if (col === 1) {
-      rowY += rowHeight + 14;
+      rowY += rowHeight + 12;
       rowHeight = 0;
       col = 0;
     } else {
