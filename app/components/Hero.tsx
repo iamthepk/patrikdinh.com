@@ -56,8 +56,7 @@ export default function Hero() {
 
           <h1 className="heroTitle">Patrik Dinh</h1>
           <h2 className="heroSubtitle">
-            Full-stack developer building internal systems, automation and AI
-            tools for real-world use.
+            Building internal systems, automation and AI tools.
           </h2>
 
           <p className="heroDescription">

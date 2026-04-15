@@ -97,8 +97,7 @@ export default function OpenGraphImage() {
                 maxWidth: 900,
               }}
             >
-              Full-stack developer building internal systems, automation and AI
-              tools for real-world use.
+              Building internal systems, automation and AI tools.
             </div>
 
             <div
