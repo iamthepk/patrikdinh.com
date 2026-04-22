@@ -1,0 +1,119 @@
+.printAgentPreviewModalContent {
+  width: min(92vw, 1280px);
+  background: transparent;
+  box-shadow: none;
+}
+
+.printAgentPreviewModalBody {
+  padding: 0 0 1rem;
+}
+
+.printAgentPreviewModalClose {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.printAgentPreviewViewport {
+  position: relative;
+  width: min(90vw, 1180px);
+  height: min(82vh, 720px);
+  margin: 0 auto;
+  overflow: auto;
+  border-radius: 1rem;
+}
+
+.printAgentPreviewImageButton {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+}
+
+.printAgentPreviewImageButtonZoomed {
+  cursor: zoom-out;
+}
+
+.printAgentPreviewCanvas {
+  position: relative;
+  width: min(90vw, 1120px);
+  height: min(76vh, 680px);
+  transition: transform 200ms ease;
+  transform-origin: center center;
+}
+
+.printAgentPreviewCanvasZoomed {
+  transform: scale(1.8);
+}
+
+.printAgentPreviewImage {
+  object-fit: contain;
+  user-select: none;
+}
+
+.printAgentPreviewToolbar {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1;
+}
+
+.printAgentPreviewZoomButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  backdrop-filter: blur(10px);
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.printAgentPreviewZoomButtonDark {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.printAgentPreviewZoomButtonDark:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.printAgentPreviewZoomButtonLight {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #111827;
+}
+
+.printAgentPreviewZoomButtonLight:hover {
+  background: rgba(0, 0, 0, 0.16);
+}
+
+@media (max-width: 767px) {
+  .printAgentPreviewModalContent {
+    width: calc(100vw - 12px);
+  }
+
+  .printAgentPreviewModalBody {
+    padding: 0 0 0.75rem;
+  }
+
+  .printAgentPreviewViewport {
+    width: calc(100vw - 24px);
+    height: min(78vh, 540px);
+  }
+
+  .printAgentPreviewCanvas {
+    width: calc(100vw - 32px);
+    height: min(72vh, 500px);
+  }
+}

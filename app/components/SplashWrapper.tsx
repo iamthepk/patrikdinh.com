@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import SplashScreen from "./SplashScreen";
 
 export default function SplashWrapper({
@@ -9,6 +10,7 @@ export default function SplashWrapper({
   children: React.ReactNode;
 }) {
   const [showSplash, setShowSplash] = useState(true);
+  const pathname = usePathname();
 
   const handleSplashComplete = () => {
     setShowSplash(false);
@@ -16,7 +18,9 @@ export default function SplashWrapper({
 
   return (
     <>
-      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+      {pathname === "/" && showSplash && (
+        <SplashScreen onComplete={handleSplashComplete} />
+      )}
       {children}
     </>
   );

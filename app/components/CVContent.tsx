@@ -1,14 +1,20 @@
+"use client";
+
 import { cvData } from "../lib/cv-data";
 import "./CV.css";
 
 type CVContentProps = {
   mode?: "modal" | "page" | "print";
+  onProjectSelect?: (projectId: string) => void;
 };
 
 const formatDisplayUrl = (url: string) =>
   url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
-export default function CVContent({ mode = "modal" }: CVContentProps) {
+export default function CVContent({
+  mode = "modal",
+  onProjectSelect,
+}: CVContentProps) {
   const contactItems = [
     {
       label: "Email",
@@ -179,18 +185,35 @@ export default function CVContent({ mode = "modal" }: CVContentProps) {
           <div className="cvPageBody cvPageBodyProjects">
             <section className="cvMainSection cvMainSectionProjectsOnly">
               <div className="cvProjectGrid cvProjectGridStandalone">
-                {cvData.projects.map((project) => (
-                  <article key={project.title} className="cvProjectCard">
-                    <h3 className="cvProjectTitle">{project.title}</h3>
-                    {project.subtitle && (
-                      <p className="cvProjectSubtitle">{project.subtitle}</p>
-                    )}
-                    {project.stack && project.stack.length > 0 && (
-                      <p className="cvProjectStack">{project.stack.join(" · ")}</p>
-                    )}
-                    <p className="cvProjectSummary">{project.summary}</p>
-                  </article>
-                ))}
+                {cvData.projects.map((project) => {
+                  const projectContent = (
+                    <>
+                      <h3 className="cvProjectTitle">{project.title}</h3>
+                      {project.subtitle && (
+                        <p className="cvProjectSubtitle">{project.subtitle}</p>
+                      )}
+                      {project.stack && project.stack.length > 0 && (
+                        <p className="cvProjectStack">{project.stack.join(" · ")}</p>
+                      )}
+                      <p className="cvProjectSummary">{project.summary}</p>
+                    </>
+                  );
+
+                  return onProjectSelect ? (
+                    <button
+                      key={project.title}
+                      type="button"
+                      className="cvProjectCard cvProjectCardButton"
+                      onClick={() => onProjectSelect(project.projectId)}
+                    >
+                      {projectContent}
+                    </button>
+                  ) : (
+                    <article key={project.title} className="cvProjectCard">
+                      {projectContent}
+                    </article>
+                  );
+                })}
               </div>
             </section>
           </div>

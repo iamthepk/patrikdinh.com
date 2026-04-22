@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "../lib/theme-provider";
-import { Sun, Moon } from "lucide-react";
+import { Download, Mail, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import CVContent from "./CVContent";
 import Modal from "./Modal";
@@ -11,10 +11,6 @@ export default function Hero() {
   const { theme, toggleTheme } = useTheme();
   const [cvOpen, setCvOpen] = useState(false);
 
-  const openCvPage = () => {
-    window.open("/cv", "_blank", "noopener,noreferrer");
-  };
-
   const downloadCvPdf = () => {
     const link = document.createElement("a");
     link.href = "/cv/download";
@@ -22,6 +18,18 @@ export default function Hero() {
     document.body.appendChild(link);
     link.click();
     link.remove();
+  };
+
+  const scrollToProject = (projectId: string) => {
+    setCvOpen(false);
+
+    window.setTimeout(() => {
+      const projectElement = document.getElementById(`project-${projectId}`);
+      projectElement?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 120);
   };
 
   const scrollToSection = (id: string): void => {
@@ -106,29 +114,30 @@ export default function Hero() {
         topBarClassName="cvPreviewTopBar"
         closeButtonClassName="cvPreviewClose"
         topBarContent={
-          <div className="cvPreviewHeader">
-            <div className="cvPreviewMeta">
-              <p className="cvPreviewEyebrow">Document preview</p>
-              <p className="cvPreviewTitle">Curriculum Vitae</p>
-            </div>
-            <div className="cvPreviewActions">
-              <button
-                className="cvActionButton cvActionButtonPrimary"
-                onClick={downloadCvPdf}
-                type="button"
-              >
-                Download PDF
-              </button>
-              <button className="cvActionButton" onClick={openCvPage} type="button">
-                Open full page
-              </button>
-            </div>
+          <div className="cvPreviewActions">
+            <button
+              className="cvActionButton cvActionButtonPrimary uiTooltip uiTooltipLeft"
+              onClick={downloadCvPdf}
+              type="button"
+              aria-label="Download CV PDF"
+              data-tooltip="Download PDF"
+            >
+              <Download className="cvActionIcon" aria-hidden="true" />
+            </button>
+            <a
+              className="cvActionButton uiTooltip uiTooltipLeft"
+              href="mailto:me@patrikdinh.com"
+              aria-label="Email Patrik"
+              data-tooltip="Email me"
+            >
+              <Mail className="cvActionIcon" aria-hidden="true" />
+            </a>
           </div>
         }
       >
         <div className="cvPreviewCanvas">
           <div className="cvPreviewInner">
-            <CVContent mode="modal" />
+            <CVContent mode="modal" onProjectSelect={scrollToProject} />
           </div>
         </div>
       </Modal>

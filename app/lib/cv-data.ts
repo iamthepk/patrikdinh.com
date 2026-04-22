@@ -1,4 +1,5 @@
 export type CvProject = {
+  projectId: string;
   title: string;
   subtitle?: string;
   stack?: string[];
@@ -77,6 +78,7 @@ export const cvData: CvData = {
 
   projects: [
     {
+      projectId: "lootea-pos",
       title: "Lootea Operations System",
       subtitle: "Production system built around real daily cafe operations.",
       stack: ["React", "TypeScript", "PostgreSQL", "Supabase"],
@@ -84,13 +86,15 @@ export const cvData: CvData = {
         "Built and evolved a production system combining POS, local printing, stock, recipes, reporting, shifts, invoices and back-office workflows into one platform used in daily operation.",
     },
     {
-      title: "Invoice AI Extractor",
-      subtitle: "AI-assisted invoice extraction for structured accounting workflows.",
-      stack: ["Next.js", "TypeScript", "Gemini API"],
+      projectId: "print-agent",
+      title: "Print Agent",
+      subtitle: "Local integration layer connecting a cloud POS with physical printers.",
+      stack: ["Node.js", "Express"],
       summary:
-        "Built a tool that converts invoice PDFs into validated JSON with correction logic for VAT, dates and accounting fields, designed for downstream ERP use rather than demo output.",
+        "Built a local desktop service that handles receipt and label printing without browser dialogs or manual steps, bridging cloud POS workflows with in-store hardware.",
     },
     {
+      projectId: "voucher-generator",
       title: "Voucher Generator",
       subtitle: "Batch PDF voucher generation with precision and production safeguards.",
       stack: ["Next.js", "TypeScript", "Supabase", "PDFKit"],
@@ -98,18 +102,19 @@ export const cvData: CvData = {
         "Built a voucher generation tool with live preview, sequential logic and separate DEMO and PROD modes, designed for reliable campaign workflows and print accuracy.",
     },
     {
-      title: "Print Agent",
-      subtitle: "Local integration layer connecting a cloud POS with physical printers.",
-      stack: ["Node.js", "Express"],
+      projectId: "invoice-ai",
+      title: "Invoice AI Extractor",
+      subtitle: "AI-assisted invoice extraction for structured accounting workflows.",
+      stack: ["Next.js", "TypeScript", "Gemini API"],
       summary:
-        "Built a local desktop service that handles receipt and label printing without browser dialogs or manual steps, bridging cloud POS workflows with in-store hardware.",
+        "Built a tool that converts invoice PDFs into validated JSON with correction logic for VAT, dates and accounting fields, designed for downstream ERP use rather than demo output.",
     },
   ],
 
   experience: [
     {
       company: "We Are Lootea s. r. o.",
-      role: "Finance & Operations",
+      role: "Co-Founder / Finance & Operations",
       period: "2021 - Present",
       bullets: [
         "Work in a live business environment where software, reporting and operational correctness have direct day-to-day impact.",

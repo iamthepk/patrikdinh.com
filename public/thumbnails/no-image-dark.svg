@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1243 698" fill="none">
+  <rect width="1243" height="698" rx="28" fill="#101010" />
+  <rect x="49.5" y="49.5" width="1144" height="599" rx="24" stroke="#3f3f46" stroke-dasharray="12 12" />
+  <rect x="522" y="211" width="199" height="145" rx="9" fill="#9ca3af" />
+  <rect x="541" y="232" width="161" height="104" rx="2" fill="#e5e7eb" />
+  <circle cx="574" cy="264" r="17" fill="#b8bec7" />
+  <path d="M555 319L596 278L629 310L663 266L691 319H555Z" fill="#aeb4bd" />
+  <text x="621.5" y="476" fill="#fafafa" font-family="Arial, sans-serif" font-size="34" font-weight="700" text-anchor="middle">Preview not available</text>
+  <text x="621.5" y="522" fill="#a1a1aa" font-family="Arial, sans-serif" font-size="22" text-anchor="middle">Private internal system. Public screenshot pending.</text>
+</svg>

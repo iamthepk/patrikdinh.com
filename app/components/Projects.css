@@ -25,6 +25,7 @@
 .projectContainer {
   padding-top: 4rem;
   padding-bottom: 6rem;
+  scroll-margin-top: 3rem;
 }
 
 /* FULL-WIDTH GRID */
@@ -91,6 +92,18 @@
   aspect-ratio: 1243/698; /* necháváme originální poměr */
 }
 
+.thumbnailButton {
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.thumbnailButton:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+}
+
 .thumbnailImageWrapper {
   position: absolute;
   inset: 0;
@@ -107,12 +120,27 @@
   will-change: transform;
 }
 
-.thumbnailContainer:hover .thumbnailImage {
+.thumbnailContainer:not(.thumbnailContainerPlaceholder):hover .thumbnailImage {
   transform: scale(1.05);
 }
 
 .thumbnailImageDark {
   filter: brightness(1.15);
+}
+
+.thumbnailContainerPlaceholder {
+  cursor: default;
+}
+
+.thumbnailImageWrapperPlaceholder {
+  inset: clamp(0.5rem, 1.25vw, 0.9rem);
+  overflow: hidden;
+  border-radius: 1.25rem;
+}
+
+.thumbnailImagePlaceholder {
+  object-position: center center;
+  transform: none !important;
 }
 
 /* Gradient overlay */
@@ -279,6 +307,7 @@
 }
 
 .techIconWrapper {
+  display: block;
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;
@@ -296,28 +325,6 @@
     width: 1.75rem;
     height: 1.75rem;
   }
-}
-
-.techIconTooltip {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 0.25rem;
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 10;
-  color: var(--text);
-}
-
-.techIcon:hover .techIconTooltip {
-  opacity: 1;
 }
 
 .techIconText {
@@ -359,28 +366,6 @@
   transform: scale(1.1);
 }
 
-/* Modal */
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 1rem;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.modalContent {
-  position: relative;
-  max-width: 80rem;
-  max-height: 90vh;
-  width: 100%;
-  height: 100%;
-}
-
 .modalImage {
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
@@ -388,60 +373,38 @@
   image-rendering: high-quality;
 }
 
-.modalClose {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: white;
-  font-size: 2.25rem;
-  font-weight: 700;
-  transition: opacity 0.15s;
-  background: none;
-  border: none;
-  cursor: pointer;
+.projectImageModalContent {
+  width: min(80rem, calc(100vw - 32px));
+  background: transparent;
+  box-shadow: none;
 }
 
-.modalClose:hover {
-  opacity: 0.7;
+.projectImageModalBody {
+  padding: 0 0 1rem;
+}
+
+.projectImageFrame {
+  position: relative;
+  width: min(80rem, 100%);
+  aspect-ratio: 16 / 9;
+  min-height: 20rem;
+}
+
+.projectImageModalClose {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(15, 23, 42, 0.55);
 }
 
 /* Case Study Modal */
-.caseStudyModal {
-  align-items: flex-start;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .caseStudyModalContent {
   max-width: 70rem;
-  max-height: 90vh;
-  height: auto;
-  overflow-y: auto;
-  padding: 3rem;
-  background: var(--bg);
-  border-radius: 0.5rem;
-  position: relative;
-  cursor: default;
+}
+
+.caseStudyModalBody {
+  padding: 0 3rem 3rem;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-}
-
-.caseStudyModalContent .modalClose {
-  position: sticky;
-  top: 0;
-  right: 0;
-  float: right;
-  margin-bottom: 1rem;
-  z-index: 10;
-  background: var(--bg);
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  color: var(--text);
-  opacity: 0.8;
-}
-
-.caseStudyModalContent .modalClose:hover {
-  opacity: 1;
 }
 
 .caseStudy {
@@ -512,4 +475,22 @@
 .caseStudyContent strong,
 .caseStudyBullets li strong {
   font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .projectImageModalContent {
+    width: calc(100vw - 12px);
+  }
+
+  .projectImageModalBody {
+    padding: 0 0 0.75rem;
+  }
+
+  .projectImageFrame {
+    min-height: 14rem;
+  }
+
+  .caseStudyModalBody {
+    padding: 0 1.5rem 1.5rem;
+  }
 }

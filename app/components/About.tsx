@@ -197,9 +197,9 @@ export default function About() {
                   >
                     {IconComponent ? (
                       <div
-                        className="w-8 h-8 md:w-10 md:h-10 cursor-pointer"
+                        className="w-8 h-8 md:w-10 md:h-10 cursor-pointer uiTooltip uiTooltipTop"
                         style={{ color: "var(--text)" }}
-                        title={tech}
+                        data-tooltip={tech}
                         role="img"
                         aria-label={tech}
                       >
@@ -207,14 +207,6 @@ export default function About() {
                           className="w-full h-full"
                           style={{ color: "inherit" }}
                         />
-                        <span
-                          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 text-sm font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10"
-                          style={{
-                            color: "var(--text)",
-                          }}
-                        >
-                          {tech}
-                        </span>
                       </div>
                     ) : (
                       <span

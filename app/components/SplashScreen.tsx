@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const firstName = "PATRIK";
 const lastName = "DINH";
@@ -29,28 +29,6 @@ export default function SplashScreen({
   onComplete: () => void;
 }) {
   const [phase, setPhase] = useState<Phase>("enter");
-
-  // theme sync
-  useLayoutEffect(() => {
-    // Nejprve zkontroluj URL parametr
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlTheme = urlParams.get("theme") as "dark" | "light" | null;
-
-    let theme: "dark" | "light" | null;
-    if (urlTheme === "dark" || urlTheme === "light") {
-      theme = urlTheme;
-      // Aktualizuj localStorage podle URL parametru
-      localStorage.setItem("theme", theme);
-    } else {
-      theme = localStorage.getItem("theme") as "dark" | "light" | null;
-    }
-
-    if (theme) {
-      document.documentElement.classList.toggle("dark", theme === "dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
 
   // po „dopsání“ jména chvíli podržet a pak spustit exit
   useEffect(() => {

@@ -69,6 +69,61 @@ button:hover {
   opacity: 0.5;
 }
 
+.uiTooltip {
+  position: relative;
+}
+
+.uiTooltip::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  z-index: 30;
+  width: max-content;
+  max-width: 12rem;
+  padding: 0.25rem 0.75rem;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 140ms,
+    transform 140ms;
+}
+
+.uiTooltip::after {
+  display: none;
+}
+
+.uiTooltip:hover::before,
+.uiTooltip:focus-visible::before {
+  opacity: 1;
+}
+
+.uiTooltipLeft::before {
+  top: 50%;
+  right: calc(100% + 0.7rem);
+  transform: translate(0.25rem, -50%);
+}
+
+.uiTooltipLeft:hover::before,
+.uiTooltipLeft:focus-visible::before {
+  transform: translate(0, -50%);
+}
+
+.uiTooltipTop::before {
+  bottom: calc(100% + 0.7rem);
+  left: 50%;
+  transform: translate(-50%, 0.25rem);
+}
+
+.uiTooltipTop:hover::before,
+.uiTooltipTop:focus-visible::before {
+  transform: translate(-50%, 0);
+}
+
 .section-padding {
   padding-left: 24px;
   padding-right: 24px;
