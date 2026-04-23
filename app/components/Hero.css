@@ -167,6 +167,12 @@
     linear-gradient(180deg, color-mix(in srgb, var(--bg) 98%, var(--text) 1%) 0%, color-mix(in srgb, var(--bg) 94%, var(--text) 3%) 100%);
 }
 
+@media (min-width: 1400px) {
+  .cvPreviewPanel {
+    width: min(1900px, calc(100vw - 24px));
+  }
+}
+
 :root.dark .cvPreviewPanel {
   border-color: transparent;
   background: #000000;
@@ -232,6 +238,38 @@
   width: min(100%, 960px);
   max-width: 100%;
   border-radius: 1.15rem;
+}
+
+@media (min-width: 1400px) {
+  .cvPreviewInner {
+    width: auto;
+    max-width: none;
+    zoom: 0.68;
+  }
+
+  .cvPreviewInner .cvRoot--modal .cvPaperStack {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: auto;
+  }
+
+  .cvPreviewInner .cvRoot--modal .cvPaper {
+    width: 960px;
+    max-width: none;
+  }
+}
+
+@media (min-width: 1600px) {
+  .cvPreviewInner {
+    zoom: 0.8;
+  }
+}
+
+@media (min-width: 1900px) {
+  .cvPreviewInner {
+    zoom: 0.89;
+  }
 }
 
 .cvActionButton {
