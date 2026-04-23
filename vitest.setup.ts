@@ -81,7 +81,10 @@ vi.mock("framer-motion", () => {
     }
   );
 
-  return { motion };
+  return {
+    motion,
+    useReducedMotion: () => false,
+  };
 });
 
 if (!window.matchMedia) {

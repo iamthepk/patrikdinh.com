@@ -1,14 +1,13 @@
 "use client";
 
-import { useTheme } from "../lib/theme-provider";
-import { Download, Mail, Moon, Sun } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 import { useState } from "react";
 import CVContent from "./CVContent";
 import Modal from "./Modal";
+import ThemeToggle from "./ThemeToggle";
 import "./Hero.css";
 
 export default function Hero() {
-  const { theme, toggleTheme } = useTheme();
   const [cvOpen, setCvOpen] = useState(false);
 
   const downloadCvPdf = () => {
@@ -42,19 +41,7 @@ export default function Hero() {
   return (
     <>
       <section className="heroSection section-padding">
-        <button
-          onClick={toggleTheme}
-          className="themeToggle"
-          aria-label="Toggle theme"
-          aria-pressed={theme === "light"}
-          type="button"
-        >
-          {theme === "dark" ? (
-            <Sun className="themeToggleIcon" />
-          ) : (
-            <Moon className="themeToggleIcon" />
-          )}
-        </button>
+        <ThemeToggle />
 
         <div className="heroContainer">
           <div className="heroEyebrow">

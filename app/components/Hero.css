@@ -33,42 +33,6 @@
   box-shadow: 0 0 18px rgba(123, 241, 168, 0.55);
 }
 
-/* Theme Toggle Button */
-.themeToggle {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  z-index: 80;
-  width: 2.75rem;
-  height: 2.75rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  transition:
-    opacity 150ms,
-    background-color 150ms,
-    border-color 150ms,
-    transform 150ms;
-  color: var(--text);
-  background: color-mix(in srgb, var(--bg) 90%, var(--text) 4%);
-  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
-  border-radius: 999px;
-  cursor: pointer;
-  backdrop-filter: blur(12px);
-}
-
-.themeToggle:hover {
-  opacity: 1;
-  transform: translateY(-1px);
-  background: color-mix(in srgb, var(--bg) 82%, var(--text) 7%);
-}
-
-.themeToggleIcon {
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
 /* Typography */
 .heroTitle {
   font-size: clamp(3rem, 12vw, 8.2rem);
@@ -161,11 +125,6 @@
   .heroSection {
     padding-top: 7rem;
     padding-bottom: 2rem;
-  }
-
-  .themeToggle {
-    top: 1.25rem;
-    right: 1.25rem;
   }
 
   .heroEyebrow {
