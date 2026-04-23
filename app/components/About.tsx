@@ -44,7 +44,7 @@ const iconItem = {
 export default function About() {
   return (
     <section className="section-padding section-spacing">
-      <div className="max-w-[1300px] mx-auto px-6">
+      <div className="content-shell">
         <motion.h2
           className="text-5xl md:text-6xl font-black tracking-tight heading-spacing"
           style={{ color: "var(--text)" }}

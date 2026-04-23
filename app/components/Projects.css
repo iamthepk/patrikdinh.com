@@ -32,7 +32,7 @@
 .projectContent {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: clamp(2rem, 4vw, 4rem);
   overflow: visible;
   align-items: start;
 }
@@ -77,6 +77,7 @@
 /* Screenshot container */
 .thumbnailWrapper {
   width: 100%;
+  min-width: 0;
   overflow: visible;
   display: flex;
   align-items: flex-start;
@@ -478,6 +479,16 @@
 }
 
 @media (max-width: 767px) {
+  .projectContainer {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+  }
+
+  .caseStudyAndTechWrapper {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
   .projectImageModalContent {
     width: calc(100vw - 12px);
   }

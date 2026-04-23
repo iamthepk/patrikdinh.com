@@ -10,7 +10,8 @@
 }
 
 .heroContainer {
-  max-width: 76rem;
+  width: min(100%, 76rem);
+  margin: 0 auto;
 }
 
 .heroEyebrow {
@@ -147,9 +148,8 @@
 }
 
 .cvPreviewPanel {
-  width: min(1900px, calc(100vw - 16px));
-  height: calc(100vh - 16px);
-  max-height: none;
+  width: min(1100px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
   border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
   border-radius: 1.35rem;
   background:
@@ -171,21 +171,18 @@
 }
 
 .cvPreviewTopBar {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   z-index: 5;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: flex-end;
   gap: 0.55rem;
-  padding: 0;
+  padding: 1rem 1rem 0;
   background: transparent;
 }
 
 .cvPreviewActions {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 0.55rem;
 }
@@ -194,41 +191,32 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 1rem 4.75rem;
+  padding: 0.75rem 1rem 1rem;
   overflow: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 
 .cvPreviewCanvas {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  display: block;
   flex: 1;
   min-height: 0;
   padding: 0;
 }
 
 .cvPreviewInner {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
-  width: auto;
-  max-width: 100%;
-  overflow: visible;
-  zoom: 0.52;
+  width: min(100%, 960px);
+  margin: 0 auto;
 }
 
 .cvPreviewInner .cvRoot--modal .cvPaperStack {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  width: auto;
+  gap: 1rem;
+  width: 100%;
 }
 
 .cvPreviewInner .cvRoot--modal .cvPaper {
-  width: 960px;
-  max-width: none;
+  width: min(100%, 960px);
+  max-width: 100%;
   border-radius: 1.15rem;
 }
 
@@ -283,109 +271,19 @@
 @media (max-width: 767px) {
   .cvPreviewPanel {
     width: calc(100vw - 12px);
-    height: calc(100vh - 12px);
+    max-height: calc(100vh - 12px);
     border-radius: 0.85rem;
   }
 
   .cvPreviewTopBar {
-    top: 0.75rem;
-    right: 0.75rem;
-  }
-
-  .cvPreviewActions {
-    flex-direction: column;
+    padding: 0.75rem 0.75rem 0;
   }
 
   .cvPreviewBody {
-    padding: 0.75rem 3.75rem;
-    overflow: auto;
+    padding: 0.5rem 0.5rem 0.75rem;
   }
 
   .cvPreviewCanvas {
-    padding-bottom: 0.4rem;
-  }
-
-  .cvPreviewInner {
-    align-self: flex-start;
-    zoom: 0.5;
-  }
-
-  .cvPreviewInner .cvRoot--modal .cvPaperStack {
-    gap: 1rem;
-  }
-
-  .cvPreviewInner .cvRoot--modal .cvPaper {
-    width: 640px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1199px) {
-  .cvPreviewInner {
-    zoom: 0.56;
-  }
-
-  .cvPreviewInner .cvRoot--modal .cvPaperStack {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-
-@media (min-width: 900px) and (max-width: 1199px) {
-  .cvPreviewInner {
-    zoom: 0.76;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1199px) {
-  .cvPreviewInner {
-    zoom: 0.88;
-  }
-}
-
-@media (min-width: 1280px) {
-  .cvPreviewInner {
-    zoom: 0.56;
-  }
-}
-
-@media (min-width: 1360px) {
-  .cvPreviewInner {
-    zoom: 0.61;
-  }
-}
-
-@media (min-width: 1440px) {
-  .cvPreviewInner {
-    zoom: 0.65;
-  }
-}
-
-@media (min-width: 1536px) {
-  .cvPreviewInner {
-    zoom: 0.7;
-  }
-}
-
-@media (min-width: 1680px) {
-  .cvPreviewInner {
-    zoom: 0.77;
-  }
-}
-
-@media (min-width: 1900px) {
-  .cvPreviewInner {
-    zoom: 0.89;
-  }
-}
-
-@media (max-height: 820px) and (min-width: 768px) and (max-width: 1359px) {
-  .cvPreviewInner {
-    zoom: 0.5;
-  }
-}
-
-@media (min-height: 920px) and (min-width: 1900px) {
-  .cvPreviewInner {
-    zoom: 0.89;
+    padding-bottom: 0.25rem;
   }
 }
