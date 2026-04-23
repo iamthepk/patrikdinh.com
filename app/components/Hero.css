@@ -211,14 +211,16 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 0.75rem 4.25rem 1rem 1rem;
+  padding: 1rem 4.75rem 1rem 1rem;
   overflow: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 
 .cvPreviewCanvas {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   flex: 1;
   min-height: 0;
   padding: 0;
@@ -338,5 +340,12 @@
 
   .cvPreviewCanvas {
     padding-bottom: 0.25rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1399px) {
+  .cvPreviewBody {
+    padding-left: 1rem;
+    padding-right: 4.25rem;
   }
 }
