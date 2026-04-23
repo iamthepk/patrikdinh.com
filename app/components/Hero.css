@@ -10,8 +10,19 @@
 }
 
 .heroContainer {
-  width: min(100%, 76rem);
-  margin: 0 auto;
+  max-width: 76rem;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .heroContainer {
+    max-width: 52rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heroContainer {
+    max-width: 76rem;
+  }
 }
 
 .heroEyebrow {
