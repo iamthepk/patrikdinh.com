@@ -33,6 +33,8 @@ export default function Modal({
   children,
 }: ModalProps) {
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
+  const shouldRestoreFocusRef = useRef(false);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const closeTimeoutRef = useRef<number | null>(null);
   const [isExiting, setIsExiting] = useState(false);
 
@@ -53,6 +55,11 @@ export default function Modal({
       document.activeElement instanceof HTMLElement
         ? document.activeElement
         : null;
+
+    shouldRestoreFocusRef.current =
+      previousActiveElementRef.current?.matches(":focus-visible") ?? false;
+
+    closeButtonRef.current?.focus({ preventScroll: true });
   }, [isOpen]);
 
   useEffect(() => {
@@ -65,8 +72,15 @@ export default function Modal({
 
     return () => {
       document.body.style.overflow = previousOverflow;
-      previousActiveElementRef.current?.focus();
+
+      if (shouldRestoreFocusRef.current) {
+        previousActiveElementRef.current?.focus({ preventScroll: true });
+      } else {
+        previousActiveElementRef.current?.blur();
+      }
+
       previousActiveElementRef.current = null;
+      shouldRestoreFocusRef.current = false;
     };
   }, [isOpen]);
 
@@ -117,13 +131,13 @@ export default function Modal({
             <div className="appModalTopBarContent">{topBarContent}</div>
           )}
           <button
+            ref={closeButtonRef}
             type="button"
             className={["appModalClose", closeButtonClassName]
               .filter(Boolean)
               .join(" ")}
             aria-label={closeLabel}
             onClick={requestClose}
-            autoFocus
           >
             <X className="appModalCloseIcon" aria-hidden="true" />
           </button>
