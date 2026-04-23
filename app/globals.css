@@ -166,6 +166,26 @@ button:hover {
   }
 }
 
+@media (min-width: 1280px) {
+  .projects-shell {
+    max-width: 1520px;
+  }
+
+  .about-shell {
+    max-width: 1380px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .projects-shell {
+    max-width: 1760px;
+  }
+
+  .about-shell {
+    max-width: 1540px;
+  }
+}
+
 .section-spacing {
   padding-top: 2rem;
   padding-bottom: 2rem;
