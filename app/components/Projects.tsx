@@ -148,7 +148,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="work" className="section-padding section-spacing">
+    <section id="work" className="projectsSection section-padding section-spacing">
       <div className="projects-shell">
         <h2 className="text-5xl md:text-6xl font-black tracking-tight heading-spacing heading">
           Work

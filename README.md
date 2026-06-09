@@ -11,8 +11,7 @@ This repository contains the portfolio site itself, not the source code of the f
 - Editorial-style hero section and project storytelling
 - Shared accessible modal layer for case studies, previews, and CV
 - Interactive CV modal with code-based CV content
-- `/cv` full-page fallback route for the same CV content
-- `/cv/print` print-friendly CV route
+- `/cv/download` PDF download route generated from the same CV data
 - Theme-aware thumbnails and favicons
 - Custom animated thumbnail for Print Agent
 - Vercel Analytics and Speed Insights in production only
@@ -69,7 +68,7 @@ app/
 │   ├── Hero.tsx                    # Intro section, nav links, CV modal trigger
 │   ├── Projects.tsx                # Project list, thumbnails, modals
 │   ├── About.tsx                   # Positioning text and personal context
-│   ├── CVContent.tsx               # Shared CV content for modal and /cv page
+│   ├── CVContent.tsx               # Shared CV content for the homepage modal
 │   ├── Footer.tsx                  # Contact section
 │   ├── PrintAgentFlowAnimation.tsx # Custom animated project preview
 │   ├── Modal.tsx                   # Shared accessible modal component
@@ -78,10 +77,10 @@ app/
 │   ├── SplashWrapper.tsx           # Splash lifecycle wrapper
 │   └── print-agent-flow/           # Print Agent preview config, loop hook and modal
 ├── cv/
-│   ├── page.tsx                    # Full-page CV route
-│   └── print/                      # Print-friendly CV route
+│   └── download/                   # Generated CV PDF download route
 ├── lib/
 │   ├── cv-data.ts                  # Structured CV data source
+│   ├── cv-pdf.ts                   # Code-generated CV PDF renderer
 │   ├── projects.ts                 # Project data and case studies
 │   ├── rich-text.ts                # Structured inline text helpers
 │   ├── tech-icons.tsx              # Icon mapping for homepage tech stack
@@ -117,9 +116,9 @@ Edit `app/lib/projects.ts` to update:
 The CV is now maintained in code.
 
 - `app/lib/cv-data.ts` = CV data source
-- `app/components/CVContent.tsx` = shared CV layout
-- `app/cv/page.tsx` = full-page CV route
-- `app/cv/print/page.tsx` = print-friendly CV route
+- `app/components/CVContent.tsx` = CV modal layout
+- `app/lib/cv-pdf.ts` = generated PDF renderer
+- `app/cv/download/route.ts` = PDF download endpoint
 
 ### Page Copy
 

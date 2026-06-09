@@ -178,11 +178,11 @@ button:hover {
 
 @media (min-width: 1600px) {
   .projects-shell {
-    max-width: 1760px;
+    max-width: 1820px;
   }
 
   .about-shell {
-    max-width: 1540px;
+    max-width: 1580px;
   }
 }
 
@@ -212,6 +212,12 @@ button:hover {
 
 .project-spacing > * + * {
   margin-top: 4rem;
+}
+
+@media (min-width: 1280px) {
+  .project-spacing > * + * {
+    margin-top: 2.5rem;
+  }
 }
 
 /* Custom Scrollbar */

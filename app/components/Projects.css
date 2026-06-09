@@ -4,6 +4,10 @@
   color: var(--text);
 }
 
+.projectsSection {
+  position: relative;
+}
+
 .projectsIntro {
   color: var(--text);
   font-size: clamp(1.125rem, 2.5vw, 1.4rem);
@@ -14,9 +18,15 @@
 }
 
 @media (min-width: 1280px) {
+  .projectsSection {
+    padding-top: 0;
+    padding-bottom: 1.5rem;
+  }
+
   .projectsIntro {
     font-size: clamp(1.25rem, 1.45vw, 1.55rem);
-    max-width: 58rem;
+    max-width: 64rem;
+    margin-bottom: 0.65rem;
   }
 }
 
@@ -30,8 +40,8 @@
 
 @media (min-width: 1280px) {
   .projectsDisclosure {
-    max-width: 60rem;
-    margin-bottom: 2rem;
+    max-width: 66rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -44,8 +54,8 @@
 
 @media (min-width: 1280px) {
   .projectContainer {
-    padding-top: 3rem;
-    padding-bottom: 4.5rem;
+    padding-top: 1.75rem;
+    padding-bottom: 3.5rem;
   }
 }
 
@@ -61,8 +71,8 @@
 /* screenshot vlevo (cca 55%), text vpravo (45%) */
 @media (min-width: 1024px) {
   .projectContent {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr);
+    gap: 2.5rem;
     align-items: flex-start;
   }
 
@@ -193,7 +203,7 @@
 
 @media (min-width: 1280px) {
   .content {
-    max-width: 40rem;
+    max-width: 42rem;
   }
 }
 
@@ -221,7 +231,8 @@
 
 @media (min-width: 1280px) {
   .title {
-    font-size: clamp(3.4rem, 4.4vw, 5.9rem);
+    font-size: clamp(3.6rem, 4vw, 6rem);
+    padding-bottom: 0.8rem;
   }
 }
 
