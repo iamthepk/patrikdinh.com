@@ -135,10 +135,11 @@ export const projects: Project[] = [
         {
           heading: "Customers & daily sync",
           content: rich(
-            strong("Mobile app customer"),
-            " data is stored in Firebase, while customers created in the POS are native to the PostgreSQL database. I built a migration pipeline with ",
+            "Customer data from an ",
+            strong("external mobile app source"),
+            " is synchronized into the PostgreSQL database alongside customers created directly in the POS. I built a migration pipeline with ",
             strong("Supabase migrations, a migration script and a daily cron job"),
-            " that ensures the mobile app customers are kept in sync with the primary database. Each customer receives a unique incremental number via a PostgreSQL sequence. The customer module supports favorites, discounts, validation, duplicate detection, real-time updates and manual sync operations."
+            " that keeps mobile app customers aligned with the primary database. Each customer receives a unique incremental number via a PostgreSQL sequence. The customer module supports favorites, discounts, validation, duplicate detection, real-time updates and manual sync operations."
           ),
         },
         {
@@ -829,7 +830,6 @@ export const techStack = {
     "JavaScript",
     "Node.js",
     "Supabase",
-    "Firebase",
     "PostgreSQL",
     "Vercel",
   ],
