@@ -26,11 +26,24 @@ const ThemeContext = createContext<{
 
 export const useTheme = () => useContext(ThemeContext);
 
+function subscribeToHydration(callback: () => void) {
+  const timeoutId = window.setTimeout(callback, 0);
+  return () => window.clearTimeout(timeoutId);
+}
+
+function getHydratedSnapshot() {
+  return true;
+}
+
+function getServerHydrationSnapshot() {
+  return false;
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
+    subscribeToHydration,
+    getHydratedSnapshot,
+    getServerHydrationSnapshot
   );
   const [themeOverride, setThemeOverride] = useState<Theme | null>(null);
   const theme = themeOverride ?? (hydrated ? getStoredTheme() : DEFAULT_THEME);

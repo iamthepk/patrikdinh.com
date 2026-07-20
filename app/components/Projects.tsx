@@ -175,6 +175,11 @@ export default function Projects() {
             const isPrintAgent = project.previewType === "print-agent-flow";
             const thumbnail = project.thumbnail ?? PLACEHOLDER_THUMBNAIL;
             const themedThumbnailPath = getThumbnailSrc(thumbnail, theme);
+            const keyPoints = project.previewKeyPointCount
+              ? project.keyPoints?.slice(0, project.previewKeyPointCount)
+              : project.keyPoints;
+            const shouldBoostDarkThumbnail =
+              theme === "dark" && project.id !== "lootea-pos";
             const isPlaceholderThumbnail =
               themedThumbnailPath === getThumbnailSrc(PLACEHOLDER_THUMBNAIL, theme);
             const showPreview = isPrintAgent || Boolean(project.thumbnail);
@@ -249,7 +254,7 @@ export default function Projects() {
                               fill
                               quality={90}
                               className={`thumbnailImage ${
-                                theme === "dark" ? "thumbnailImageDark" : ""
+                                shouldBoostDarkThumbnail ? "thumbnailImageDark" : ""
                               } ${
                                 isPlaceholderThumbnail
                                   ? "thumbnailImagePlaceholder"
@@ -283,9 +288,9 @@ export default function Projects() {
                         <RichText value={project.description} />
                       </p>
 
-                      {project.keyPoints && project.keyPoints.length > 0 && (
+                      {keyPoints && keyPoints.length > 0 && (
                         <ul className="keyPoints">
-                          {project.keyPoints.map((point, pointIndex) => (
+                          {keyPoints.map((point, pointIndex) => (
                             <li key={pointIndex}>
                               <RichText value={point} />
                             </li>
@@ -374,20 +379,32 @@ export default function Projects() {
             : "Project image preview"
         }
         closeLabel="Close image preview"
+        overlayClassName="projectImageModalOverlay"
         panelClassName="projectImageModalContent"
         bodyClassName="projectImageModalBody"
         closeButtonClassName="projectImageModalClose"
       >
         {activeModal?.type === "image" && (
           <div className="projectImageFrame">
-            <Image
-              src={activeModal.imageSrc}
-              alt={activeModal.alt}
-              fill
-              quality={95}
-              className="modalImage"
-              sizes="100vw"
-            />
+            {activeModal.imageSrc.endsWith(".svg") ? (
+              // SVG previews stay sharper when the browser renders them directly.
+              // Next's fill wrapper can introduce fractional scaling in this modal.
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={activeModal.imageSrc}
+                alt={activeModal.alt}
+                className="modalImage modalImageSvg"
+              />
+            ) : (
+              <Image
+                src={activeModal.imageSrc}
+                alt={activeModal.alt}
+                fill
+                quality={100}
+                className="modalImage"
+                sizes="100vw"
+              />
+            )}
           </div>
         )}
       </Modal>

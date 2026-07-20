@@ -4,7 +4,7 @@ import { PrintAgentFlowAnimation } from "../app/components/PrintAgentFlowAnimati
 import { ThemeProvider } from "../app/lib/theme-provider";
 
 describe("print agent flow preview", () => {
-  it("opens and closes the order preview modal", async () => {
+  it("opens and closes the receipt API contract modal", async () => {
     const user = userEvent.setup();
 
     render(
@@ -14,18 +14,18 @@ describe("print agent flow preview", () => {
     );
 
     await user.click(
-      screen.getByRole("button", { name: "Open Order payload preview" })
+      screen.getByRole("button", { name: "Open Receipt API contract" })
     );
 
     expect(
-      screen.getByRole("dialog", { name: "Order payload preview" })
+      screen.getByRole("dialog", { name: "Receipt API contract" })
     ).toBeInTheDocument();
 
     await user.keyboard("{Escape}");
 
     await waitFor(() => {
       expect(
-        screen.queryByRole("dialog", { name: "Order payload preview" })
+        screen.queryByRole("dialog", { name: "Receipt API contract" })
       ).not.toBeInTheDocument();
     });
   });

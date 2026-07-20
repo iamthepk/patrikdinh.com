@@ -80,10 +80,10 @@ export const cvData: CvData = {
     {
       projectId: "lootea-pos",
       title: "Lootea Operations System",
-      subtitle: "Production system built around real daily cafe operations.",
+      subtitle: "POS-first production system for daily cafe operations.",
       stack: ["React", "TypeScript", "PostgreSQL", "Supabase"],
       summary:
-        "Built and evolved a production system combining POS, local printing, stock, recipes, reporting, shifts, invoices and back-office workflows into one platform used in daily operation.",
+        "Built and evolved a production system with POS at the center, combining checkout, local printing, products, employee cards, shifts, calendar sync, stock, recipes, invoice AI, reporting and back-office workflows into one platform used in daily operation.",
     },
     {
       projectId: "print-agent",
@@ -92,6 +92,14 @@ export const cvData: CvData = {
       stack: ["Node.js", "Express"],
       summary:
         "Built a local desktop service that handles receipt and label printing without browser dialogs or manual steps, bridging cloud POS workflows with in-store hardware.",
+    },
+    {
+      projectId: "lobbymates",
+      title: "Lobby Mates",
+      subtitle: "Squad planning app for deciding what a group can play together.",
+      stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Vercel"],
+      summary:
+        "Built a production web app with external account sign-in, squad invites, shared library and wishlist sync, profile presence refresh, ownership-source handling, six-level play intent, audit-friendly scoring, suggested games, comparison filters, optional group room provisioning and a public read-only demo mode.",
     },
     {
       projectId: "voucher-generator",

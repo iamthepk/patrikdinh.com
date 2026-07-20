@@ -87,19 +87,28 @@
 .heroSubtitle {
   font-size: clamp(2.4rem, 8vw, 5.6rem);
   font-weight: 900;
-  line-height: 0.96;
+  line-height: 0.94;
   letter-spacing: -0.04em;
   color: var(--text);
-  max-width: 14ch;
+  max-width: min(100%, 74rem);
   margin-bottom: 2.4rem;
-  text-wrap: balance;
+}
+
+.heroSubtitleLine {
+  display: block;
+  overflow-wrap: normal;
 }
 
 @media (min-width: 1280px) {
   .heroSubtitle {
-    font-size: clamp(3.5rem, 5.8vw, 6.35rem);
-    max-width: 11ch;
+    font-size: clamp(3.5rem, 5.6vw, 6.35rem);
     margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .heroSubtitleLine {
+    white-space: nowrap;
   }
 }
 
@@ -196,7 +205,9 @@
   }
 
   .heroSubtitle {
-    max-width: 12ch;
+    font-size: 1.8rem;
+    line-height: 1.03;
+    max-width: 100%;
     margin-bottom: 1.8rem;
   }
 

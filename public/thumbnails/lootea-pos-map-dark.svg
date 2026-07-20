@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1243 698" fill="none">
+  <defs>
+    <filter id="soft-shadow" x="-20%" y="-30%" width="140%" height="160%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity=".34"/>
+    </filter>
+    <symbol id="icon-orders" viewBox="0 0 24 24">
+      <path d="M6 8V7a6 6 0 0 1 12 0v1"/>
+      <path d="M5 8h14l1 13H4L5 8Z"/>
+    </symbol>
+    <symbol id="icon-payments" viewBox="0 0 24 24">
+      <rect x="2.5" y="5.5" width="19" height="13" rx="2"/>
+      <path d="M2.5 10h19"/>
+      <path d="M6.5 15h5"/>
+    </symbol>
+    <symbol id="icon-stock" viewBox="0 0 24 24">
+      <path d="m12 2.75 8.25 4.75v9L12 21.25 3.75 16.5v-9L12 2.75Z"/>
+      <path d="m3.95 7.6 8.05 4.65 8.05-4.65"/>
+      <path d="M12 12.25v8.75"/>
+    </symbol>
+    <symbol id="icon-shifts" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9.5"/>
+      <path d="M12 6.5V12l4.4 3"/>
+    </symbol>
+    <symbol id="icon-receipts" viewBox="0 0 24 24">
+      <path d="M5 3h14v18l-2.4-1.4L14.2 21 12 19.6 9.8 21l-2.4-1.4L5 21V3Z"/>
+      <path d="M8.5 8h7"/>
+      <path d="M8.5 12h7"/>
+      <path d="M8.5 16h4.5"/>
+    </symbol>
+    <symbol id="icon-reports" viewBox="0 0 24 24">
+      <path d="M4 20h16"/>
+      <rect x="5.5" y="11.5" width="3.5" height="8.5" rx="1"/>
+      <rect x="10.25" y="7.5" width="3.5" height="12.5" rx="1"/>
+      <rect x="15" y="3.5" width="3.5" height="16.5" rx="1"/>
+    </symbol>
+    <symbol id="icon-products" viewBox="0 0 24 24">
+      <path d="M11.5 3H5a2 2 0 0 0-2 2v6.5a2 2 0 0 0 .6 1.4l7.5 7.5a2.1 2.1 0 0 0 3 0l6.3-6.3a2.1 2.1 0 0 0 0-3L12.9 3.6A2 2 0 0 0 11.5 3Z"/>
+      <circle cx="7.75" cy="7.75" r="1.15" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="icon-invoices" viewBox="0 0 24 24">
+      <path d="M6 2.75h8l4 4V21H6V2.75Z"/>
+      <path d="M14 2.75V7h4"/>
+      <path d="M12 10v7"/>
+      <path d="M14.5 11.2c-.55-.45-1.2-.65-2-.65-1.25 0-2.15.65-2.15 1.55 0 2.05 4.3.85 4.3 3.05 0 .95-.9 1.55-2.15 1.55-.9 0-1.65-.28-2.25-.82"/>
+    </symbol>
+  </defs>
+
+  <path d="M319 202v20c0 24 19 43 43 43h259" stroke="#5f5f5f" stroke-width="1.7"/>
+  <path d="M621 202v142" stroke="#5f5f5f" stroke-width="1.7"/>
+  <path d="M923 202v20c0 24-19 43-43 43H621" stroke="#5f5f5f" stroke-width="1.7"/>
+  <path d="M409 342h80" stroke="#5f5f5f" stroke-width="1.7"/>
+  <path d="M754 342h84" stroke="#5f5f5f" stroke-width="1.7"/>
+  <path d="M621 427v115" stroke="#5f5f5f" stroke-width="1.7"/>
+  <path d="M319 542v-24c0-24 19-43 43-43h259" stroke="#5f5f5f" stroke-width="1.7"/>
+  <path d="M923 542v-24c0-24-19-43-43-43H621" stroke="#5f5f5f" stroke-width="1.7"/>
+  <circle cx="621" cy="265" r="5" fill="#8d8d8d"/>
+  <circle cx="621" cy="475" r="5" fill="#8d8d8d"/>
+  <circle cx="489" cy="342" r="5" fill="#8d8d8d"/>
+  <circle cx="754" cy="342" r="5" fill="#8d8d8d"/>
+
+  <g>
+    <rect x="489" y="256" width="265" height="172" rx="18" fill="#f4f4f2"/>
+    <text x="516" y="304" fill="#141414" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="27" font-weight="500">POS Core</text>
+    <text x="516" y="338" fill="#343434" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="350">Central Operations</text>
+    <rect x="516" y="372" width="80" height="10" rx="5" fill="#a7a7a7"/>
+    <rect x="516" y="392" width="147" height="10" rx="5" fill="#bbbbbb"/>
+  </g>
+
+  <g>
+    <rect x="183" y="88" width="276" height="112" rx="16" fill="#151515" stroke="#343434"/>
+    <rect x="208" y="112" width="58" height="58" rx="14" fill="#242424"/>
+    <use href="#icon-orders" x="216" y="120" width="42" height="42" color="#dddddd" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="285" y="130" fill="#d4d4d4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400">Orders</text>
+    <rect x="285" y="153" width="117" height="6" rx="3" fill="#696969"/>
+    <rect x="285" y="170" width="76" height="6" rx="3" fill="#4f4f4f"/>
+  </g>
+
+  <g>
+    <rect x="484" y="88" width="276" height="112" rx="16" fill="#151515" stroke="#343434"/>
+    <rect x="509" y="112" width="58" height="58" rx="14" fill="#242424"/>
+    <use href="#icon-payments" x="517" y="120" width="42" height="42" color="#dddddd" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="586" y="130" fill="#d4d4d4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400">Payments</text>
+    <rect x="586" y="153" width="117" height="6" rx="3" fill="#696969"/>
+    <rect x="586" y="170" width="76" height="6" rx="3" fill="#4f4f4f"/>
+  </g>
+
+  <g>
+    <rect x="785" y="88" width="276" height="112" rx="16" fill="#151515" stroke="#343434"/>
+    <rect x="810" y="112" width="58" height="58" rx="14" fill="#242424"/>
+    <use href="#icon-stock" x="818" y="120" width="42" height="42" color="#dddddd" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="887" y="130" fill="#d4d4d4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400">Stock</text>
+    <rect x="887" y="153" width="117" height="6" rx="3" fill="#696969"/>
+    <rect x="887" y="170" width="76" height="6" rx="3" fill="#4f4f4f"/>
+  </g>
+
+  <g>
+    <rect x="149" y="284" width="260" height="112" rx="16" fill="#151515" stroke="#343434"/>
+    <rect x="174" y="308" width="58" height="58" rx="14" fill="#242424"/>
+    <use href="#icon-shifts" x="182" y="316" width="42" height="42" color="#dddddd" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="249" y="326" fill="#d4d4d4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400">Shifts</text>
+    <rect x="249" y="349" width="117" height="6" rx="3" fill="#696969"/>
+    <rect x="249" y="366" width="76" height="6" rx="3" fill="#4f4f4f"/>
+  </g>
+
+  <g>
+    <rect x="838" y="284" width="260" height="112" rx="16" fill="#151515" stroke="#343434"/>
+    <rect x="863" y="308" width="58" height="58" rx="14" fill="#242424"/>
+    <use href="#icon-receipts" x="871" y="316" width="42" height="42" color="#dddddd" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="938" y="326" fill="#d4d4d4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400">Receipts</text>
+    <rect x="938" y="349" width="117" height="6" rx="3" fill="#696969"/>
+    <rect x="938" y="366" width="76" height="6" rx="3" fill="#4f4f4f"/>
+  </g>
+
+  <g>
+    <rect x="183" y="480" width="276" height="112" rx="16" fill="#151515" stroke="#343434"/>
+    <rect x="208" y="504" width="58" height="58" rx="14" fill="#242424"/>
+    <use href="#icon-reports" x="216" y="512" width="42" height="42" color="#dddddd" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="285" y="522" fill="#d4d4d4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400">Reports</text>
+    <rect x="285" y="545" width="117" height="6" rx="3" fill="#696969"/>
+    <rect x="285" y="562" width="76" height="6" rx="3" fill="#4f4f4f"/>
+  </g>
+
+  <g>
+    <rect x="484" y="480" width="276" height="112" rx="16" fill="#151515" stroke="#343434"/>
+    <rect x="509" y="504" width="58" height="58" rx="14" fill="#242424"/>
+    <use href="#icon-products" x="517" y="512" width="42" height="42" color="#dddddd" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="586" y="522" fill="#d4d4d4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400">Products</text>
+    <rect x="586" y="545" width="117" height="6" rx="3" fill="#696969"/>
+    <rect x="586" y="562" width="76" height="6" rx="3" fill="#4f4f4f"/>
+  </g>
+
+  <g>
+    <rect x="785" y="480" width="276" height="112" rx="16" fill="#151515" stroke="#343434"/>
+    <rect x="810" y="504" width="58" height="58" rx="14" fill="#242424"/>
+    <use href="#icon-invoices" x="818" y="512" width="42" height="42" color="#dddddd" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="887" y="522" fill="#d4d4d4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400">Invoices</text>
+    <rect x="887" y="545" width="117" height="6" rx="3" fill="#696969"/>
+    <rect x="887" y="562" width="76" height="6" rx="3" fill="#4f4f4f"/>
+  </g>
+</svg>

@@ -10,6 +10,7 @@ interface ModalProps {
   onClose: () => void;
   ariaLabel: string;
   closeLabel?: string;
+  overlayClassName?: string;
   panelClassName?: string;
   bodyClassName?: string;
   topBarClassName?: string;
@@ -25,6 +26,7 @@ export default function Modal({
   onClose,
   ariaLabel,
   closeLabel = "Close dialog",
+  overlayClassName,
   panelClassName,
   bodyClassName,
   topBarClassName,
@@ -104,7 +106,7 @@ export default function Modal({
 
   return createPortal(
     <div
-      className="appModalOverlay"
+      className={["appModalOverlay", overlayClassName].filter(Boolean).join(" ")}
       data-state={isExiting ? "closed" : "open"}
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {

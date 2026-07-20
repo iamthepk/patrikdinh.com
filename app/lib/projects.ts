@@ -24,6 +24,7 @@ export interface Project {
   githubUrl?: string;
   previewType?: "image" | "print-agent-flow";
   thumbnail?: ProjectThumbnail;
+  previewKeyPointCount?: number;
   caseStudy?: {
     title: string;
     sections: ProjectCaseStudySection[];
@@ -40,19 +41,20 @@ export const projects: Project[] = [
   {
     id: "lootea-pos",
     title: "Lootea Operations System",
-    subtitle: "An in-house system built to run real day-to-day cafe operations.",
+    subtitle:
+      "A POS-first system that runs real day-to-day cafe operations.",
     description:
-      "An in-house operations system built around real bubble tea workflows, not generic restaurant assumptions. It combines POS, printing, stock, recipes, reporting, shifts, invoices and daily management into one production system used every day.",
+      "An in-house cafe operations system built around real bubble tea workflows, not generic restaurant assumptions. POS is the center: checkout, orders, payments, receipts, labels and refunds, with the wider operation connected through products, employee cards, shifts, calendar sync, invoice AI, stock, recipes and reporting.",
     keyPoints: [
       rich(
-        "Built for ",
-        strong("real cafe workflow speed"),
-        " across checkout, prep, back office and daily management."
+        "Built around the ",
+        strong("POS core"),
+        ": fast checkout, configured drinks, payments, receipts, labels and refunds."
       ),
       rich(
-        "Combines ",
-        strong("POS, local printing, stock, recipes, reporting, invoices and shifts"),
-        " in one production system."
+        "Connects the wider operation through ",
+        strong("products, stock, recipes, employee cards, shifts, calendar sync, invoice AI and reporting"),
+        "."
       ),
       rich(
         "Supports ",
@@ -62,35 +64,40 @@ export const projects: Project[] = [
         " in daily use."
       ),
       rich(
+        "Connected to a custom ",
+        strong("Print Agent"),
+        " for instant receipts, drink labels and cash drawer actions without extra staff steps."
+      ),
+      rich(
         "Includes ",
         strong(
           "RBAC, investor reporting, customer sync, Google Calendar shift sync and security alerts"
         ),
         " for real operations."
       ),
-      rich(
-        "Connected to a custom ",
-        strong("Print Agent"),
-        " for instant receipts, drink labels and cash drawer actions without extra staff steps."
-      ),
       "Reduced operational friction, replaced rigid subscription tooling and gave the business a system it can keep evolving in-house.",
     ],
+    previewKeyPointCount: 4,
     challenge:
-      "Keeping checkout, printing, refunds, stock, permissions and reporting coherent in daily operation.",
+      "Keeping checkout, products, staff, shifts, invoices, printing, permissions and reporting coherent in daily operation.",
     tech: ["React", "TypeScript", "PostgreSQL"],
-    thumbnail: PLACEHOLDER_THUMBNAIL,
+    thumbnail: {
+      default: "/thumbnails/lootea-pos-map-dark.svg",
+      dark: "/thumbnails/lootea-pos-map-dark.svg",
+      light: "/thumbnails/lootea-pos-map-light.svg",
+    },
     caseStudy: {
       title: "Lootea Operations System: Technical Case Study",
       sections: [
         {
           heading: "Context",
           content:
-            "Commercial POS systems solved only part of the problem. What we actually needed was a system built around how the shop runs every day: ordering, label printing, refunds, parked orders, shifts, stock, recipes, invoices, reporting and management workflows. I built Lootea as an in-house production system that now runs day-to-day operations on pos.lootea.cz.",
+            "Commercial POS systems solved only part of the problem. What we actually needed was a cafe operations system with POS at the center: ordering, label printing, refunds, parked orders, product setup, employee cards, shifts, stock, recipes, invoices, reporting and management workflows. I built Lootea as an in-house production system that now runs day-to-day operations on pos.lootea.cz.",
         },
         {
           heading: rich("Technical challenges ", em("aka the nightmares")),
           content:
-            "The hard part was not building screens. It was keeping checkout, printing, refunds, stock, recipes, reporting, permissions and daily workflows coherent under real shop conditions. Receipts and labels had to print instantly, totals had to survive edits and refunds, and management data had to stay trustworthy enough for closures, reporting and back-office work.",
+            "The hard part was not building screens. It was keeping checkout, printing, refunds, product data, employee access, shifts, stock, recipes, invoices, reporting, permissions and daily workflows coherent under real shop conditions. Receipts and labels had to print instantly, totals had to survive edits and refunds, and management data had to stay trustworthy enough for closures, reporting and back-office work.",
         },
         {
           heading: "Architecture overview",
@@ -99,7 +106,7 @@ export const projects: Project[] = [
             strong("React + TypeScript + Vite PWA"),
             " on the frontend with ",
             strong("Supabase"),
-            " as the main backend for Postgres, auth, storage, realtime and edge functions. Around that, I built serverless API routes, scheduled jobs and integrations for customer sync, Google Calendar shifts, invoice processing and security alerts. A custom ",
+            " as the main backend for Postgres, auth, storage, realtime and edge functions. POS is the operational core, with management modules for products, employees, shifts, stock, recipes, office work and reporting around it. Around that, I built serverless API routes, scheduled jobs and integrations for customer sync, Google Calendar shifts, invoice AI processing and security alerts. A custom ",
             strong("Print Agent"),
             " bridges the cloud app with local hardware so the system can behave like native in-store software."
           ),
@@ -135,9 +142,9 @@ export const projects: Project[] = [
           ),
         },
         {
-          heading: "Operations layer",
+          heading: "Operations modules around POS",
           content:
-            "Beyond checkout, the system covers the operational side of the business: employees, role-based permissions, shifts, customer data, daily closures, office workflows and reporting. It includes a dedicated stock engine, recipes engine, nutrition and allergen display in POS, Google Calendar sync for shifts, investor-specific reporting access and internal tools for invoices, cash and bank transactions.",
+            "Beyond checkout, the system includes the management modules needed to run the shop from one place: product catalog, drinks, toppings, modifiers, employee cards, role-based permissions, shifts, customer data, daily closures, office workflows and reporting. It includes a dedicated stock engine, recipes engine, nutrition and allergen display in POS, Google Calendar sync for shifts, investor-specific reporting access and internal tools for invoice AI, cash and bank transactions.",
         },
         {
           heading: "Daily closures & financial accuracy",
@@ -157,12 +164,12 @@ export const projects: Project[] = [
         {
           heading: "Impact",
           content:
-            "Lootea replaced a more limited subscription-style setup with a system tailored to the way the business actually operates. It brought checkout, management and back-office workflows into one place, reduced friction for staff, and made it possible to improve the system continuously based on real daily use instead of vendor constraints.",
+            "Lootea replaced a more limited subscription-style setup with a system tailored to the way the business actually operates. POS is the operational center, but product management, staff workflows, shifts, invoices, reporting and back-office work live around it in one place. That reduced friction for staff and made it possible to improve the system continuously based on real daily use instead of vendor constraints.",
         },
         {
           heading: "My role",
           content:
-            "I designed and built the system end-to-end: product structure, database schema, migrations, POS flows, management screens, permissions, stock and recipes, reporting, shift tools, customer sync, invoice workflows, integrations and production hardening. I used AI tools to move faster, but the architecture, implementation decisions, testing and day-to-day reliability were my responsibility. The system is actively used in daily operation.",
+            "I designed and built the system end-to-end: product structure, database schema, migrations, POS checkout flows, management modules, employee cards, permissions, products, stock and recipes, reporting, shift tools, customer sync, invoice workflows, integrations and production hardening. I used AI tools to move faster, but the architecture, implementation decisions, testing and day-to-day reliability were my responsibility. The system is actively used in daily operation.",
         },
       ],
     },
@@ -344,6 +351,139 @@ export const projects: Project[] = [
             strong("health-check endpoints"),
             ". I used AI tools where they helped me move faster, but the real work was making the system stable, testable and trustworthy in daily operation."
           ),
+        },
+      ],
+    },
+  },
+  {
+    id: "lobbymates",
+    title: "Lobby Mates",
+    subtitle:
+      "A squad planning app that helps friend groups decide what they can play together.",
+    description:
+      "A real full-stack product for gaming groups. Lobby Mates brings Steam login, squad invites, shared libraries, play intent, Steam wishlist overlap, profile presence, suggested games, top picks, comparison filters and Discord room setup into one focused dashboard, with a public read-only demo for portfolio review.",
+    keyPoints: [
+      rich(
+        "Built around the practical question: ",
+        strong("what can this group play together right now?"),
+        "."
+      ),
+      rich(
+        "Uses ",
+        strong("Steam OpenID and Steam Web API"),
+        " for account identity, profile data, current activity, game ownership, playtime, public library sync and squad wishlist discovery."
+      ),
+      rich(
+        "Supports ",
+        strong("multi-squad membership, invite codes, active squad switching and leader/member permissions"),
+        " in one production database."
+      ),
+      rich(
+        "Ranks games with ",
+        strong("audit-friendly score breakdowns, readiness, ownership, play intent, wishlist overlap, sort modes and member comparison"),
+        " instead of a generic list."
+      ),
+      rich(
+        "Includes ",
+        strong("cards/list views, setup guidance, paginated browsing and status/platform/genre/search filters"),
+        " for a dashboard that stays usable as the squad library grows."
+      ),
+      rich(
+        "Adds an optional ",
+        strong("Discord integration"),
+        " for private squad text and voice rooms managed from the app."
+      ),
+      "Includes a public read-only demo route powered by a viewer role, normal session cookies and server-side write guards.",
+    ],
+    challenge:
+      "Making group game choice clear while keeping Steam sync, invites, permissions and Discord state reliable.",
+    tech: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Vercel"],
+    liveUrl: "https://www.lobbymates.app/demo",
+    thumbnail: {
+      default: "/thumbnails/lobbymates-dashboard-overview.webp",
+      dark: "/thumbnails/lobbymates-dashboard-overview.webp",
+    },
+    caseStudy: {
+      title: "Lobby Mates: Technical Case Study",
+      sections: [
+        {
+          heading: "Context",
+          content:
+            "Lobby Mates started from a very ordinary group problem: deciding what to play takes longer than it should. People own different games, want different things, play on different platforms and often end up scrolling through chat instead of launching anything. I built Lobby Mates as a focused squad app that turns that messy conversation into a shared dashboard.",
+        },
+        {
+          heading: "Product loop",
+          content:
+            "The core loop is simple: sign in with Steam, create or join a squad, sync public Steam libraries, compare what members own, mark what each person wants to play, check shared wishlist overlap, and use top picks and filters to decide what is ready now. The app is not broad social networking; it is a decision tool for existing friend groups.",
+        },
+        {
+          heading: "Architecture overview",
+          content: rich(
+            "The app is built with ",
+            strong("Next.js App Router"),
+            ", ",
+            strong("TypeScript"),
+            " and ",
+            strong("Tailwind CSS"),
+            ". Supabase Postgres is used through server-side REST access for users, sessions, squads, invites, games, statuses, suggestions and Discord integration records. The application is deployed on ",
+            strong("Vercel"),
+            " and includes Playwright smoke tests for the public and protected route surface. Vercel Web Analytics and Speed Insights are wired into the public release."
+          ),
+        },
+        {
+          heading: "Auth and sessions",
+          content:
+            "Production auth is Steam OpenID only. Lobby Mates never asks for a Steam username, password or Steam Guard code. After Steam verification, the app creates its own Supabase-backed session and stores the session token in an HTTP-only cookie. A separate active-squad cookie keeps squad switching stable across reloads.",
+        },
+        {
+          heading: "Squads and invites",
+          content:
+            "Users can create or join multiple squads, with one active squad in the current browser session. Invite codes and invite links are stored hashed in the database, expire automatically and can be revoked. The app has leader/member permissions for actions such as member removal, leadership transfer, squad deletion and Discord lobby creation.",
+        },
+        {
+          heading: "Public demo mode",
+          content:
+            "For portfolio review, I added a public /demo route that opens the real app without requiring a visitor to use Steam. The route creates a normal Lobby Mates session for a configured demo user, sets the active squad cookie and loads the dashboard as a viewer. The viewer role can browse the real squad dashboard, including cards/list view, filters, compare scope, scores and wishlist results, but cannot change games, ownership, play intent, invites, Steam sync, Discord setup or squad settings.",
+        },
+        {
+          heading: "Steam sync",
+          content:
+            "Steam sync pulls public profile data, avatar/frame artwork, current activity when available, owned games and playtime. The sync process matches games by Steam app ID and normalized title, creates missing squad games, enriches games with Steam Store metadata and preserves user-authored interest signals. Private, stale or unavailable Steam libraries are handled as expected states, not as broken accounts.",
+        },
+        {
+          heading: "Wishlist and metadata",
+          content:
+            "A squad wishlist action syncs public Steam wishlists for real squad members, persists the rows per user and enriches them with EUR Store prices, discounts and release information. The dashboard can flag games wanted by everyone while keeping the synthetic demo viewer out of member-facing wishlist data. Game metadata and artwork can also be discovered from Steam Store URLs, so manually added games still gain useful platform, genre and release context.",
+        },
+        {
+          heading: "Decision model",
+          content:
+            "The dashboard turns raw game data into decision signals: owned count, ready-to-play count, six-level play intent, score, suggestions, wishlist overlap, platform filters, genre filters, search, sort modes, paginated browsing and member subset comparison. Top 5 is algorithmic, while Suggested games are a separate human nomination layer. Score is inspectable through per-game breakdowns covering ready players, ownership, intent, recent Steam activity and pushback.",
+        },
+        {
+          heading: "Discord integration",
+          content:
+            "Discord is treated as an optional integration layer, not the source of truth. Squad leaders can create or check a private Discord space for the squad: one role, one text channel and two voice rooms inside the official Lobby Mates server. Users connect Discord through OAuth, then the app joins them to the server and syncs squad roles when possible.",
+        },
+        {
+          heading: rich("Technical challenges ", em("aka the nightmares")),
+          content:
+            "The hard part was keeping several external systems coherent without making the product feel heavy: Steam auth, library and wishlist availability, Supabase session state, squad membership, invite safety, stable sorting, optimistic UI updates, Discord role/channel state and enough permission boundaries that the app can expose a safe portfolio demo mode.",
+        },
+        {
+          heading: "Reliability and safety",
+          content:
+            "The app uses server-side session validation, server-only service role access, hashed invite codes, per-squad game limits, invite rate limits, optional Cloudflare Turnstile for squad creation and protected API routes. Manual ownership sources such as Other launcher are preserved across Steam sync, and hidden games, setup completion and restore controls keep the dashboard manageable. The viewer role is enforced server-side, so direct write requests from the demo session return a protected read-only response instead of relying on hidden buttons alone.",
+        },
+        {
+          heading: "Impact",
+          content:
+            "Lobby Mates turns an unstructured chat decision into a visible shared state. The useful part is not just storing a game list; it is making the group answer faster: who owns it, who wants it, whether it is playable now and where the squad can meet once they pick it.",
+        },
+        {
+          heading: "My role",
+          content:
+            "I designed and built the product end-to-end: product model, branding, Next.js app structure, Steam auth, custom session flow, Supabase schema, invite system, dashboard UX, Steam library and wishlist pipelines, metadata enrichment, Discord OAuth/lobby integration, public read-only demo mode, production deployment and smoke testing.",
         },
       ],
     },

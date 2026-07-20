@@ -13,6 +13,7 @@ import {
   SiPuppeteer,
   SiGooglegemini,
   SiPostgresql,
+  SiTailwindcss,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 
@@ -33,6 +34,6 @@ export const techIcons: Record<string, TechIconComponent> = {
   Puppeteer: SiPuppeteer,
   Gemini: SiGooglegemini,
   PostgreSQL: SiPostgresql,
+  "Tailwind CSS": SiTailwindcss,
   PDFKit: SiPuppeteer, // Fallback, PDFKit doesn't have an icon
 };
-

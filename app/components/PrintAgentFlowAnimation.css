@@ -23,79 +23,16 @@
   border-radius: 1rem;
 }
 
-.printAgentPreviewImageButton {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: none;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: zoom-in;
-}
-
-.printAgentPreviewImageButtonZoomed {
-  cursor: zoom-out;
-}
-
 .printAgentPreviewCanvas {
   position: relative;
   width: min(90vw, 1120px);
   height: min(76vh, 680px);
-  transition: transform 200ms ease;
-  transform-origin: center center;
-}
-
-.printAgentPreviewCanvasZoomed {
-  transform: scale(1.8);
+  margin: 0 auto;
 }
 
 .printAgentPreviewImage {
   object-fit: contain;
   user-select: none;
-}
-
-.printAgentPreviewToolbar {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 1;
-}
-
-.printAgentPreviewZoomButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  backdrop-filter: blur(10px);
-  transition:
-    background 150ms ease,
-    border-color 150ms ease,
-    color 150ms ease;
-}
-
-.printAgentPreviewZoomButtonDark {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: white;
-}
-
-.printAgentPreviewZoomButtonDark:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.printAgentPreviewZoomButtonLight {
-  background: rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 0, 0, 0.12);
-  color: #111827;
-}
-
-.printAgentPreviewZoomButtonLight:hover {
-  background: rgba(0, 0, 0, 0.16);
 }
 
 @media (max-width: 767px) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const firstName = "PATRIK";
 const lastName = "DINH";
@@ -29,15 +29,29 @@ export default function SplashScreen({
   onComplete: () => void;
 }) {
   const [phase, setPhase] = useState<Phase>("enter");
+  const completionStartedRef = useRef(false);
+
+  const completeSplash = useCallback(() => {
+    if (completionStartedRef.current) {
+      return;
+    }
+
+    completionStartedRef.current = true;
+    setTimeout(onComplete, 350);
+  }, [onComplete]);
 
   // po „dopsání“ jména chvíli podržet a pak spustit exit
   useEffect(() => {
     const timer = setTimeout(() => {
       setPhase("exit");
     }, 2200); // klidně si poladíš (délka enter animace + chvilka pauzy)
+    const fallbackTimer = setTimeout(completeSplash, 4300);
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(fallbackTimer);
+    };
+  }, [completeSplash]);
 
   const containerVariants = {
     initial: { opacity: 1 },
@@ -86,11 +100,10 @@ export default function SplashScreen({
       animate={phase}
       onAnimationComplete={() => {
         if (phase === "exit") {
-          // necháme jemný buffer, ať to není useknuté
-          setTimeout(onComplete, 350);
+          completeSplash();
         }
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
       style={{
         backgroundColor: "var(--bg)",
       }}

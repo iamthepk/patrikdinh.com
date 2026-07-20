@@ -40,6 +40,7 @@ interface PrintAgentFlowAnimationProps {
 
 type FlowThumbnailCardProps = {
   preview: PrintAgentPreview;
+  imageSrc: string;
   strokeColor: string;
   strokeWidth: number;
   textColor: string;
@@ -63,6 +64,7 @@ function handleSvgButtonKeyDown(
 
 function FlowThumbnailCard({
   preview,
+  imageSrc,
   strokeColor,
   strokeWidth,
   textColor,
@@ -87,19 +89,19 @@ function FlowThumbnailCard({
         y={preview.y}
         width={preview.width}
         height={preview.height}
-        rx={12}
+        rx={8}
         stroke={strokeColor}
         fill="none"
         strokeWidth={strokeWidth}
       />
       <image
-        href={preview.src}
+        href={imageSrc}
         x={preview.imageX}
         y={preview.imageY}
         width={preview.imageWidth}
         height={preview.imageHeight}
         preserveAspectRatio="xMidYMid meet"
-        opacity={0.95}
+        opacity={1}
       />
       <text
         x={preview.x + preview.width / 2}
@@ -112,28 +114,6 @@ function FlowThumbnailCard({
         {preview.label}
       </text>
     </motion.g>
-  );
-}
-
-function FlowThumbnailConnector({
-  preview,
-  strokeColor,
-  strokeWidth,
-  getAnimationProps,
-}: Omit<FlowThumbnailCardProps, "textColor" | "openPreview">) {
-  return (
-    <motion.path
-      d={preview.connectorPath}
-      stroke={strokeColor}
-      strokeWidth={strokeWidth * 0.7}
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeDasharray="4 6"
-      variants={lineVariants}
-      {...getAnimationProps(preview.connectorDelay)}
-      opacity={0.6}
-    />
   );
 }
 
@@ -158,6 +138,13 @@ export function PrintAgentFlowAnimation({
   const bgColor = isDark ? "bg-black" : "bg-white";
   const strokeColor = isDark ? "white" : "#1a1a1a";
   const textColor = isDark ? "white" : "#1a1a1a";
+  const mutedTextColor = isDark
+    ? "rgba(255,255,255,0.62)"
+    : "rgba(26,26,26,0.62)";
+  const softStrokeColor = isDark
+    ? "rgba(255,255,255,0.28)"
+    : "rgba(26,26,26,0.24)";
+  const nodeFillColor = isDark ? "#050505" : "#ffffff";
   const strokeWidth = isDark ? 2 : 2.5;
 
   const getAnimationProps = (customDelay?: number) => ({
@@ -259,442 +246,204 @@ export function PrintAgentFlowAnimation({
             orient="auto"
             markerUnits="userSpaceOnUse"
           >
-            <path
-              d="M 0 0.5 Q 0 0, 1 0.5 L 8 3 L 1 5.5 Q 0 6, 0 5.5 Z"
-              fill={strokeColor}
-              stroke="none"
-            />
+            <path d="M0,0 L0,6 L9,3 Z" fill={strokeColor} stroke="none" />
           </marker>
         </defs>
 
         <motion.g variants={cardVariants} {...getAnimationProps(0)}>
           <rect
-            x={150}
-            y={260}
-            width={180}
-            height={90}
-            rx={16}
+            x={90}
+            y={120}
+            width={350}
+            height={300}
+            rx={8}
             stroke={strokeColor}
-            fill="none"
+            fill={nodeFillColor}
             strokeWidth={strokeWidth}
           />
-          <rect
-            x={165}
-            y={275}
-            width={90}
-            height={50}
-            rx={4}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth}
-          />
-          <line
-            x1={175}
-            y1={290}
-            x2={245}
-            y2={290}
-            stroke={strokeColor}
-            strokeWidth={strokeWidth * 0.6}
-          />
-          <line
-            x1={175}
-            y1={300}
-            x2={230}
-            y2={300}
-            stroke={strokeColor}
-            strokeWidth={strokeWidth * 0.6}
-          />
-          <line
-            x1={175}
-            y1={310}
-            x2={220}
-            y2={310}
-            stroke={strokeColor}
-            strokeWidth={strokeWidth * 0.6}
-          />
-          <rect
-            x={260}
-            y={278}
-            width={25}
-            height={20}
-            rx={3}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth * 0.7}
-          />
-          <rect
-            x={290}
-            y={278}
-            width={25}
-            height={20}
-            rx={3}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth * 0.7}
-          />
-          <rect
-            x={260}
-            y={303}
-            width={25}
-            height={20}
-            rx={3}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth * 0.7}
-          />
-          <rect
-            x={290}
-            y={303}
-            width={25}
-            height={20}
-            rx={3}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth * 0.7}
-          />
-          <text
-            x={240}
-            y={370}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            POS App
+          <text x={120} y={175} fill={textColor} fontSize={34} fontWeight={800}>
+            Cloud POS
           </text>
-        </motion.g>
-
-        <motion.g variants={cardVariants} {...getAnimationProps(0.6)}>
-          <rect
-            x={360}
-            y={260}
-            width={180}
-            height={90}
-            rx={16}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth}
-          />
-          <text
-            x={450}
-            y={310}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            JSON Payload
+          <text x={120} y={220} fill={mutedTextColor} fontSize={20} fontWeight={700}>
+            sends structured jobs
           </text>
-          <text
-            x={450}
-            y={370}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            Order
+          <line x1={120} y1={245} x2={410} y2={245} stroke={softStrokeColor} />
+          <text x={120} y={288} fill={textColor} fontSize={22} fontWeight={700}>
+            POST /print-receipt
+          </text>
+          <text x={120} y={324} fill={textColor} fontSize={22} fontWeight={700}>
+            POST /print-sticker
+          </text>
+          <text x={120} y={360} fill={textColor} fontSize={22} fontWeight={700}>
+            POST /open-drawer
           </text>
         </motion.g>
 
         <motion.path
-          d="M330 305 H360"
+          d="M440 270 H610"
           stroke={strokeColor}
-          strokeWidth={strokeWidth * 0.85}
+          strokeWidth={strokeWidth * 0.9}
           fill="none"
           strokeLinecap="round"
-          strokeLinejoin="round"
           variants={lineVariants}
-          {...getAnimationProps(0.4)}
+          {...getAnimationProps(0.65)}
+          markerEnd="url(#arrowhead)"
+        />
+
+        <motion.g variants={cardVariants} {...getAnimationProps(0.9)}>
+          <rect
+            x={610}
+            y={105}
+            width={430}
+            height={330}
+            rx={8}
+            stroke={strokeColor}
+            fill={nodeFillColor}
+            strokeWidth={strokeWidth * 1.15}
+          />
+          <text x={650} y={165} fill={textColor} fontSize={38} fontWeight={850}>
+            Print Agent
+          </text>
+          <text x={650} y={205} fill={mutedTextColor} fontSize={22} fontWeight={750}>
+            Node.js service - localhost:8000
+          </text>
+          <line x1={650} y1={232} x2={1000} y2={232} stroke={softStrokeColor} />
+          <text x={650} y={275} fill={textColor} fontSize={22} fontWeight={750}>
+            Method selection
+          </text>
+          <text x={650} y={312} fill={textColor} fontSize={22} fontWeight={750}>
+            PDF renderer + ESC/POS fallback
+          </text>
+          <text x={650} y={349} fill={textColor} fontSize={22} fontWeight={750}>
+            Sticker PNG renderer
+          </text>
+          <text x={650} y={386} fill={textColor} fontSize={22} fontWeight={750}>
+            Health + capability checks
+          </text>
+        </motion.g>
+
+        <motion.path
+          d="M1040 270 H1128"
+          stroke={strokeColor}
+          strokeWidth={strokeWidth * 0.9}
+          fill="none"
+          strokeLinecap="round"
+          variants={lineVariants}
+          {...getAnimationProps(1.25)}
+        />
+
+        <motion.path
+          d="M1128 162.5 V492.5"
+          stroke={strokeColor}
+          strokeWidth={strokeWidth * 0.9}
+          fill="none"
+          strokeLinecap="round"
+          variants={lineVariants}
+          {...getAnimationProps(1.35)}
+        />
+
+        <motion.path
+          d="M1128 162.5 H1180"
+          stroke={strokeColor}
+          strokeWidth={strokeWidth * 0.9}
+          fill="none"
+          strokeLinecap="round"
+          variants={lineVariants}
+          {...getAnimationProps(1.5)}
           markerEnd="url(#arrowhead)"
         />
 
         <motion.path
-          d="M540 305 H620"
+          d="M1128 337.5 H1180"
           stroke={strokeColor}
-          strokeWidth={strokeWidth * 0.85}
+          strokeWidth={strokeWidth * 0.9}
           fill="none"
           strokeLinecap="round"
-          strokeLinejoin="round"
-          variants={lineVariants}
-          {...getAnimationProps(1)}
-          markerEnd="url(#arrowhead)"
-        />
-
-        <motion.g variants={cardVariants} {...getAnimationProps(1.4)}>
-          <rect
-            x={620}
-            y={260}
-            width={100}
-            height={90}
-            rx={16}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth}
-          />
-          <text
-            x={670}
-            y={310}
-            fill={textColor}
-            fontSize={18}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            ngrok
-          </text>
-          <text
-            x={670}
-            y={370}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            HTTPS Tunnel
-          </text>
-        </motion.g>
-
-        <motion.path
-          d="M720 305 H800"
-          stroke={strokeColor}
-          strokeWidth={strokeWidth * 0.85}
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
           variants={lineVariants}
           {...getAnimationProps(1.6)}
           markerEnd="url(#arrowhead)"
         />
 
-        <motion.g variants={cardVariants} {...getAnimationProps(1.8)}>
-          <polygon
-            points="800,285 840,265 880,285 880,325 840,345 800,325"
-            stroke={strokeColor}
-            strokeWidth={strokeWidth}
-            fill="none"
-          />
-          <text
-            x={840}
-            y={308}
-            fill={textColor}
-            fontSize={20}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            JS
-          </text>
-          <text
-            x={840}
-            y={365}
-            fill={textColor}
-            fontSize={18}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            Print Agent
-          </text>
-          <text
-            x={840}
-            y={385}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            :8000
-          </text>
-          <text
-            x={840}
-            y={405}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            REST API
-          </text>
-        </motion.g>
-
         <motion.path
-          d="M880 325 C 1000 375, 1100 375, 1150 395"
+          d="M1128 492.5 H1180"
           stroke={strokeColor}
-          strokeWidth={strokeWidth * 0.85}
+          strokeWidth={strokeWidth * 0.9}
           fill="none"
           strokeLinecap="round"
-          strokeLinejoin="round"
           variants={lineVariants}
-          {...getAnimationProps(2.4)}
+          {...getAnimationProps(1.7)}
           markerEnd="url(#arrowhead)"
         />
 
-        <motion.g variants={cardVariants} {...getAnimationProps(2.5)}>
+        <motion.g variants={cardVariants} {...getAnimationProps(1.7)}>
           <rect
-            x={950}
-            y={323}
-            width={100}
-            height={22}
-            rx={4}
-            fill={isDark ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)"}
+            x={1180}
+            y={95}
+            width={455}
+            height={135}
+            rx={8}
             stroke={strokeColor}
-            strokeWidth={strokeWidth * 0.5}
-            opacity={0.8}
-          />
-          <text
-            x={1000}
-            y={338}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            /print-label
-          </text>
-        </motion.g>
-
-        <motion.path
-          d="M880 285 C 1050 235, 1250 235, 1350 235"
-          stroke={strokeColor}
-          strokeWidth={strokeWidth * 0.85}
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          variants={lineVariants}
-          {...getAnimationProps(2.8)}
-          markerEnd="url(#arrowhead)"
-        />
-
-        <motion.g variants={cardVariants} {...getAnimationProps(2.9)}>
-          <rect
-            x={1070}
-            y={253}
-            width={105}
-            height={22}
-            rx={4}
-            fill={isDark ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)"}
-            stroke={strokeColor}
-            strokeWidth={strokeWidth * 0.5}
-            opacity={0.8}
-          />
-          <text
-            x={1122.5}
-            y={268}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            /print-receipt
-          </text>
-        </motion.g>
-
-        <motion.g variants={cardVariants} {...getAnimationProps(3)}>
-          <rect
-            x={1350}
-            y={190}
-            width={150}
-            height={90}
-            rx={10}
-            stroke={strokeColor}
-            fill="none"
+            fill={nodeFillColor}
             strokeWidth={strokeWidth}
           />
-          <rect
-            x={1365}
-            y={205}
-            width={120}
-            height={60}
-            rx={6}
-            stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth * 0.75}
-          />
-          <text
-            x={1425}
-            y={240}
-            fill={textColor}
-            fontSize={16}
-            textAnchor="middle"
-          >
+          <text x={1212} y={145} fill={textColor} fontSize={28} fontWeight={850}>
             Receipt
           </text>
-          <text
-            x={1425}
-            y={305}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            Epson TM-T20III
-          </text>
-          <text
-            x={1425}
-            y={325}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            PDFKit + SumatraPDF
+          <text x={1212} y={184} fill={mutedTextColor} fontSize={20} fontWeight={700}>
+            PDF print - ESC/POS fallback
           </text>
         </motion.g>
 
-        <motion.g variants={cardVariants} {...getAnimationProps(2.6)}>
+        <motion.g variants={cardVariants} {...getAnimationProps(1.9)}>
           <rect
-            x={1150}
-            y={350}
-            width={150}
-            height={90}
-            rx={10}
+            x={1180}
+            y={270}
+            width={455}
+            height={135}
+            rx={8}
             stroke={strokeColor}
-            fill="none"
+            fill={nodeFillColor}
             strokeWidth={strokeWidth}
           />
+          <text x={1212} y={320} fill={textColor} fontSize={28} fontWeight={850}>
+            Sticker
+          </text>
+          <text x={1212} y={359} fill={mutedTextColor} fontSize={20} fontWeight={700}>
+            HTML - PNG @ 300 DPI - Brother
+          </text>
+        </motion.g>
+
+        <motion.g variants={cardVariants} {...getAnimationProps(2.1)}>
           <rect
-            x={1165}
-            y={365}
-            width={120}
-            height={60}
-            rx={6}
+            x={1180}
+            y={445}
+            width={455}
+            height={95}
+            rx={8}
             stroke={strokeColor}
-            fill="none"
-            strokeWidth={strokeWidth * 0.75}
+            fill={nodeFillColor}
+            strokeWidth={strokeWidth}
           />
-          <text
-            x={1225}
-            y={398}
-            fill={textColor}
-            fontSize={18}
-            textAnchor="middle"
-          >
-            Label
+          <text x={1212} y={500} fill={textColor} fontSize={28} fontWeight={850}>
+            Drawer kick
           </text>
-          <text
-            x={1225}
-            y={460}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            Brother QL-700
+          <text x={1412} y={500} fill={mutedTextColor} fontSize={20} fontWeight={700}>
+            ESC p pulse
           </text>
-          <text
-            x={1225}
-            y={480}
-            fill={textColor}
-            fontSize={16}
-            fontWeight={600}
-            textAnchor="middle"
-          >
-            Puppeteer + IrfanView
+        </motion.g>
+
+        <motion.g variants={cardVariants} {...getAnimationProps(2.35)}>
+          <text x={95} y={585} fill={mutedTextColor} fontSize={18} fontWeight={800}>
+            API contracts
           </text>
+          <line x1={230} y1={579} x2={1510} y2={579} stroke={softStrokeColor} />
         </motion.g>
 
         {PRINT_AGENT_PREVIEWS.map((preview) => (
           <FlowThumbnailCard
             key={preview.id}
             preview={preview}
+            imageSrc={isDark ? preview.src : preview.lightSrc}
             strokeColor={strokeColor}
             strokeWidth={strokeWidth}
             textColor={textColor}
@@ -703,15 +452,6 @@ export function PrintAgentFlowAnimation({
           />
         ))}
 
-        {PRINT_AGENT_PREVIEWS.map((preview) => (
-          <FlowThumbnailConnector
-            key={`${preview.id}-connector`}
-            preview={preview}
-            strokeColor={strokeColor}
-            strokeWidth={strokeWidth}
-            getAnimationProps={getAnimationProps}
-          />
-        ))}
       </motion.svg>
 
       <PrintAgentPreviewModal
