@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Patrik Dinh — Full-stack developer building internal systems, automation and AI tools for real-world use.";
+export const alt = "Patrik Dinh — Full-stack developer building internal systems, automation and reliable tools for real-world use.";
 export const size = {
   width: 1200,
   height: 630,
@@ -97,7 +97,7 @@ export default function OpenGraphImage() {
                 maxWidth: 900,
               }}
             >
-              Building internal systems, automation and AI tools.
+              Building internal systems, automation and reliable tools.
             </div>
 
             <div
@@ -111,7 +111,7 @@ export default function OpenGraphImage() {
               {[
                 "Internal tools",
                 "Automation",
-                "AI workflows",
+                "Workflow systems",
                 "Production systems",
               ].map((label) => (
                 <div
@@ -148,7 +148,7 @@ export default function OpenGraphImage() {
                 fontSize: 24,
               }}
             >
-              <div style={{ display: "flex" }}>Full-stack · TypeScript · AI</div>
+              <div style={{ display: "flex" }}>Full-stack · TypeScript · Automation</div>
               <div style={{ display: "flex" }}>Case-study driven portfolio</div>
             </div>
 

@@ -161,7 +161,7 @@ export default function Projects() {
         <p className="projectsDisclosure">
           What you see here are public-facing versions of larger production
           systems. I share enough to explain the thinking and the work, but not
-          the private logic, prompts and internal workflows behind them.
+          the private implementation details and internal workflows behind them.
         </p>
 
         <motion.div
