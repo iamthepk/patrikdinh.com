@@ -160,6 +160,15 @@ The portfolio stores theme preference locally and applies it before hydration to
 
 Vercel Analytics and Speed Insights are both loaded only in production builds.
 
+## License
+
+Copyright (c) 2026 Patrik Dinh. All rights reserved.
+
+This repository is visible for evaluation and review, but no permission is
+granted to copy, modify, distribute, publish, host, sell, or reuse its code,
+content, design, case studies, screenshots, or generated assets without prior
+written permission.
+
 ## Testing
 
 The repository includes a small regression safety net with Vitest and Testing Library:
