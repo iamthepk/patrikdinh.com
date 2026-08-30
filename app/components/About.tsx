@@ -87,11 +87,11 @@ export default function About() {
                   className="text-2xl md:text-3xl font-normal leading-[1.6]"
                   style={{ color: "var(--text)" }}
                 >
-                  I am not interested in just getting an app on the screen and
-                  calling it finished. I care about the parts that decide
-                  whether something is actually usable: security, testing,
-                  validation, reliability, and whether it still makes sense once
-                  real people start depending on it.
+                  I use AI tools a lot, but I am not interested in just getting
+                  an app on the screen and calling it finished. I care about the
+                  parts that decide whether something is actually usable:
+                  security, testing, validation, reliability, and whether it
+                  still makes sense once real people start depending on it.
                 </p>
 
                 <p

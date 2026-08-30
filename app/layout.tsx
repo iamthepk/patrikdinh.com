@@ -20,9 +20,9 @@ const inter = Inter({
 });
 
 const siteUrl = "https://patrikdinh.com";
-const siteTitle = "Patrik Dinh - Full-stack Developer";
+const siteTitle = "Patrik Dinh - Full-stack & AI Developer";
 const siteDescription =
-  "Building production-ready systems with TypeScript. Full-stack developer focused on practical automation, internal tools and reliable software used in real daily operation.";
+  "Building production-ready systems with AI & TypeScript. Full-stack developer focused on practical automation, internal tools and intelligent systems used in real daily operation.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

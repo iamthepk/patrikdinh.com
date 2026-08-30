@@ -52,7 +52,7 @@ export default function Hero() {
           <h1 className="heroTitle">Patrik Dinh</h1>
           <h2 className="heroSubtitle">
             <span className="heroSubtitleLine">Building internal systems,</span>
-            <span className="heroSubtitleLine">automation and reliable tools.</span>
+            <span className="heroSubtitleLine">automation and AI tools.</span>
           </h2>
 
           <p className="heroDescription">

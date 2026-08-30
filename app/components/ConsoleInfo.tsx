@@ -28,11 +28,11 @@ export default function ConsoleInfo() {
         "color: " + accentColor + "; font-size: 16px; font-weight: bold;"
       );
       console.log(
-        "%cFull-stack Developer",
+        "%cFull-stack & AI Developer",
         "color: " + textColor + "; font-size: 12px;"
       );
       console.log(
-        "%cBuilding useful products with TypeScript",
+        "%cBuilding useful products with AI & TypeScript",
         "color: " + textColor + "; font-size: 12px;"
       );
       console.log("");
@@ -66,7 +66,7 @@ export default function ConsoleInfo() {
         Framework: "Next.js 16 (App Router)",
         Language: "TypeScript",
         Styling: "Tailwind CSS",
-        Focus: "Full-stack Product Development",
+        Focus: "Full-stack & AI Development",
         Author: "Patrik Dinh",
         Location: "Prague, Czech Republic",
       });
@@ -76,7 +76,7 @@ export default function ConsoleInfo() {
         "color: " + accentColor + "; font-size: 14px; font-weight: bold;"
       );
       console.log(
-        "%c• Internal systems, automation and production workflows",
+        "%c• Experience with modern AI models (GPT, Gemini, Claude)",
         "color: " + textColor + "; font-size: 12px;"
       );
       console.log(

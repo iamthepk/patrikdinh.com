@@ -170,7 +170,7 @@ export const projects: Project[] = [
         {
           heading: "My role",
           content:
-            "I designed and built the system end-to-end: product structure, database schema, migrations, POS checkout flows, management modules, employee cards, permissions, products, stock and recipes, reporting, shift tools, customer sync, invoice workflows, integrations and production hardening. I owned the architecture, implementation decisions, testing and day-to-day reliability. The system is actively used in daily operation.",
+            "I designed and built the system end-to-end: product structure, database schema, migrations, POS checkout flows, management modules, employee cards, permissions, products, stock and recipes, reporting, shift tools, customer sync, invoice workflows, integrations and production hardening. I used AI tools to move faster, but the architecture, implementation decisions, testing and day-to-day reliability were my responsibility. The system is actively used in daily operation.",
         },
       ],
     },
@@ -350,7 +350,7 @@ export const projects: Project[] = [
             strong("Windows integration"),
             " (startup, restart, background mode), templates for receipts and labels, operational scripts and ",
             strong("health-check endpoints"),
-            ". The real work was making the system stable, testable and trustworthy in daily operation."
+            ". I used AI tools where they helped me move faster, but the real work was making the system stable, testable and trustworthy in daily operation."
           ),
         },
       ],
@@ -649,7 +649,7 @@ export const projects: Project[] = [
         {
           heading: "My Role & Ownership",
           content:
-            "I was responsible for the entire full-stack pipeline: architectural design, Next.js/TypeScript implementation, canvas-based live preview engine, secure PDFKit rendering logic, DEMO/PROD mode management, the prefix/sequence engine, Supabase integration, and final Vercel deployment setup. The production rules, layout precision and safety guarantees were mine to define and test.",
+            "I was responsible for the entire full-stack pipeline: architectural design, Next.js/TypeScript implementation, canvas-based live preview engine, secure PDFKit rendering logic, DEMO/PROD mode management, the prefix/sequence engine, Supabase integration, and final Vercel deployment setup. AI tools helped with speed, but the production rules, layout precision and safety guarantees were mine to define and test.",
         },
       ],
     },
