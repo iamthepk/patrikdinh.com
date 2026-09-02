@@ -387,7 +387,7 @@ export const projects: Project[] = [
     subtitle:
       "A squad planning app that helps friend groups decide what they can play together.",
     description:
-      "A real full-stack product for gaming groups. Lobby Mates brings Steam login, squad invites, shared libraries, play intent, Steam wishlist overlap, profile presence, suggested games, top picks, comparison filters and Discord room setup into one focused dashboard, with a public read-only demo for portfolio review.",
+      "A live full-stack product for gaming groups, currently deployed in production and still actively evolving. Lobby Mates brings Steam and Microsoft/Xbox sign-in, squad invites, seasons, shared libraries, play intent, Steam wishlist overlap, profile presence, suggested games, top picks, comparison filters and Discord room setup into one focused dashboard, with a public read-only demo for portfolio review.",
     keyPoints: [
       rich(
         "Built around the practical question: ",
@@ -396,12 +396,12 @@ export const projects: Project[] = [
       ),
       rich(
         "Uses ",
-        strong("Steam OpenID and Steam Web API"),
+        strong("Steam OpenID, Microsoft/Xbox sign-in and Steam Web API"),
         " for account identity, profile data, current activity, game ownership, playtime, public library sync and squad wishlist discovery."
       ),
       rich(
         "Supports ",
-        strong("multi-squad membership, invite codes, active squad switching and leader/member permissions"),
+        strong("multi-squad membership, invite codes, seasons, active squad switching and leader/member permissions"),
         " in one production database."
       ),
       rich(
@@ -420,9 +420,14 @@ export const projects: Project[] = [
         " for private squad text and voice rooms managed from the app."
       ),
       "Includes a public read-only demo route powered by a viewer role, normal session cookies and server-side write guards.",
+      rich(
+        "Production deployment is live, but the product is still ",
+        strong("under active development"),
+        " as the core group workflow, ranking model and integrations continue to improve."
+      ),
     ],
     challenge:
-      "Making group game choice clear while keeping Steam sync, invites, permissions and Discord state reliable.",
+      "Making group game choice clear while shipping a live product whose multi-provider sign-in, seasons, Steam sync, invites, permissions, scoring and Discord state are still being actively refined.",
     tech: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Vercel"],
     liveUrl: "https://www.lobbymates.app/demo",
     thumbnail: {
@@ -435,12 +440,12 @@ export const projects: Project[] = [
         {
           heading: "Context",
           content:
-            "Lobby Mates started from a very ordinary group problem: deciding what to play takes longer than it should. People own different games, want different things, play on different platforms and often end up scrolling through chat instead of launching anything. I built Lobby Mates as a focused squad app that turns that messy conversation into a shared dashboard.",
+            "Lobby Mates started from a very ordinary group problem: deciding what to play takes longer than it should. People own different games, want different things, play on different platforms and often end up scrolling through chat instead of launching anything. I built Lobby Mates as a focused squad app that turns that messy conversation into a shared dashboard. The app is live in production, but I still treat it as an actively developed product rather than a frozen portfolio artifact.",
         },
         {
           heading: "Product loop",
           content:
-            "The core loop is simple: sign in with Steam, create or join a squad, sync public Steam libraries, compare what members own, mark what each person wants to play, check shared wishlist overlap, and use top picks and filters to decide what is ready now. The app is not broad social networking; it is a decision tool for existing friend groups.",
+            "The current product loop is simple: sign in with Steam or Microsoft/Xbox, create or join a squad, move through seasons, sync public Steam libraries, compare what members own, mark what each person wants to play, check shared wishlist overlap, and use top picks and filters to decide what is ready now. The app is not broad social networking; it is a decision tool for existing friend groups, and its production version keeps changing as I tighten that decision flow.",
         },
         {
           heading: "Architecture overview",
@@ -451,7 +456,7 @@ export const projects: Project[] = [
             strong("TypeScript"),
             " and ",
             strong("Tailwind CSS"),
-            ". Supabase Postgres is used through server-side REST access for users, sessions, squads, invites, games, statuses, suggestions and Discord integration records. The application is deployed on ",
+            ". Supabase Postgres is used through server-side REST access for users, sessions, squads, invites, seasons, games, statuses, suggestions and Discord integration records. The application is deployed on ",
             strong("Vercel"),
             " and includes Playwright smoke tests for the public and protected route surface. Vercel Web Analytics and Speed Insights are wired into the public release."
           ),
@@ -459,12 +464,17 @@ export const projects: Project[] = [
         {
           heading: "Auth and sessions",
           content:
-            "Production auth is Steam OpenID only. Lobby Mates never asks for a Steam username, password or Steam Guard code. After Steam verification, the app creates its own Supabase-backed session and stores the session token in an HTTP-only cookie. A separate active-squad cookie keeps squad switching stable across reloads.",
+            "Production auth started with Steam OpenID and now also supports Microsoft/Xbox sign-in. Lobby Mates never asks for a Steam username, password or Steam Guard code. After external account verification, the app creates its own Supabase-backed session and stores the session token in an HTTP-only cookie. A separate active-squad cookie keeps squad switching stable across reloads.",
         },
         {
           heading: "Squads and invites",
           content:
             "Users can create or join multiple squads, with one active squad in the current browser session. Invite codes and invite links are stored hashed in the database, expire automatically and can be revoked. The app has leader/member permissions for actions such as member removal, leadership transfer, squad deletion and Discord lobby creation.",
+        },
+        {
+          heading: "Seasons",
+          content:
+            "Seasons give the product a way to organize ongoing squad activity into named cycles instead of treating the dashboard as one endless state. That makes it easier to evolve ranking, intent and group decision history around the way friend groups actually come back to games over time.",
         },
         {
           heading: "Public demo mode",
@@ -494,7 +504,7 @@ export const projects: Project[] = [
         {
           heading: rich("Technical challenges ", em("aka the nightmares")),
           content:
-            "The hard part was keeping several external systems coherent without making the product feel heavy: Steam auth, library and wishlist availability, Supabase session state, squad membership, invite safety, stable sorting, optimistic UI updates, Discord role/channel state and enough permission boundaries that the app can expose a safe portfolio demo mode.",
+            "The hard part was keeping several external systems coherent without making the product feel heavy: Steam auth, Microsoft/Xbox sign-in, library and wishlist availability, Supabase session state, squad membership, seasons, invite safety, stable sorting, optimistic UI updates, Discord role/channel state and enough permission boundaries that the app can expose a safe portfolio demo mode.",
         },
         {
           heading: "Reliability and safety",
@@ -504,12 +514,12 @@ export const projects: Project[] = [
         {
           heading: "Impact",
           content:
-            "Lobby Mates turns an unstructured chat decision into a visible shared state. The useful part is not just storing a game list; it is making the group answer faster: who owns it, who wants it, whether it is playable now and where the squad can meet once they pick it.",
+            "Lobby Mates turns an unstructured chat decision into a visible shared state. The useful part is not just storing a game list; it is making the group answer faster: who owns it, who wants it, whether it is playable now and where the squad can meet once they pick it. Because the product is already deployed, each improvement can be tested against the real shape of the workflow instead of only against a static demo.",
         },
         {
           heading: "My role",
           content:
-            "I designed and built the product end-to-end: product model, branding, Next.js app structure, Steam auth, custom session flow, Supabase schema, invite system, dashboard UX, Steam library and wishlist pipelines, metadata enrichment, Discord OAuth/lobby integration, public read-only demo mode, production deployment and smoke testing.",
+            "I designed and built the product end-to-end: product model, branding, Next.js app structure, Steam auth, Microsoft/Xbox sign-in, custom session flow, Supabase schema, invite system, seasons, dashboard UX, Steam library and wishlist pipelines, metadata enrichment, Discord OAuth/lobby integration, public read-only demo mode, production deployment and smoke testing.",
         },
       ],
     },

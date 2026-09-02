@@ -103,7 +103,7 @@ export const cvData: CvData = {
       subtitle: "Squad planning app for deciding what a group can play together.",
       stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Vercel"],
       summary:
-        "Built a production web app with external account sign-in, squad invites, shared library and wishlist sync, profile presence refresh, ownership-source handling, six-level play intent, audit-friendly scoring, suggested games, comparison filters, optional group room provisioning and a public read-only demo mode.",
+        "Built and continue to evolve a production web app with Steam and Microsoft/Xbox sign-in, squad invites, seasons, shared library and wishlist sync, profile presence refresh, ownership-source handling, six-level play intent, audit-friendly scoring, suggested games, comparison filters, optional group room provisioning and a public read-only demo mode.",
     },
     {
       projectId: "voucher-generator",
