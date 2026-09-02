@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, RotateCcw } from "lucide-react";
 import { useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { useTheme } from "../lib/theme-provider";
 import "./PrintAgentFlowAnimation.css";
@@ -206,20 +206,31 @@ export function PrintAgentFlowAnimation({
           <button
             type="button"
             onClick={toggleLoop}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold shadow-lg transition-colors ${
+            className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold shadow-lg transition-colors ${
               isLooping
                 ? "bg-green-500 text-white hover:bg-green-600"
                 : "bg-gray-500 text-white hover:bg-gray-600"
             }`}
           >
-            {isLooping ? "⏸️ Zastavit loop" : "▶️ Zapnout loop"}
+            {isLooping ? (
+              <>
+                <Pause className="h-4 w-4" />
+                Pause loop
+              </>
+            ) : (
+              <>
+                <Play className="h-4 w-4" />
+                Play loop
+              </>
+            )}
           </button>
           <button
             type="button"
             onClick={restartAnimation}
-            className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black shadow-lg transition-colors hover:bg-gray-200"
+            className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black shadow-lg transition-colors hover:bg-gray-200"
           >
-            🔄 Restart
+            <RotateCcw className="h-4 w-4" />
+            Restart
           </button>
         </div>
       )}
@@ -261,21 +272,66 @@ export function PrintAgentFlowAnimation({
             fill={nodeFillColor}
             strokeWidth={strokeWidth}
           />
-          <text x={120} y={175} fill={textColor} fontSize={34} fontWeight={800}>
+          <text
+            x={265}
+            y={175}
+            fill={textColor}
+            fontSize={34}
+            fontWeight={800}
+            textAnchor="middle"
+          >
             Cloud POS
           </text>
-          <text x={120} y={220} fill={mutedTextColor} fontSize={20} fontWeight={700}>
-            sends structured jobs
+          <text
+            x={265}
+            y={220}
+            fill={mutedTextColor}
+            fontSize={20}
+            fontWeight={700}
+            textAnchor="middle"
+          >
+            sends tokenized jobs
           </text>
           <line x1={120} y1={245} x2={410} y2={245} stroke={softStrokeColor} />
-          <text x={120} y={288} fill={textColor} fontSize={22} fontWeight={700}>
-            POST /print-receipt
+          <text
+            x={265}
+            y={284}
+            fill={textColor}
+            fontSize={22}
+            fontWeight={700}
+            textAnchor="middle"
+          >
+            GET /health
           </text>
-          <text x={120} y={324} fill={textColor} fontSize={22} fontWeight={700}>
-            POST /print-sticker
+          <text
+            x={265}
+            y={320}
+            fill={textColor}
+            fontSize={22}
+            fontWeight={700}
+            textAnchor="middle"
+          >
+            POST /print-jobs
           </text>
-          <text x={120} y={360} fill={textColor} fontSize={22} fontWeight={700}>
-            POST /open-drawer
+          <text
+            x={265}
+            y={356}
+            fill={textColor}
+            fontSize={21}
+            fontWeight={700}
+            textAnchor="middle"
+          >
+            receipt / kitchen
+          </text>
+          <text
+            x={265}
+            y={390}
+            fill={textColor}
+            fontSize={21}
+            fontWeight={700}
+            textAnchor="middle"
+          >
+            cash_drawer
           </text>
         </motion.g>
 
@@ -301,24 +357,66 @@ export function PrintAgentFlowAnimation({
             fill={nodeFillColor}
             strokeWidth={strokeWidth * 1.15}
           />
-          <text x={650} y={165} fill={textColor} fontSize={38} fontWeight={850}>
+          <text
+            x={825}
+            y={165}
+            fill={textColor}
+            fontSize={38}
+            fontWeight={850}
+            textAnchor="middle"
+          >
             Print Agent
           </text>
-          <text x={650} y={205} fill={mutedTextColor} fontSize={22} fontWeight={750}>
-            Node.js service - localhost:8000
+          <text
+            x={825}
+            y={205}
+            fill={mutedTextColor}
+            fontSize={22}
+            fontWeight={750}
+            textAnchor="middle"
+          >
+            Electron app - 127.0.0.1:47821
           </text>
           <line x1={650} y1={232} x2={1000} y2={232} stroke={softStrokeColor} />
-          <text x={650} y={275} fill={textColor} fontSize={22} fontWeight={750}>
-            Method selection
+          <text
+            x={825}
+            y={275}
+            fill={textColor}
+            fontSize={22}
+            fontWeight={750}
+            textAnchor="middle"
+          >
+            Token auth + config UI
           </text>
-          <text x={650} y={312} fill={textColor} fontSize={22} fontWeight={750}>
-            PDF renderer + ESC/POS fallback
+          <text
+            x={825}
+            y={312}
+            fill={textColor}
+            fontSize={22}
+            fontWeight={750}
+            textAnchor="middle"
+          >
+            Role routing + printer queues
           </text>
-          <text x={650} y={349} fill={textColor} fontSize={22} fontWeight={750}>
-            Sticker PNG renderer
+          <text
+            x={825}
+            y={349}
+            fill={textColor}
+            fontSize={22}
+            fontWeight={750}
+            textAnchor="middle"
+          >
+            PDF/ESC-POS + Windows fallback
           </text>
-          <text x={650} y={386} fill={textColor} fontSize={22} fontWeight={750}>
-            Health + capability checks
+          <text
+            x={825}
+            y={386}
+            fill={textColor}
+            fontSize={22}
+            fontWeight={750}
+            textAnchor="middle"
+          >
+            Health + 24h dedupe
           </text>
         </motion.g>
 
@@ -386,11 +484,25 @@ export function PrintAgentFlowAnimation({
             fill={nodeFillColor}
             strokeWidth={strokeWidth}
           />
-          <text x={1212} y={145} fill={textColor} fontSize={28} fontWeight={850}>
+          <text
+            x={1407.5}
+            y={145}
+            fill={textColor}
+            fontSize={28}
+            fontWeight={850}
+            textAnchor="middle"
+          >
             Receipt
           </text>
-          <text x={1212} y={184} fill={mutedTextColor} fontSize={20} fontWeight={700}>
-            PDF print - ESC/POS fallback
+          <text
+            x={1407.5}
+            y={184}
+            fill={mutedTextColor}
+            fontSize={20}
+            fontWeight={700}
+            textAnchor="middle"
+          >
+            SumatraPDF/PDF - ESC/POS raw
           </text>
         </motion.g>
 
@@ -405,11 +517,25 @@ export function PrintAgentFlowAnimation({
             fill={nodeFillColor}
             strokeWidth={strokeWidth}
           />
-          <text x={1212} y={320} fill={textColor} fontSize={28} fontWeight={850}>
-            Sticker
+          <text
+            x={1407.5}
+            y={320}
+            fill={textColor}
+            fontSize={28}
+            fontWeight={850}
+            textAnchor="middle"
+          >
+            Kitchen label
           </text>
-          <text x={1212} y={359} fill={mutedTextColor} fontSize={20} fontWeight={700}>
-            HTML - PNG @ 300 DPI - Brother
+          <text
+            x={1407.5}
+            y={359}
+            fill={mutedTextColor}
+            fontSize={20}
+            fontWeight={700}
+            textAnchor="middle"
+          >
+            Image/PDF - Windows fallback
           </text>
         </motion.g>
 
@@ -424,10 +550,24 @@ export function PrintAgentFlowAnimation({
             fill={nodeFillColor}
             strokeWidth={strokeWidth}
           />
-          <text x={1212} y={500} fill={textColor} fontSize={28} fontWeight={850}>
+          <text
+            x={1407.5}
+            y={485}
+            fill={textColor}
+            fontSize={28}
+            fontWeight={850}
+            textAnchor="middle"
+          >
             Drawer kick
           </text>
-          <text x={1412} y={500} fill={mutedTextColor} fontSize={20} fontWeight={700}>
+          <text
+            x={1407.5}
+            y={519}
+            fill={mutedTextColor}
+            fontSize={20}
+            fontWeight={700}
+            textAnchor="middle"
+          >
             ESC p pulse
           </text>
         </motion.g>

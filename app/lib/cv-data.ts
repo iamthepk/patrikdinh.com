@@ -68,7 +68,10 @@ export const cvData: CvData = {
     "React",
     "Next.js",
     "Node.js",
+    "Electron",
     "Express",
+    "Vite",
+    "PDFKit",
     "PostgreSQL",
     "Supabase",
     "REST APIs",
@@ -88,10 +91,11 @@ export const cvData: CvData = {
     {
       projectId: "print-agent",
       title: "Print Agent",
-      subtitle: "Local integration layer connecting a cloud POS with physical printers.",
-      stack: ["Node.js", "Express"],
+      subtitle:
+        "Windows desktop print bridge for POS receipts, kitchen labels and cash drawers.",
+      stack: ["Electron", "React", "TypeScript", "Node.js", "PDFKit"],
       summary:
-        "Built a local desktop service that handles receipt and label printing without browser dialogs or manual steps, bridging cloud POS workflows with in-store hardware.",
+        "Built and released the maintained public Windows desktop print bridge for POS workflows, including an Electron tray/admin app, token-protected HTTP API, device-local pairing, printer roles, installer packaging, local dedupe, simulated backend, non-blocking checkout behavior and receipt/kitchen/cash drawer pipelines.",
     },
     {
       projectId: "lobbymates",

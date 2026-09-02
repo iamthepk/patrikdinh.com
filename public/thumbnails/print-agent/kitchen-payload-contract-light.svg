@@ -1,0 +1,35 @@
+<svg width="920" height="560" viewBox="0 0 920 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Print Agent kitchen task contract</title>
+  <rect width="920" height="560" fill="#ffffff"/>
+  <rect x="28" y="28" width="864" height="504" rx="8" stroke="#d4d4d8" stroke-width="2"/>
+  <style>
+    text { font-family: Inter, "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+    .eyebrow { fill: #18181b; font-size: 15px; font-weight: 800; }
+    .title { fill: #09090b; font-size: 38px; font-weight: 850; }
+    .muted { fill: #52525b; font-size: 18px; font-weight: 700; }
+    .label { fill: #09090b; font-size: 15px; font-weight: 850; }
+    .code { fill: #18181b; font-family: Consolas, "SFMono-Regular", monospace; font-size: 18px; font-weight: 700; white-space: pre; }
+    .sideTitle { fill: #09090b; font-size: 24px; font-weight: 850; }
+    .sideText { fill: #18181b; font-size: 17px; font-weight: 750; }
+    .sideHint { fill: #52525b; font-size: 15px; font-weight: 700; }
+  </style>
+  <text x="58" y="78" class="eyebrow">PRINT AGENT / KITCHEN</text>
+  <text x="58" y="130" class="title">Kitchen label task</text>
+  <text x="60" y="168" class="muted">Prep labels use the same endpoint, routed by task role.</text>
+  <rect x="60" y="218" width="800" height="286" rx="8" fill="#f8fafc" stroke="#d4d4d8" stroke-width="2"/>
+  <rect x="92" y="248" width="212" height="38" rx="8" fill="#ffffff" stroke="#111827" stroke-width="2"/>
+  <text x="112" y="273" class="label">POST /print-jobs</text>
+  <text x="92" y="318" class="code">{</text>
+  <text x="112" y="342" class="code">jobId,</text>
+  <text x="112" y="366" class="code">tasks: [{ role: &quot;kitchen&quot;,</text>
+  <text x="132" y="390" class="code">templateId: &quot;kitchen.default&quot;,</text>
+  <text x="132" y="414" class="code">payload: { productName,</text>
+  <text x="152" y="438" class="code">modifiers, note }</text>
+  <text x="112" y="462" class="code">}]</text>
+  <text x="92" y="486" class="code">}</text>
+  <rect x="606" y="304" width="222" height="148" rx="8" fill="#ffffff" stroke="#111827" stroke-width="2"/>
+  <text x="628" y="340" class="sideTitle">Output</text>
+  <text x="628" y="374" class="sideText">Image/PDF label</text>
+  <text x="628" y="402" class="sideText">Windows fallback</text>
+  <text x="628" y="430" class="sideHint">Role routed</text>
+</svg>

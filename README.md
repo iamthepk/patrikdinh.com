@@ -2,7 +2,7 @@
 
 Personal portfolio website built with Next.js, focused on real-world internal systems, automation, practical software, and case-study-driven presentation.
 
-This repository contains the portfolio site itself, not the source code of the featured products. Some showcased systems are private internal tools, production systems, or business assets, so the portfolio presents them through write-ups, screenshots, interactive previews, and technical summaries instead of public repositories.
+This repository contains the portfolio site itself, not most of the source code for the featured products. Some showcased systems are private internal tools, production systems, or business assets, so the portfolio presents them through write-ups, screenshots, interactive previews, and technical summaries. Intentionally public work, such as Print Agent, is linked from its project card.
 
 ## What This Site Includes
 
@@ -24,6 +24,7 @@ The products presented on the site are real projects, but their source code is n
 - Client or operational tooling stays private
 - Live demos are linked only where sharing is safe
 - GitHub links are shown only for projects that are intentionally public
+- Print Agent is public and linked from the portfolio
 
 If you are reviewing the portfolio, the main signal is the quality of the case studies and the scope of the shipped work, not the number of open-source repositories.
 
@@ -70,7 +71,7 @@ app/
 │   ├── About.tsx                   # Positioning text and personal context
 │   ├── CVContent.tsx               # Shared CV content for the homepage modal
 │   ├── Footer.tsx                  # Contact section
-│   ├── PrintAgentFlowAnimation.tsx # Custom animated project preview
+│   ├── PrintAgentFlowAnimation.tsx # Custom animated Print Agent preview
 │   ├── Modal.tsx                   # Shared accessible modal component
 │   ├── RichText.tsx                # Structured rich text renderer for project content
 │   ├── SplashScreen.tsx            # Intro animation

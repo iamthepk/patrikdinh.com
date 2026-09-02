@@ -16,8 +16,8 @@
 
 .printAgentPreviewViewport {
   position: relative;
-  width: min(90vw, 1180px);
-  height: min(82vh, 720px);
+  width: min(90vw, 1120px);
+  max-height: min(82vh, 720px);
   margin: 0 auto;
   overflow: auto;
   border-radius: 1rem;
@@ -26,7 +26,8 @@
 .printAgentPreviewCanvas {
   position: relative;
   width: min(90vw, 1120px);
-  height: min(76vh, 680px);
+  aspect-ratio: 920 / 560;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -46,11 +47,10 @@
 
   .printAgentPreviewViewport {
     width: calc(100vw - 24px);
-    height: min(78vh, 540px);
+    max-height: min(78vh, 540px);
   }
 
   .printAgentPreviewCanvas {
     width: calc(100vw - 32px);
-    height: min(72vh, 500px);
   }
 }

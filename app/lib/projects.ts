@@ -114,7 +114,7 @@ export const projects: Project[] = [
         {
           heading: "POS and front-of-house workflows",
           content:
-            "The POS layer is optimized for barista speed: big tiles, minimal clicks and clear product flows. Orders support drink configuration, parked orders, vouchers, split payments, cash rounding, refunds and multiple payment methods. On confirmation, the system sends structured jobs to the Print Agent so receipts, labels and cash drawer actions happen without browser popups or extra staff interaction.",
+            "The POS layer is optimized for barista speed: big tiles, minimal clicks and clear product flows. Orders support drink configuration, parked orders, vouchers, split payments, cash rounding, refunds and multiple payment methods. On confirmation, the system sends structured jobs to Print Agent so receipts, kitchen labels and cash drawer actions happen without browser popups or extra staff interaction.",
         },
         {
           heading: "Receipt editing & refunds",
@@ -129,7 +129,7 @@ export const projects: Project[] = [
             strong("RefundModal"),
             ". All edits re-calculate totals, VAT, discounts and multi-currency amounts. Audit safety rules ensure ",
             strong("receipt_number and order_number are immutable"),
-            ". Refunds use a soft-refund model, creating a dedicated record while keeping the original receipt intact. Updated receipts and refunds are printed through the Print Agent."
+            ". Refunds use a soft-refund model, creating a dedicated record while keeping the original receipt intact. Updated receipts and refunds are printed through Print Agent."
           ),
         },
         {
@@ -178,42 +178,49 @@ export const projects: Project[] = [
   {
     id: "print-agent",
     title: "Print Agent",
-    subtitle: "Local printing layer for a cloud-based POS system.",
+    subtitle:
+      "Windows desktop print bridge with local admin UI and token-protected HTTP API.",
     description:
-      "A local desktop bridge that makes a cloud-based POS behave like a native in-store system. Running on a Windows PC next to the cash desk, it handles receipt and label printing without browser dialogs, manual clicks or staff intervention.",
+      "A maintained Windows desktop app that lets a cloud POS print through local receipt printers, kitchen label printers and cash drawers. The current public implementation replaces the original Node-only bridge with an Electron tray app, installer, local admin UI, token-protected API, printer role configuration and safer runtime behavior.",
     keyPoints: [
       rich(
-        "Built to solve the real gap between a ",
-        strong("cloud POS"),
+        "Built as an ",
+        strong("Electron desktop app"),
+        " with tray integration and a local admin UI for device setup."
+      ),
+      rich(
+        "Exposes a token-protected HTTP API with ",
+        strong("GET /health"),
+        ", ",
+        strong("GET /printers"),
+        ", ",
+        strong("PATCH /config"),
         " and ",
-        strong("local in-shop printers"),
+        strong("POST /print-jobs"),
         "."
       ),
       rich(
-        "Prints receipts with discounts, VAT, refunds and ",
-        strong("dual-currency totals (CZK/EUR)"),
-        "."
+        "Routes ",
+        strong("receipt, kitchen and cash_drawer"),
+        " tasks to configured Windows printers."
       ),
       rich(
-        "Automatically prints a drink label for every confirmed item with ",
-        strong("zero extra barista steps"),
-        "."
+        "Supports receipt printing through ",
+        strong("SumatraPDF/PDF or POS/ESC raw mode"),
+        ", kitchen labels through image/PDF fallback paths and cash drawer pulses."
       ),
       rich(
-        "Runs ",
-        strong("silently in the background"),
-        ", starts with Windows and is designed for day-to-day reliability."
+        "Uses 24-hour local dedupe by ",
+        strong("jobId + normalized request content"),
+        " to suppress accidental duplicate prints."
       ),
-      "Uses a custom REST API and secure HTTPS tunnel to connect cloud workflows with local hardware.",
-      rich(
-        "Turned slow, fragile browser printing into a workflow that feels like a ",
-        strong("native on-prem system"),
-        "."
-      ),
+      "Keeps checkout behavior non-blocking: print failures surface as warnings while receipts, kitchen labels and drawer actions can be retried through explicit POS flows.",
+      "Ships as a Windows NSIS installer with prerequisite bootstrap for SumatraPDF, IrfanView and ngrok, plus a simulated backend for testing without physical printers.",
     ],
     challenge:
-      "Browser printing was too slow and too fragile for live cafe workflow.",
-    tech: ["Node.js", "Express"],
+      "Turning a fragile browser-printing workaround into an installable, token-protected Windows desktop bridge that staff can ignore while it keeps working.",
+    tech: ["Electron", "React", "TypeScript", "Node.js", "Vite", "PDFKit"],
+    githubUrl: "https://github.com/iamthepk/print-agent",
     previewType: "print-agent-flow",
     caseStudy: {
       title: "Print Agent - Technical Overview",
@@ -221,136 +228,154 @@ export const projects: Project[] = [
         {
           heading: "Context",
           content: rich(
-            "Our POS application runs in the cloud (Vercel, HTTPS) while both printers (Epson receipt printer and Brother label printer) live on a ",
-            strong("Windows PC"),
-            " inside the shop. Browsers can't talk directly to local printers, and mixing HTTPS (POS) with plain HTTP (local network) causes security issues (",
-            strong("CORS, Mixed Content, .local hostname problems"),
-            "). I built Print Agent as a small ",
-            strong("Node.js service"),
-            " that sits on that Windows PC and acts as the single bridge between the cloud POS and all local printing."
+            "Our POS runs in the cloud while receipts, kitchen labels and the cash drawer depend on hardware attached to a ",
+            strong("Windows register PC"),
+            ". The original Print Agent proved the idea, but it was still closer to a Node service with operational scripts. ",
+            strong("Print Agent"),
+            " is the maintained public implementation: an installable desktop app with a local admin UI, tray behavior, token-protected API and a clearer POS integration contract."
           ),
         },
         {
           heading: "High-level architecture",
           content: rich(
-            "Local ",
-            strong("Node.js service"),
-            " listening on a fixed port on Windows. POS app sends structured print jobs over HTTPS to a ",
-            strong("tunnel endpoint"),
-            ". A lightweight ",
-            strong("HTTPS tunnel"),
-            " forwards those requests to the local agent. The agent converts each job into either: a receipt ",
-            strong("PDF"),
-            " (for the Epson printer), or a ",
-            strong("label layout"),
-            " (for the Brother QL-700), and then triggers the actual print on the right device. The service exposes a small ",
-            strong("REST API"),
-            " for \"print receipt\", \"print label\", health-checks and discovery. No printers are exposed directly to the internet - only the tunnel endpoint is."
+            "The desktop app uses ",
+            strong("Electron"),
+            " for the Windows shell, a ",
+            strong("React/Vite"),
+            " renderer for the admin UI and a Node main process for the API, configuration, printer adapters, startup registration, logs and tunnel lifecycle. The POS sends structured jobs to the local URL or a configured remote access URL. The agent resolves each task by role, queues work per printer and routes the output through the configured Windows backend."
           ),
         },
         {
-          heading: "Receipts pipeline",
+          heading: "API and security model",
           content: rich(
-            "For receipts the flow is: POS sends a ",
-            strong("JSON payload"),
-            " describing the sale (items, VAT, discounts, totals, payment, refund flags, etc.). A dynamic template layer normalises the data (dates, VAT breakdown, multi-currency, negative totals for refunds). The template is rendered into a PDF using a ",
-            strong("PDF engine"),
-            ". A lightweight ",
-            strong("PDF viewer/CLI"),
-            " is used to send the document to the configured ",
-            strong("Epson printer"),
-            ". The agent returns a simple status back to the POS."
+            "The local HTTP API is intentionally small: ",
+            strong("GET /health"),
+            ", ",
+            strong("GET /printers"),
+            ", ",
+            strong("GET /config"),
+            ", ",
+            strong("PATCH /config"),
+            " and ",
+            strong("POST /print-jobs"),
+            ", with ",
+            strong("POST /print-job"),
+            " kept as a compatibility alias. Every endpoint requires a Print Agent token via Bearer auth or ",
+            strong("x-print-agent-token"),
+            ". The API also exposes authenticated receipt, kitchen and drawer test endpoints for setup checks. The token is shown once, stored only as a local hash and can be regenerated from the admin UI. Ngrok authtokens are stored locally through Electron safe storage when available."
+          ),
+        },
+        {
+          heading: "Print job protocol",
+          content: rich(
+            "The maintained desktop app moved from separate endpoint-shaped commands to a single ",
+            strong("PrintJobRequest"),
+            " contract. The POS submits a stable ",
+            strong("jobId"),
+            " and one or more tasks. Each task declares a role: ",
+            strong("receipt"),
+            ", ",
+            strong("kitchen"),
+            " or ",
+            strong("cash_drawer"),
+            ", plus a template, copy count and payload. That gives the POS one contract for receipts, prep labels and drawer pulses while keeping printer selection local to the Windows workstation."
+          ),
+        },
+        {
+          heading: "POS integration behavior",
+          content: rich(
+            "The integration is intentionally device-scoped: one Print Agent belongs to one logical POS/register, and the POS stores only the agent base URL and API token on that local terminal. Checkout does ",
+            strong("not"),
+            " wait on printer recovery or fall back to the browser print dialog. If the agent is offline, a token is wrong, a printer is missing or a drawer pulse fails, the sale still completes and the operator gets a warning with a manual retry/reprint path."
           ),
           bullets: [
-            "Normal sales, refunds and discounts (including percent-based discounts).",
+            "Receipt jobs are sent after payment completion or explicit receipt request.",
+            "Kitchen labels are role-routed prep tasks with consistent naming across the integration contract.",
+            "Cash drawer pulses use the same token-protected job flow and only fire after an accepted cash payment.",
+            "Manual reprints and drawer reopen actions use a fresh jobId so dedupe never suppresses intentional operator actions.",
+          ],
+        },
+        {
+          heading: "Printing pipelines",
+          content: rich(
+            "Receipts can be rendered with ",
+            strong("PDFKit"),
+            " and printed through SumatraPDF, or sent through a POS/ESC raw mode for receipt printers. The receipt payload supports sales, refunds, discounts, VAT breakdowns, payments, cash change and CZK/EUR totals. Kitchen labels use a compact preparation-label template and can print through image/PDF and Windows driver fallback paths. Cash drawer tasks send the ESC/POS drawer pulse through the configured receipt or drawer printer."
+          ),
+          bullets: [
             rich(
-              strong("Dual-currency totals (CZK + EUR)"),
-              " with printed exchange rate."
+              strong("Printer roles"),
+              " keep receipt, kitchen and cash drawer configuration separate even when two roles use the same physical device."
             ),
             rich(
-              "Automatic ",
-              strong("cash change calculation"),
-              " when paying in cash."
+              strong("Media selection"),
+              " lets label printers use the paper size reported by the Windows driver."
             ),
             rich(
-              "A single ",
-              strong("dynamic template"),
-              " where branding (logo, footer, QR for reviews, etc.) comes from the POS payload instead of being hard-coded."
+              strong("Fallback paths"),
+              " make it possible to prove connectivity even when an optional helper is missing."
             ),
           ],
         },
         {
-          heading: "Labels pipeline",
+          heading: "Desktop operations",
           content: rich(
-            "For drink labels: POS sends a small JSON describing one drink (name, size, sweetness/ice level, toppings, order number, round, optional message). The agent renders a compact label layout (",
-            strong("HTML/Canvas"),
-            ") optimised for fast scanning by staff. A ",
-            strong("headless browser engine"),
-            " converts the layout to a printable format. The job is sent to the ",
-            strong("Brother QL-700 label printer"),
-            ". Labels are printed one per drink immediately after confirmation, so baristas just stick it on the cup and don't have to re-enter anything manually."
+            "The app starts with Windows hidden in the tray, while a manual launch opens the admin UI. From there I can configure printer roles, switch between the real Windows backend and a ",
+            strong("simulated backend"),
+            ", test receipt/kitchen/drawer flows, regenerate tokens, manage remote access, restart the app and export logs. The installer packages the desktop app and bootstraps SumatraPDF, IrfanView and ngrok prerequisites so register PCs do not need Node.js, npm or a cloned repo."
           ),
         },
         {
           heading: rich("Technical challenges ", em("aka the nightmares")),
           content:
-            "The first versions proved the main problem quickly: browser-style printing was too fragile and too slow for live cafe operation. Even small delays or popups break the flow when staff are handling a queue. I had to optimize the pipeline so receipt and label generation felt immediate, make the whole thing survive day-to-day Windows reality, and keep failure points small enough to debug during a live shift.",
+            "The hard part was making local hardware feel boring from a cloud checkout flow. Printing has to be fast, but it also has to survive Windows startup behavior, missing helper binaries, renamed printers, offline devices, repeated network retries, tunnel changes and cash drawer edge cases. The desktop app turns those concerns into explicit app state instead of hiding them in scripts.",
         },
         {
           heading: "Reliability & operations",
           content: rich(
-            "Because this runs on a shop PC, reliability and \"",
-            strong("zero friction"),
-            "\" for staff were priorities:"
+            "Because this runs on a shop PC, reliability and ",
+            strong("zero staff friction"),
+            " were priorities:"
           ),
           bullets: [
             rich(
               strong("Automatic startup with Windows"),
-              " via a small helper script - no one has to remember to \"turn the system on\"."
+              " through registry registration, with cleanup for legacy startup values."
             ),
             rich(
-              "Runs in ",
-              strong("silent mode"),
-              ", no console windows or dialogs for baristas."
+              strong("Tray-first runtime"),
+              " keeps the service available without leaving console windows on the register."
             ),
-            "Simple restart/stop helpers for me as an admin (scripts instead of complex tooling).",
             rich(
-              "Built-in ",
-              strong("health-check and network info endpoints"),
-              " so the POS can: verify that the agent is alive, discover the correct URL / hostname to use on different clients (web browser vs iPad vs Android terminal)."
+              strong("24-hour dedupe"),
+              " suppresses identical automatic retries by jobId and normalized payload."
             ),
-            "Basic logging so I can debug printing issues without direct access to the system during the shift.",
+            "In-flight duplicate jobs join the same work instead of racing the printer.",
+            "Printer work is queued per physical printer so receipt, label and drawer tasks do not collide.",
+            "Detailed health responses expose agent version, protocol version, capabilities and per-role printer status.",
           ],
         },
         {
           heading: "Networking decisions",
           content: rich(
-            "To avoid ",
-            strong("Mixed Content/CORS issues"),
-            " between HTTPS POS and local HTTP, the agent uses an ",
-            strong("HTTPS tunnel (e.g. ngrok)"),
-            " in front of it. The tunnel URL is: started automatically together with the agent, stored locally and exposed through a tiny \"what's my URL\" endpoint for the POS. For production, the setup can be upgraded to a ",
-            strong("static tunnel/domain or a VPN"),
-            ", but the current design already works reliably for a single-shop environment."
+            "For same-PC POS use, the app exposes ",
+            strong("http://127.0.0.1:47821"),
+            ". For cloud, tablet or other-device POS use, it can manage an ",
+            strong("ngrok or custom remote access URL"),
+            ". The POS stores only the base URL and token on the local terminal. A tunnel URL may be public, but it should not be useful without the device-local API token."
           ),
         },
         {
           heading: "Impact",
           content:
-            "Print Agent removed the weakest part of the whole POS workflow: local printing from a cloud app. Instead of staff fighting browser dialogs or unreliable device behavior, printing became part of the flow. That made the cloud POS feel local, faster and operationally dependable.",
+            "Print Agent turns local printing from a fragile checkout workaround into a maintained desktop integration layer. Staff do not need to think about print dialogs, scripts or terminal windows; the POS can send jobs, check health and recover gracefully when hardware or network state changes.",
         },
         {
           heading: "My role",
           content: rich(
-            "I designed and implemented the ",
-            strong("whole solution"),
-            ": requirements, architecture and data model, ",
-            strong("Node.js service and printing pipelines"),
-            ", ",
-            strong("Windows integration"),
-            " (startup, restart, background mode), templates for receipts and labels, operational scripts and ",
-            strong("health-check endpoints"),
-            ". I used AI tools where they helped me move faster, but the real work was making the system stable, testable and trustworthy in daily operation."
+            "I designed and implemented the maintained desktop app end-to-end: ",
+            strong("Electron shell, React admin UI, local HTTP API, token model, printer-role contract, Windows printer adapters, receipt/kitchen/drawer pipelines, dedupe, logging, ngrok integration, startup behavior and installer packaging"),
+            ". I also wrote the POS integration guide and kept the implementation public so reviewers can inspect the actual code behind the portfolio case study."
           ),
         },
       ],
@@ -829,6 +854,7 @@ export const techStack = {
     "TypeScript",
     "JavaScript",
     "Node.js",
+    "Electron",
     "Supabase",
     "PostgreSQL",
     "Vercel",
