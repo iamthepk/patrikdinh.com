@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "Patrik Dinh — Full-stack developer building internal systems, automation and AI tools for real-world use.";
 export const size = {
   width: 1200,

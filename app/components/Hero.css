@@ -195,8 +195,9 @@
 
 @media (max-width: 767px) {
   .heroSection {
-    padding-top: 7rem;
-    padding-bottom: 2rem;
+    min-height: auto;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
   }
 
   .heroEyebrow {
@@ -212,11 +213,16 @@
   }
 
   .heroDescription {
-    margin-bottom: 2.25rem;
+    margin-bottom: 1.75rem;
   }
 
   .heroNavigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 0.5rem;
     width: 100%;
+    max-width: 20rem;
   }
 }
 
@@ -409,5 +415,34 @@
   .cvPreviewBody {
     padding-left: 1rem;
     padding-right: 4.25rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .cvPreviewPanel {
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .cvPreviewTopBar {
+    position: static;
+    flex: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .cvPreviewActions {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .cvPreviewClose {
+    order: 0;
+  }
+
+  .cvPreviewBody {
+    padding: 0 0.5rem 0.5rem;
   }
 }

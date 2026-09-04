@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { SiGithub } from "react-icons/si";
+import { ExternalLink } from "lucide-react";
 import {
   PLACEHOLDER_THUMBNAIL,
   projects,
@@ -13,6 +14,7 @@ import { techIcons } from "../lib/tech-icons";
 import type { Theme } from "../lib/theme";
 import { useTheme } from "../lib/theme-provider";
 import Modal from "./Modal";
+import ImagePreviewModal from "./ImagePreviewModal";
 import { PrintAgentFlowAnimation } from "./PrintAgentFlowAnimation";
 import { RichText } from "./RichText";
 import "./Projects.css";
@@ -260,7 +262,7 @@ export default function Projects() {
                                   ? "thumbnailImagePlaceholder"
                                   : ""
                               }`}
-                              sizes="(max-width: 1023px) 100vw, 55vw"
+                              sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1279px) min(960px, calc(100vw - 96px)), 55vw"
                               priority={project.id === projects[0]?.id}
                             />
                             <div className="gradientOverlay" />
@@ -277,7 +279,25 @@ export default function Projects() {
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
                   >
-                    <h3 className="title">{project.title}</h3>
+                    <h3 className="title">
+                      {project.githubUrl ? (
+                        <span className="projectTitleRow">
+                          <span>{project.title}</span>
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="projectGithubLink uiTooltip uiTooltipTop"
+                            aria-label={`View ${project.title} source on GitHub (opens in a new tab)`}
+                            data-tooltip="View on GitHub"
+                          >
+                            <SiGithub aria-hidden="true" />
+                          </a>
+                        </span>
+                      ) : (
+                        project.title
+                      )}
+                    </h3>
 
                     {project.subtitle && (
                       <p className="subtitle">{project.subtitle}</p>
@@ -324,6 +344,19 @@ export default function Projects() {
                           </button>
                         )}
 
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="projectMobileLiveLink"
+                            aria-label={`Open ${project.title} live preview (opens in a new tab)`}
+                          >
+                            Live preview
+                            <ExternalLink size={16} aria-hidden="true" />
+                          </a>
+                        )}
+
                         <div className="techIcons">
                           {project.tech.map((tech) => {
                             const IconComponent = techIcons[tech];
@@ -348,20 +381,6 @@ export default function Projects() {
                         </div>
                       </div>
                     </div>
-
-                    <div className="links">
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="link"
-                        >
-                          <span>Code</span>
-                          <SiGithub className="linkIcon" />
-                        </a>
-                      )}
-                    </div>
                   </motion.div>
                 </div>
               </motion.div>
@@ -370,44 +389,18 @@ export default function Projects() {
         </motion.div>
       </div>
 
-      <Modal
-        isOpen={activeModal?.type === "image"}
-        onClose={closeModal}
-        ariaLabel={
-          activeModal?.type === "image"
-            ? activeModal.alt
-            : "Project image preview"
-        }
-        closeLabel="Close image preview"
-        overlayClassName="projectImageModalOverlay"
-        panelClassName="projectImageModalContent"
-        bodyClassName="projectImageModalBody"
-        closeButtonClassName="projectImageModalClose"
-      >
-        {activeModal?.type === "image" && (
-          <div className="projectImageFrame">
-            {activeModal.imageSrc.endsWith(".svg") ? (
-              // SVG previews stay sharper when the browser renders them directly.
-              // Next's fill wrapper can introduce fractional scaling in this modal.
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={activeModal.imageSrc}
-                alt={activeModal.alt}
-                className="modalImage modalImageSvg"
-              />
-            ) : (
-              <Image
-                src={activeModal.imageSrc}
-                alt={activeModal.alt}
-                fill
-                quality={100}
-                className="modalImage"
-                sizes="100vw"
-              />
-            )}
-          </div>
-        )}
-      </Modal>
+      {activeModal?.type === "image" && (
+        <ImagePreviewModal
+          key={activeModal.imageSrc}
+          src={activeModal.imageSrc}
+          alt={activeModal.alt}
+          ariaLabel={activeModal.alt}
+          closeLabel="Close image preview"
+          width={1243}
+          height={698}
+          onClose={closeModal}
+        />
+      )}
 
       <Modal
         isOpen={Boolean(caseStudyProject?.caseStudy)}

@@ -58,7 +58,7 @@
 
 .cvHero {
   display: flex;
-  height: 8.25rem;
+  min-height: 8.25rem;
   flex-direction: column;
   justify-content: center;
   padding: 1.7rem 1.5rem 1.45rem;
@@ -78,10 +78,10 @@
 
 .cvHeroName {
   margin-bottom: 0.42rem;
-  font-size: clamp(2.25rem, 4vw, 3.35rem);
+  font-size: 3.35rem;
   font-weight: 800;
   line-height: 0.94;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -98,10 +98,12 @@
 .cvDocumentGrid {
   display: grid;
   grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.72fr);
+  grid-template-areas: "sidebar main";
   align-items: start;
 }
 
 .cvSidebar {
+  grid-area: sidebar;
   --cv-sidebar-heading-size: 0.94rem;
   --cv-sidebar-label-size: 0.74rem;
   --cv-sidebar-body-size: 0.92rem;
@@ -260,6 +262,7 @@
 }
 
 .cvMain {
+  grid-area: main;
   min-width: 0;
   padding: 1.2rem 1.4rem 1.45rem;
 }
@@ -270,7 +273,7 @@
 
 .cvPageHeader {
   display: flex;
-  height: 8.25rem;
+  min-height: 8.25rem;
   flex-direction: column;
   justify-content: center;
   padding: 1.7rem 1.5rem 1.45rem;
@@ -289,10 +292,10 @@
 }
 
 .cvPageTitle {
-  font-size: clamp(2rem, 3vw, 2.65rem);
+  font-size: 2.65rem;
   font-weight: 800;
   line-height: 0.96;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
   color: #ffffff;
 }
 
@@ -445,14 +448,15 @@
   color: var(--cv-paper-text);
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   .cvDocumentGrid {
     grid-template-columns: 1fr;
+    grid-template-areas: "main" "sidebar";
   }
 
   .cvSidebar {
     border-right: none;
-    border-bottom: 1px solid var(--cv-paper-border);
+    border-top: 1px solid var(--cv-paper-border);
   }
 }
 
@@ -465,8 +469,19 @@
     border-radius: 1rem;
   }
 
-  .cvHero {
+  .cvHero,
+  .cvPageHeader {
     padding: 1.35rem 1rem 1.2rem;
+  }
+
+  .cvHeroName {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .cvPageTitle {
+    font-size: 1.75rem;
+    line-height: 1.15;
   }
 
   .cvMain,

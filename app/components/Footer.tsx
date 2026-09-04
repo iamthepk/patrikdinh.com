@@ -22,21 +22,23 @@ export default function Footer() {
               href="https://github.com/iamthepk"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 uiTooltip uiTooltipTop"
               style={{ color: "var(--text)" }}
               aria-label="GitHub"
+              data-tooltip="GitHub"
             >
-              <SiGithub className="w-5 h-5" />
+              <SiGithub className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
               href="https://linkedin.com/in/dinhpatrik"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 uiTooltip uiTooltipTop"
               style={{ color: "var(--text)" }}
               aria-label="LinkedIn"
+              data-tooltip="LinkedIn"
             >
-              <FaLinkedinIn className="w-5 h-5" />
+              <FaLinkedinIn className="w-5 h-5" aria-hidden="true" />
             </a>
           </div>
         </div>

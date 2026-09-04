@@ -61,6 +61,38 @@ export default function CVContent({
           </header>
 
           <div className="cvDocumentGrid">
+            <div className="cvMain">
+              <section className="cvMainSection">
+                <h2 className="cvMainHeading">Profile</h2>
+                <p className="cvProfileText">{cvData.profile}</p>
+              </section>
+
+              <section className="cvMainSection">
+                <h2 className="cvMainHeading">Experience</h2>
+                <div className="cvExperienceList">
+                  {cvData.experience.map((item) => (
+                    <article
+                      key={`${item.company}-${item.period}`}
+                      className="cvExperienceItem"
+                    >
+                      <div className="cvExperienceHeader">
+                        <div>
+                          <h3 className="cvExperienceCompany">{item.company}</h3>
+                          <p className="cvExperienceRole">{item.role}</p>
+                        </div>
+                        <p className="cvExperiencePeriod">{item.period}</p>
+                      </div>
+                      <ul className="cvExperienceBullets">
+                        {item.bullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </ul>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            </div>
+
             <aside className="cvSidebar">
               <section className="cvSidebarSection">
                 <h2 className="cvSidebarHeading">Contact</h2>
@@ -139,38 +171,6 @@ export default function CVContent({
                 </div>
               </section>
             </aside>
-
-            <div className="cvMain">
-              <section className="cvMainSection">
-                <h2 className="cvMainHeading">Profile</h2>
-                <p className="cvProfileText">{cvData.profile}</p>
-              </section>
-
-              <section className="cvMainSection">
-                <h2 className="cvMainHeading">Experience</h2>
-                <div className="cvExperienceList">
-                  {cvData.experience.map((item) => (
-                    <article
-                      key={`${item.company}-${item.period}`}
-                      className="cvExperienceItem"
-                    >
-                      <div className="cvExperienceHeader">
-                        <div>
-                          <h3 className="cvExperienceCompany">{item.company}</h3>
-                          <p className="cvExperienceRole">{item.role}</p>
-                        </div>
-                        <p className="cvExperiencePeriod">{item.period}</p>
-                      </div>
-                      <ul className="cvExperienceBullets">
-                        {item.bullets.map((bullet) => (
-                          <li key={bullet}>{bullet}</li>
-                        ))}
-                      </ul>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            </div>
           </div>
         </article>
 

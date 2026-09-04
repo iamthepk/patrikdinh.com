@@ -4,7 +4,6 @@ import { motion, type Variants } from "framer-motion";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import { useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { useTheme } from "../lib/theme-provider";
-import "./PrintAgentFlowAnimation.css";
 import {
   type PrintAgentPreview,
   PRINT_AGENT_PREVIEWS,

@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import type { Theme } from "../../lib/theme";
-import Modal from "../Modal";
+import ImagePreviewModal from "../ImagePreviewModal";
 import type { PrintAgentPreview } from "./constants";
 
 type PrintAgentPreviewModalProps = {
@@ -16,33 +15,20 @@ export function PrintAgentPreviewModal({
   theme,
   onClose,
 }: PrintAgentPreviewModalProps) {
-  const isDark = theme === "dark";
-  const previewSrc = isDark ? preview?.src : preview?.lightSrc;
+  if (!preview) return null;
+
+  const previewSrc = theme === "dark" ? preview.src : preview.lightSrc;
 
   return (
-    <Modal
-      isOpen={preview !== null}
+    <ImagePreviewModal
+      key={previewSrc}
+      src={previewSrc}
+      alt={preview.modalAlt}
       onClose={onClose}
-      ariaLabel={preview?.modalTitle ?? "Print Agent preview"}
+      ariaLabel={preview.modalTitle}
       closeLabel="Close Print Agent preview"
-      panelClassName="printAgentPreviewModalContent"
-      bodyClassName="printAgentPreviewModalBody"
-      closeButtonClassName="printAgentPreviewModalClose"
-    >
-      {preview && (
-        <div className="printAgentPreviewViewport">
-          <div className="printAgentPreviewCanvas">
-            <Image
-              src={previewSrc ?? preview.src}
-              alt={preview.modalAlt}
-              fill
-              unoptimized
-              sizes="90vw"
-              className="printAgentPreviewImage"
-            />
-          </div>
-        </div>
-      )}
-    </Modal>
+      width={920}
+      height={560}
+    />
   );
 }

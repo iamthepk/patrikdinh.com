@@ -3,6 +3,16 @@ import { afterEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 
+// jsdom has no native top layer. Focus containment is verified in a real browser.
+if (!HTMLDialogElement.prototype.showModal) {
+  HTMLDialogElement.prototype.showModal = function () {
+    this.open = true;
+  };
+  HTMLDialogElement.prototype.close = function () {
+    this.open = false;
+  };
+}
+
 const motionPropsToStrip = new Set([
   "animate",
   "custom",
