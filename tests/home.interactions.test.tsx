@@ -35,6 +35,25 @@ describe("homepage interactions", () => {
     expect(screen.queryByRole("link", { name: /^Code$/ })).not.toBeInTheDocument();
   });
 
+  it("keeps Lootea and Print Agent thumbnails passive on the homepage", () => {
+    render(<ThemeProvider><Home /></ThemeProvider>);
+
+    expect(
+      screen.getByRole("img", { name: "Lootea Operations System thumbnail" })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", {
+        name: "Open Lootea Operations System image preview",
+      })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Open Receipt task contract" })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /^(Pause|Play) animation$/ })
+    ).not.toBeInTheDocument();
+  });
+
   it("toggles theme and opens a case study dialog", async () => {
     const user = userEvent.setup();
 

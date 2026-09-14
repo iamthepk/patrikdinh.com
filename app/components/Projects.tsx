@@ -185,6 +185,35 @@ export default function Projects() {
             const isPlaceholderThumbnail =
               themedThumbnailPath === getThumbnailSrc(PLACEHOLDER_THUMBNAIL, theme);
             const showPreview = isPrintAgent || Boolean(project.thumbnail);
+            const isPassiveThumbnail =
+              isPrintAgent || project.id === "lootea-pos";
+            const thumbnailAlt = isPassiveThumbnail
+              ? `${project.title} thumbnail`
+              : `${project.title} preview`;
+            const imageThumbnailContent = (
+              <div
+                className={`thumbnailImageWrapper${
+                  isPlaceholderThumbnail
+                    ? " thumbnailImageWrapperPlaceholder"
+                    : ""
+                }`}
+              >
+                <Image
+                  src={themedThumbnailPath}
+                  alt={thumbnailAlt}
+                  fill
+                  quality={90}
+                  className={`thumbnailImage ${
+                    shouldBoostDarkThumbnail ? "thumbnailImageDark" : ""
+                  } ${
+                    isPlaceholderThumbnail ? "thumbnailImagePlaceholder" : ""
+                  }`}
+                  sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1279px) min(960px, calc(100vw - 96px)), 55vw"
+                  priority={project.id === projects[0]?.id}
+                />
+                <div className="gradientOverlay" />
+              </div>
+            );
 
             return (
               <motion.div
@@ -212,11 +241,21 @@ export default function Projects() {
                       viewport={{ once: true, margin: "-100px" }}
                     >
                       {isPrintAgent ? (
-                        <div className="thumbnailContainer">
+                        <div className="thumbnailContainer thumbnailContainerStatic">
                           <div className="thumbnailImageWrapper">
                             <PrintAgentFlowAnimation isThumbnail={true} />
                             <div className="gradientOverlay" />
                           </div>
+                        </div>
+                      ) : isPassiveThumbnail ? (
+                        <div
+                          className={`thumbnailContainer thumbnailContainerStatic${
+                            isPlaceholderThumbnail
+                              ? " thumbnailContainerPlaceholder"
+                              : ""
+                          }`}
+                        >
+                          {imageThumbnailContent}
                         </div>
                       ) : (
                         <button
@@ -234,7 +273,7 @@ export default function Projects() {
 
                             openImagePreview(
                               themedThumbnailPath,
-                              `${project.title} preview`
+                              thumbnailAlt
                             );
                           }}
                           aria-label={
@@ -243,30 +282,7 @@ export default function Projects() {
                               : `Open ${project.title} image preview`
                           }
                         >
-                          <div
-                            className={`thumbnailImageWrapper${
-                              isPlaceholderThumbnail
-                                ? " thumbnailImageWrapperPlaceholder"
-                                : ""
-                            }`}
-                          >
-                            <Image
-                              src={themedThumbnailPath}
-                              alt={`${project.title} preview`}
-                              fill
-                              quality={90}
-                              className={`thumbnailImage ${
-                                shouldBoostDarkThumbnail ? "thumbnailImageDark" : ""
-                              } ${
-                                isPlaceholderThumbnail
-                                  ? "thumbnailImagePlaceholder"
-                                  : ""
-                              }`}
-                              sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1279px) min(960px, calc(100vw - 96px)), 55vw"
-                              priority={project.id === projects[0]?.id}
-                            />
-                            <div className="gradientOverlay" />
-                          </div>
+                          {imageThumbnailContent}
                         </button>
                       )}
                     </motion.div>

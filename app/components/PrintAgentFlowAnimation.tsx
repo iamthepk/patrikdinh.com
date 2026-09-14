@@ -44,6 +44,7 @@ type FlowThumbnailCardProps = {
   strokeWidth: number;
   textColor: string;
   openPreview: (preview: PrintAgentPreview) => void;
+  isInteractive: boolean;
   getAnimationProps: (delay?: number) => {
     initial: "hidden";
     animate: "visible";
@@ -68,19 +69,22 @@ function FlowThumbnailCard({
   strokeWidth,
   textColor,
   openPreview,
+  isInteractive,
   getAnimationProps,
 }: FlowThumbnailCardProps) {
   return (
     <motion.g
       variants={cardVariants}
       {...getAnimationProps(preview.delay)}
-      style={{ cursor: "pointer" }}
-      role="button"
-      tabIndex={0}
-      aria-label={`Open ${preview.modalTitle}`}
-      onClick={() => openPreview(preview)}
+      style={isInteractive ? { cursor: "pointer" } : undefined}
+      role={isInteractive ? "button" : undefined}
+      tabIndex={isInteractive ? 0 : undefined}
+      aria-label={isInteractive ? `Open ${preview.modalTitle}` : undefined}
+      onClick={isInteractive ? () => openPreview(preview) : undefined}
       onKeyDown={(event) =>
-        handleSvgButtonKeyDown(event, () => openPreview(preview))
+        isInteractive
+          ? handleSvgButtonKeyDown(event, () => openPreview(preview))
+          : undefined
       }
     >
       <rect
@@ -145,6 +149,7 @@ export function PrintAgentFlowAnimation({
     : "rgba(26,26,26,0.24)";
   const nodeFillColor = isDark ? "#050505" : "#ffffff";
   const strokeWidth = isDark ? 2 : 2.5;
+  const canOpenPreviews = !isThumbnail;
 
   const getAnimationProps = (customDelay?: number) => ({
     initial: "hidden" as const,
@@ -170,36 +175,6 @@ export function PrintAgentFlowAnimation({
         isThumbnail ? "rounded-lg" : "rounded-2xl"
       } relative overflow-hidden`}
     >
-      {isThumbnail && (
-        <button
-          type="button"
-          onClick={(event) => {
-            event.stopPropagation();
-            toggleLoop();
-          }}
-          className={`absolute bottom-3 right-3 z-20 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-sm shadow-lg transition-all duration-200 ${
-            isDark
-              ? "border border-white/20 bg-white/10 hover:bg-white/20"
-              : "border border-black/20 bg-black/10 hover:bg-black/20"
-          }`}
-          aria-label={isLooping ? "Pause animation" : "Play animation"}
-        >
-          {isLooping ? (
-            <Pause
-              className={`h-4 w-4 ${isDark ? "text-white" : "text-black"}`}
-              fill={isDark ? "white" : "black"}
-            />
-          ) : (
-            <Play
-              className={`ml-0.5 h-4 w-4 ${
-                isDark ? "text-white" : "text-black"
-              }`}
-              fill={isDark ? "white" : "black"}
-            />
-          )}
-        </button>
-      )}
-
       {!isThumbnail && (
         <div className="absolute right-4 top-4 z-10 flex gap-2">
           <button
@@ -587,18 +562,21 @@ export function PrintAgentFlowAnimation({
             strokeWidth={strokeWidth}
             textColor={textColor}
             openPreview={openPreview}
+            isInteractive={canOpenPreviews}
             getAnimationProps={getAnimationProps}
           />
         ))}
 
       </motion.svg>
 
-      <PrintAgentPreviewModal
-        key={selectedPreview?.id ?? "closed"}
-        preview={selectedPreview}
-        theme={theme}
-        onClose={closePreview}
-      />
+      {!isThumbnail && (
+        <PrintAgentPreviewModal
+          key={selectedPreview?.id ?? "closed"}
+          preview={selectedPreview}
+          theme={theme}
+          onClose={closePreview}
+        />
+      )}
     </div>
   );
 }

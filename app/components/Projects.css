@@ -136,6 +136,10 @@
   outline-offset: 4px;
 }
 
+.thumbnailContainerStatic {
+  cursor: default;
+}
+
 .thumbnailImageWrapper {
   position: absolute;
   inset: 0;
@@ -152,7 +156,7 @@
   will-change: transform;
 }
 
-.thumbnailContainer:not(.thumbnailContainerPlaceholder):hover .thumbnailImage {
+.thumbnailButton:not(.thumbnailContainerPlaceholder):hover .thumbnailImage {
   transform: scale(1.05);
 }
 
